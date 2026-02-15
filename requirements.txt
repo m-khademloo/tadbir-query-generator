@@ -1,0 +1,20 @@
+# LLM
+litellm>=1.52.0
+
+# DB (SQL Server; use one as needed)
+pyodbc>=5.0.0
+
+# Config
+pyyaml>=6.0.0
+pydantic>=2.0.0
+pydantic-settings>=2.0.0
+python-dotenv>=1.0.0
+
+# CLI & output
+rich>=13.0.0
+
+# SQL parsing & validation
+sqlparse>=0.5.0
+
+# Optional: async / metrics
+# prometheus-client>=0.19.0

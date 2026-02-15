@@ -1,0 +1,30 @@
+# Natural-language SQL query generator – configuration
+
+db_connection:
+  # SQL Server (example); override with env DB_CONNECTION_STRING
+  driver: "ODBC Driver 18 for SQL Server"
+  server: "localhost"
+  database: "CoreInsurance-Dev"
+  trusted_connection: false
+  # Or use connection_string for full control
+
+llm_settings:
+  provider: "deepseek"   # openai | deepseek | claude | ollama (override with LLM_PROVIDER in .env)
+  model: "deepseek-chat"
+  timeout_seconds: 30
+  retry_count: 3
+
+# Query safety
+max_rows: 500
+timeout_seconds: 30
+
+# Paths (relative to project root or absolute)
+schema_sql_path: "lifecore.sql"
+schema_compressed_path: "lifecore-compressed"
+tables_description_path: "lifecore-tables-description.txt"
+forbid_columns_path: "forbid-columns.txt"
+
+# Logging
+log_level: "INFO"   # DEBUG | INFO | WARNING | ERROR
+log_structured: true
+log_prompts: false   # set true to log full prompts (DEBUG)

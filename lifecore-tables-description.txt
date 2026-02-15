@@ -1,0 +1,1938 @@
+Lifecore schema: tables with descriptions and dependency tables (FK targets).
+Each block: table name, description, depends on (comma-separated table names). Use "depends on" to follow relationships when writing queries.
+
+table: Accounting.AmendmentDocumentRequest
+description: Requests to amend or correct accounting documents with reason and approval workflow.
+depends on: Accounting.Document, dbo.User
+
+table: Accounting.Coding
+description: Chart-of-accounts style coding (multi-level codes) for ledger entries.
+depends on: none
+
+table: Accounting.Document
+description: Accounting documents (invoices, vouchers) with reference number, type, and parent/related links.
+depends on: Accounting.Document, Accounting.Parent
+
+table: Accounting.DocumentEntryPattern
+description: Templates that define how accounting debit/credit entries are generated from business events.
+depends on: dbo.User
+
+table: Accounting.DocumentSavingError
+description: Log of failures when persisting accounting documents or related objects.
+depends on: none
+
+table: Accounting.Entry
+description: Individual ledger entries (debit/credit lines) linked to a document and coding.
+depends on: Accounting.Coding, Accounting.Document, Accounting.SubCoding
+
+table: Accounting.EntryPattern
+description: Reusable entry templates for generating accounting entries from patterns.
+depends on: dbo.User
+
+table: Accounting.Parent
+description: Parent or batch container for accounting documents (e.g. period or batch).
+depends on: none
+
+table: Accounting.SubCoding
+description: Sub-level or detail coding for ledger entries (additional dimensions).
+depends on: none
+
+table: Addendums. ChangeFirstYearPremiumAddendum
+description: Addendum that changes the first-year premium amount for a policy.
+depends on: Addendums.BaseAddendum
+
+table: Addendums.AddendumAttachment
+description: File attachments (documents, scans) linked to an addendum.
+depends on: Addendums.BaseAddendum
+
+table: Addendums.BaseAddendum
+description: Root record for all policy addendums (amendments); common fields and workflow.
+depends on: none
+
+table: Addendums.BeneficiaryChangeAddendum
+description: Addendum to change beneficiary(ies) of a policy.
+depends on: Addendums.BaseAddendum
+
+table: Addendums.ChangePaymentMethodeAddendum
+description: Addendum to change premium payment method.
+depends on: Addendums.BaseAddendum
+
+table: Addendums.ChangePremiumPaymentTermAddendum
+description: Addendum to change premium payment term (e.g. annual to monthly).
+depends on: Addendums.BaseAddendum
+
+table: Addendums.ChangeProposalInsuredInsuranceRiskAddendum
+description: Addendum to change insured risks on the proposal/policy.
+depends on: Addendums.BaseAddendum
+
+table: Addendums.ChangeRisingBonusFactorAddendum
+description: Addendum to change the rising bonus factor for the policy.
+depends on: Addendums.BaseAddendum
+
+table: Addendums.ChnageCapitalFormationAddendum
+description: Addendum to change capital formation parameters (typo in name).
+depends on: Addendums.BaseAddendum
+
+table: Addendums.CoverageOccurrenceAddendum
+description: Addendum recording or adjusting a coverage occurrence (claim-like event).
+depends on: Addendums.BaseAddendum, Proposals.ProposalInsuredInsuranceRisk
+
+table: Addendums.CoverageOccurrenceAddendumContingentRisk
+description: Links coverage-occurrence addendum to contingent risks.
+depends on: Addendums.CoverageOccurrenceAddendum, Proposals.ProposalInsuredInsuranceRisk
+
+table: Addendums.DeathAnyReasonAddendum
+description: Addendum for death benefit (any reason) coverage or claim.
+depends on: Addendums.BaseAddendum
+
+table: Addendums.DeathByAccidentAddendum
+description: Addendum for accidental death benefit or claim.
+depends on: Addendums.BaseAddendum
+
+table: Addendums.DurationOfPolicyAddendum
+description: Addendum to change policy duration or end date.
+depends on: Addendums.BaseAddendum
+
+table: Addendums.ExecuteMortgageAddendum
+description: Addendum to execute (activate) a mortgage against the policy.
+depends on: Addendums.BaseAddendum, Addendums.MortgageAddendum
+
+table: Addendums.GradualReductionAddendum
+description: Addendum for gradual reduction of sum insured or benefits.
+depends on: Addendums.BaseAddendum
+
+table: Addendums.InsurancePlanAddendum
+description: Addendum that attaches or changes insurance plan on the policy.
+depends on: Addendums.BaseAddendum
+
+table: Addendums.MaimAddendum
+description: Addendum for maim/disability benefit or claim.
+depends on: Addendums.BaseAddendum
+
+table: Addendums.MedicalExpensesAddendum
+description: Addendum for medical expenses benefit or claim.
+depends on: Addendums.BaseAddendum
+
+table: Addendums.MortgageAddendum
+description: Addendum defining or changing a mortgage on the policy.
+depends on: Addendums.BaseAddendum, Persons.Person
+
+table: Addendums.ObligationAddendum
+description: Addendum for insurer obligations (e.g. pension/annuity obligations).
+depends on: Addendums.BaseAddendum, Proposals.ProposalInsured
+
+table: Addendums.ObligationAddendumRiskMapping
+description: Links obligation addendum to specific insurance risks.
+depends on: Addendums.ObligationAddendum
+
+table: Addendums.PartialRedemptionAddendum
+description: Addendum for partial surrender/redemption of policy value.
+depends on: Addendums.BaseAddendum, Proposals.ProposalInsuredInsuranceRisk
+
+table: Addendums.PolicyHolderAddendum
+description: Addendum to change policy holder (contract owner).
+depends on: Addendums.BaseAddendum, Persons.Person
+
+table: Addendums.PolicyHolderChangeOligationsAddendum
+description: Addendum to change policy holder obligations (typo: Oligations).
+depends on: Addendums.BaseAddendum
+
+table: Addendums.RedemptionAddendum
+description: Addendum for full or partial redemption (surrender) of the policy.
+depends on: Addendums.BaseAddendum
+
+table: Addendums.ReleaseMortgageAddendum
+description: Addendum to release (remove) a mortgage from the policy.
+depends on: Addendums.BaseAddendum, Addendums.MortgageAddendum
+
+table: Addendums.RemoveRedemptionEffectAddendum
+description: Addendum to remove or reverse effect of a prior redemption.
+depends on: Addendums.BaseAddendum
+
+table: Addendums.RemoveRevocationEffectAddendum
+description: Addendum to remove or reverse effect of a prior revocation.
+depends on: Addendums.BaseAddendum
+
+table: Addendums.RevocationAddendum
+description: Addendum recording revocation (cancellation) of the policy or part of it.
+depends on: Addendums.BaseAddendum, Persons.Person
+
+table: Addendums.SoloInstallmentAddendum
+description: Addendum for a single premium or solo installment treatment.
+depends on: Addendums.BaseAddendum, InsuranceRisks.InsuranceRisk
+
+table: Addendums.TerminationAddendum
+description: Addendum recording termination of the policy.
+depends on: Addendums.BaseAddendum
+
+table: BasicInformation.Bank
+description: Master list of banks (for accounts, payments, statements).
+depends on: none
+
+table: BasicInformation.Currency
+description: Supported currencies for premiums, payments, and reporting.
+depends on: none
+
+table: BasicInformation.LongTermDepositInterest
+description: Long-term deposit interest rates used in product/plan design.
+depends on: none
+
+table: BasicInformation.Measurement
+description: Units of measurement (e.g. for reporting or product parameters).
+depends on: dbo.User
+
+table: BasicInformation.PaymentIdentity
+description: Payment identity/customer identifiers for gateways or reconciliation.
+depends on: BasicInformation.SystemBankAccount, dbo.User
+
+table: BasicInformation.ReportFile
+description: Stored report files (exports, generated reports).
+depends on: InsurancePlan.InsurancePlan, dbo.User
+
+table: BasicInformation.ShortLink
+description: Short URLs or link mappings for sharing or tracking.
+depends on: dbo.User
+
+table: BasicInformation.SystemBankAccount
+description: Company (insurer) bank accounts used for receiving or paying.
+depends on: BasicInformation.Bank, BasicInformation.Currency, BasicInformation.SystemBankAccount, dbo.User
+
+table: BasicInformation.Tax
+description: Tax definitions and rates (e.g. VAT, premium tax).
+depends on: none
+
+table: Campaigns.Campaign
+description: Marketing or sales campaign (e.g. questionnaire-driven campaigns).
+depends on: dbo.User
+
+table: Campaigns.CampaignAndQuestionnaireMapping
+description: Links campaigns to questionnaires.
+depends on: Campaigns.Campaign, dbo.Questionnaire
+
+table: Campaigns.CampaignQuestionnaireAnswerMapping
+description: Stores campaign participants’ questionnaire answers.
+depends on: Campaigns.Campaign, dbo.AnswerBank, dbo.QuestionBank, dbo.Questionnaire, dbo.User
+
+table: Campaigns.CampaignQuestionnaireMultiChoiceAnswersMapping
+description: Multi-choice answers for campaign questionnaires.
+depends on: Campaigns.CampaignQuestionnaireAnswerMapping, dbo.AnswerBank
+
+table: CategoriesOfBuyerGoal.CategoriesOfBuyerGoal
+description: Categories or segments for buyer goals (e.g. savings, protection).
+depends on: none
+
+table: Comision.AdministrativeCostCategoryComision
+description: Commission rules by administrative cost category.
+depends on: Proposals.ProposalComision
+
+table: Comision.AdvisorComision
+description: Commission rules or amounts for advisors in the sales network.
+depends on: Proposals.ProposalComision
+
+table: Comision.IssuingComision
+description: Commission related to policy issuance (issuing unit).
+depends on: Proposals.ProposalComision
+
+table: Comision.SalesCoachComision
+description: Commission for sales coaches in the hierarchy.
+depends on: Proposals.ProposalComision
+
+table: Comision.SalesManComision
+description: Commission for sales representatives.
+depends on: Proposals.ProposalComision
+
+table: Comments.Answer
+description: Answers or replies to comments (e.g. on proposals or tickets).
+depends on: Comments.Comment
+
+table: Comments.Comment
+description: Comments on entities (proposals, policies, persons, etc.).
+depends on: none
+
+table: common.Attachments
+description: Generic file attachments linked to entities via reference.
+depends on: common.EntityReferences, dbo.AttachmentGroup, dbo.User
+
+table: common.EntityReferences
+description: Generic references from one entity to another (polymorphic links).
+depends on: none
+
+table: Configuration.ReportContentConfiguration
+description: Configuration for report content or layout.
+depends on: none
+
+table: ContentManagement.News
+description: News or content items for CMS (e.g. portal or marketing).
+depends on: dbo.User
+
+table: dbo.__EFMigrationsHistory
+description: Entity Framework Core migration history (schema versions).
+depends on: none
+
+table: dbo.__MigrationHistory
+description: Legacy EF migration history.
+depends on: none
+
+table: dbo.aacnum
+description: Internal or legacy accounting/numbering (e.g. sequence or code).
+depends on: none
+
+table: dbo.aacnum_copy
+description: Copy or backup of aacnum (likely temporary or legacy).
+depends on: none
+
+table: dbo.Ability
+description: Ability or skill (e.g. for persons or underwriting).
+depends on: Persons.Person
+
+table: dbo.AbilityAttachmentMapping
+description: Links abilities to attachment groups or files.
+depends on: dbo.Ability
+
+table: dbo.Acceleration
+description: Acceleration benefit or clause (e.g. advance payment on critical illness).
+depends on: InsurancePlan.InsurancePlan
+
+table: dbo.AclRecord
+description: Access control list record (permission on an entity for a role/user).
+depends on: dbo.UserRole
+
+table: dbo.ActivityLog
+description: Audit log of user or system activities.
+depends on: dbo.ActivityLogType, dbo.User
+
+table: dbo.ActivityLogType
+description: Types of activity logged (e.g. login, edit, delete).
+depends on: none
+
+table: dbo.AdditionalAttributeLegalPerson
+description: Extra attributes or metadata for legal persons.
+depends on: none
+
+table: dbo.AdditionalAttributeLegalPersonAttachmentMapping
+description: Attachments for additional legal-person attributes.
+depends on: dbo.AdditionalAttributeLegalPerson
+
+table: dbo.Address
+description: Physical or postal addresses (persons, units, branches).
+depends on: Persons.Person, dbo.Country, dbo.StateProvince
+
+table: dbo.AnswerBank
+description: Predefined or predefined-set answers for questionnaire questions.
+depends on: dbo.QuestionBank
+
+table: dbo.AttachmentGroup
+description: Group of attachments (e.g. one “folder” per entity instance).
+depends on: none
+
+table: dbo.BankAccountAttachmentMapping
+description: Links bank accounts to attachment groups.
+depends on: Persons.BankAccount
+
+table: dbo.BlackList
+description: Blacklisted persons or identifiers (e.g. fraud, sanctions).
+depends on: Persons.Person, dbo.User
+
+table: dbo.BlackListAttachmentMapping
+description: Attachments or evidence for blacklist entries.
+depends on: dbo.BlackList
+
+table: dbo.ChatGroup
+description: Chat or conversation group (internal messaging).
+depends on: none
+
+table: dbo.ChatGroupUserMapping
+description: Users belonging to a chat group.
+depends on: dbo.ChatGroup
+
+table: dbo.ChatMessage
+description: Single message in a chat/conversation.
+depends on: dbo.Conversation
+
+table: dbo.Condemnation
+description: Condemnation or conviction record (e.g. for underwriting).
+depends on: Persons.Person
+
+table: dbo.ConditionOfInsurer
+description: Standard or special conditions imposed by the insurer.
+depends on: dbo.Wording
+
+table: dbo.Conversation
+description: Conversation thread (e.g. support or internal).
+depends on: dbo.ChatGroup
+
+table: dbo.CostLoading0101_01
+description: Cost loading table or parameters (e.g. by plan or risk).
+depends on: none
+
+table: dbo.Country
+description: Countries (nationality, residence, addresses).
+depends on: none
+
+table: dbo.CourseType
+description: Type of training or course (e.g. for agents).
+depends on: none
+
+table: dbo.Disability
+description: Disability record or assessment (for underwriting or benefits).
+depends on: Persons.RealPerson
+
+table: dbo.DisabilityAttachmentMapping
+description: Attachments for disability records.
+depends on: dbo.Disability
+
+table: dbo.DrivingType
+description: Type of driving (e.g. license or usage) for underwriting.
+depends on: none
+
+table: dbo.Education
+description: Education record (level, field) for persons.
+depends on: Persons.RealPerson
+
+table: dbo.EducationAttachmentMapping
+description: Attachments for education records.
+depends on: dbo.Education
+
+table: dbo.EmailAccount
+description: Email account configuration (e.g. for sending notifications).
+depends on: none
+
+table: dbo.Entertainment
+description: Entertainment or hobby (for underwriting or profile).
+depends on: Persons.RealPerson
+
+table: dbo.EntertainmentAttachmentMapping
+description: Attachments for entertainment/hobby records.
+depends on: dbo.Entertainment
+
+table: dbo.Experience
+description: Work or life experience record.
+depends on: Persons.Person
+
+table: dbo.ExternalAuthenticationRecord
+description: External login (OAuth, SSO) linkage to user.
+depends on: dbo.User
+
+table: dbo.Faq_FaqTag_Mapping
+description: Many-to-many link between FAQs and tags.
+depends on: Faqs.Faq, Faqs.FaqTag
+
+table: dbo.FieldOfStudy
+description: Field of study (education classification).
+depends on: none
+
+table: dbo.HistoryOfDriving
+description: Driving history (accidents, violations) for underwriting.
+depends on: Persons.RealPerson, dbo.DrivingType
+
+table: dbo.HistoryOfDrivingAttachmentMapping
+description: Attachments for driving history.
+depends on: dbo.HistoryOfDriving
+
+table: dbo.HistoryOfMaritalStatus
+description: Marital status history (for underwriting or benefits).
+depends on: Persons.RealPerson
+
+table: dbo.HistoryOfMaritalStatusAttachmentMapping
+description: Attachments for marital status history.
+depends on: dbo.HistoryOfMaritalStatus
+
+table: dbo.HistoryOfSportActivity
+description: Sport activity history (for underwriting).
+depends on: Persons.RealPerson
+
+table: dbo.HistoryOfSportActivityAttachmentMapping
+description: Attachments for sport activity history.
+depends on: dbo.HistoryOfSportActivity
+
+table: dbo.HonorAndMedal
+description: Honors or medals (for underwriting or profile).
+depends on: Persons.Person
+
+table: dbo.HonorAndMedalAttachmentMapping
+description: Attachments for honor/medal records.
+depends on: dbo.HonorAndMedal
+
+table: dbo.ImpersonateUserHistory
+description: Log when a user impersonates another (support/admin).
+depends on: none
+
+table: dbo.InsurancePlanAllowedAddendums
+description: Which addendum types are allowed per insurance plan.
+depends on: InsurancePlan.InsurancePlan
+
+table: dbo.InsurancePlanCommisionMapping
+description: Commission configuration per insurance plan.
+depends on: none
+
+table: dbo.Job
+description: Job or occupation (for underwriting, pricing).
+depends on: dbo.JobCategory
+
+table: dbo.JobCategory
+description: Category of job (e.g. risk class).
+depends on: none
+
+table: dbo.Language
+description: Supported languages (localization).
+depends on: none
+
+table: dbo.LegalPersonAttachmentMapping
+description: Attachments for legal person records.
+depends on: Persons.LegalPerson
+
+table: dbo.LocaleStringResource
+description: Localized strings (labels, messages) by language.
+depends on: dbo.Language
+
+table: dbo.Log
+description: General application or error log.
+depends on: dbo.User
+
+table: dbo.Mandate
+description: Mandate or power of attorney (authorized representative).
+depends on: Persons.Person
+
+table: dbo.MilitaryActivity
+description: Military service or activity record.
+depends on: Persons.RealPerson
+
+table: dbo.MilitaryActivityAttachmentMapping
+description: Attachments for military activity.
+depends on: dbo.MilitaryActivity
+
+table: dbo.PartnerPerson
+description: Person in a partnership (legal person).
+depends on: dbo.PartnerShip
+
+table: dbo.PartnerPersonAttachmentMapping
+description: Attachments for partner-person records.
+depends on: dbo.PartnerPerson
+
+table: dbo.PartnerShip
+description: Partnership (legal person) record.
+depends on: none
+
+table: dbo.PartnerShipAttachmentMapping
+description: Attachments for partnership.
+depends on: dbo.PartnerShip
+
+table: dbo.PartnerShipAttribute
+description: Attribute or metadata for partnership.
+depends on: dbo.PartnerShip
+
+table: dbo.PartnerShipAttributeAttachmentMapping
+description: Attachments for partnership attributes.
+depends on: dbo.PartnerShipAttribute
+
+table: dbo.Passport
+description: Passport data (for foreigners or travel).
+depends on: Persons.RealPerson
+
+table: dbo.PassportAttachmentMapping
+description: Attachments for passport.
+depends on: dbo.Passport
+
+table: dbo.PermissionRecord
+description: Permission definition (e.g. permission to access a resource).
+depends on: none
+
+table: dbo.PermissionRecord_Role_Mapping
+description: Roles that have a given permission.
+depends on: dbo.PermissionRecord, dbo.UserRole
+
+table: dbo.PersonContactInfo
+description: Contact info (phone, email, etc.) for a person.
+depends on: Persons.Person
+
+table: dbo.PersonContactInfoAttachmentMapping
+description: Attachments for contact info.
+depends on: dbo.PersonContactInfo
+
+table: dbo.PersonCustomerRoleTypeMapping
+description: Maps person to customer role types (e.g. policyholder, beneficiary).
+depends on: Persons.Person
+
+table: dbo.Policy
+description: Issued insurance policy (contract) linked to proposal and central insurance.
+depends on: none
+
+table: dbo.proTemp
+description: Temporary table for proposal-related processing.
+depends on: none
+
+table: dbo.QuestionBank
+description: Question definitions for questionnaires (text, type, required).
+depends on: dbo.Questionnaire
+
+table: dbo.Questionnaire
+description: Questionnaire definition (title, display order).
+depends on: none
+
+table: dbo.RabbitLog
+description: Log of messages or events via RabbitMQ (or similar).
+depends on: none
+
+table: dbo.RealPersonAttachmentMapping
+description: Attachments for natural (real) person.
+depends on: Persons.RealPerson
+
+table: dbo.RealPersonJobMappings
+description: Links real person to job(s) (current or history).
+depends on: Persons.RealPerson, dbo.Job
+
+table: dbo.ScheduleTask
+description: Scheduled task (e.g. background job) definition.
+depends on: none
+
+table: dbo.Setting
+description: Key-value application or tenant settings.
+depends on: none
+
+table: dbo.ShokaUnitIBAN
+description: IBAN or bank details for Shoka unit (specific use).
+depends on: none
+
+table: dbo.SignatureSample
+description: Sample or template of signature (e.g. for comparison).
+depends on: Persons.Person
+
+table: dbo.Sport
+description: Sport type (for underwriting or profile).
+depends on: none
+
+table: dbo.StateProvince
+description: State or province (address, jurisdiction).
+depends on: dbo.Country
+
+table: dbo.tempaccvira01
+description: Temporary or legacy accounting/vira table.
+depends on: none
+
+table: dbo.TempCP
+description: Temporary table (e.g. for proposal or calculation).
+depends on: none
+
+table: dbo.TempShellerId
+description: Temporary table for seller/sheller ID (likely typo).
+depends on: none
+
+table: dbo.TrainingCourse
+description: Training course definition.
+depends on: Persons.RealPerson, dbo.CourseType
+
+table: dbo.TrainingCoursesAttachmentMapping
+description: Attachments for training courses.
+depends on: dbo.TrainingCourse
+
+table: dbo.UrlRecord
+description: URL slug or friendly URL for entities (SEO, routing).
+depends on: none
+
+table: dbo.User
+description: System user (login, profile) linked to person or operation unit.
+depends on: none
+
+table: dbo.User_UserRole_Mapping
+description: User-to-role assignment.
+depends on: dbo.User, dbo.UserRole
+
+table: dbo.UserAttribute
+description: Custom attribute definition for users.
+depends on: none
+
+table: dbo.UserAttributeValue
+description: Values of user custom attributes.
+depends on: dbo.UserAttribute
+
+table: dbo.UserClientChangeLog
+description: Log of client or context changes for a user (e.g. impersonation).
+depends on: none
+
+table: dbo.UserGroup
+description: User group (e.g. team or department).
+depends on: none
+
+table: dbo.UserGroup_User_Mapping
+description: Users in a user group.
+depends on: dbo.User, dbo.UserGroup
+
+table: dbo.UserGroupUserRoleMapping
+description: Role assignments at group level.
+depends on: dbo.UserGroup, dbo.UserRole
+
+table: dbo.UserRole
+description: Role definition (e.g. admin, advisor, issuer).
+depends on: none
+
+table: dbo.UserToken
+description: Token for user (e.g. password reset, API, refresh).
+depends on: dbo.User
+
+table: dbo.Wording
+description: Wording or clause text (legal, conditions, templates).
+depends on: none
+
+table: dbo.WorkExperience
+description: Work experience record for a person.
+depends on: Persons.Person, dbo.Job
+
+table: dbo.WorkExperienceAttachmentMapping
+description: Attachments for work experience.
+depends on: dbo.WorkExperience
+
+table: Facilities.ProposalCreditFacility
+description: Credit facility (e.g. loan) attached to a proposal.
+depends on: BasicInformation.Bank, Proposals.Proposal
+
+table: Facilities.ProposalCreditFacilityInstallment
+description: Installment schedule for proposal credit facility.
+depends on: Facilities.ProposalCreditFacility
+
+table: Facilities.ProposalCreditFacilityRequest
+description: Request for a credit facility on a proposal.
+depends on: none
+
+table: Faqs.Faq
+description: Frequently asked question (content and metadata).
+depends on: dbo.User
+
+table: Faqs.FaqTag
+description: Tag for categorizing FAQs.
+depends on: none
+
+table: FnPolicies.FnPolicy
+description: Financial or functional view of policy (e.g. for accounting/reporting).
+depends on: none
+
+table: FnPolicies.FnPolicyLoan
+description: Loan data attached to fn policy.
+depends on: FnPolicies.FnPolicy
+
+table: FnPolicies.FnPolicySavingMath
+description: Saving/math reserve data for fn policy.
+depends on: FnPolicies.FnPolicy
+
+table: Histories.OperationalUserHistory
+description: History of operational user assignments or changes.
+depends on: dbo.User
+
+table: Histories.OperationUnitAllowedInsurancePlanHistory
+description: History of which plans an operation unit is allowed to sell/issue.
+depends on: dbo.User
+
+table: Inquiry.IbanInquiry
+description: IBAN validation or inquiry request/response.
+depends on: dbo.User
+
+table: InsurancePlan.AdministrativeCost
+description: Administrative cost definition per plan (e.g. by year or type).
+depends on: InsurancePlan.AdministrativeCostCategory, InsurancePlan.InsurancePlan
+
+table: InsurancePlan.AdministrativeCostCategory
+description: Category of administrative cost.
+depends on: none
+
+table: InsurancePlan.BordereauCentralInsuranceMapping
+description: Mapping for bordereau (batch) to central insurance codes.
+depends on: none
+
+table: InsurancePlan.ComparativeProfit
+description: Comparative profit assumption or result for a plan.
+depends on: InsurancePlan.InsurancePlan, dbo.User
+
+table: InsurancePlan.ConditionOfRiskPolicy
+description: Condition that applies to a risk within the plan.
+depends on: none
+
+table: InsurancePlan.ConditionOfRiskPolicyWordingMapping
+description: Wording clauses for condition of risk.
+depends on: InsurancePlan.ConditionOfRiskPolicy, dbo.Wording
+
+table: InsurancePlan.InsurancePlan
+description: Master insurance product/plan (life, savings, riders, terms).
+depends on: BasicInformation.SystemBankAccount, InsurancePlan.InsurancePlan, InsurancePlan.PatternOfRiskOccurrence, InsuranceRisks.InsurableObject
+
+table: InsurancePlan.InsurancePlanAccountingDocumentsProduction
+description: Rules for producing accounting documents from plan events.
+depends on: InsurancePlan.InsurancePlan
+
+table: InsurancePlan.InsurancePlanAccountingEntryPattern
+description: Links plan to accounting entry patterns.
+depends on: Accounting.EntryPattern, InsurancePlan.InsurancePlan
+
+table: InsurancePlan.InsurancePlanAdjustedDepositInterest
+description: Adjusted deposit interest rates by plan and period.
+depends on: none
+
+table: InsurancePlan.InsurancePlanAgreement
+description: Agreement or contract template for the plan.
+depends on: InsurancePlan.InsurancePlan, InsurancePlan.InsurancePlanAgreementBody, dbo.User
+
+table: InsurancePlan.InsurancePlanAgreementBody
+description: Body text or clauses of plan agreement.
+depends on: none
+
+table: InsurancePlan.InsurancePlanBeneficiary
+description: Default or template beneficiary rules for the plan.
+depends on: InsurancePlan.InsurancePlan, dbo.User
+
+table: InsurancePlan.InsurancePlanCityMapping
+description: Cities where plan is offered or restricted.
+depends on: InsurancePlan.InsurancePlan, dbo.StateProvince
+
+table: InsurancePlan.InsurancePlanComision
+description: Commission structure for the plan.
+depends on: InsurancePlan.InsurancePlan
+
+table: InsurancePlan.InsurancePlanComparativeProfitMapping
+description: Links plan to comparative profit records.
+depends on: InsurancePlan.ComparativeProfit
+
+table: InsurancePlan.InsurancePlanCurrencyMapping
+description: Currencies in which plan can be sold.
+depends on: BasicInformation.Currency, InsurancePlan.InsurancePlan
+
+table: InsurancePlan.InsurancePlanDepositPlanning
+description: Deposit or premium deposit planning for the plan.
+depends on: InsurancePlan.InsurancePlan
+
+table: InsurancePlan.InsurancePlanDocumentEntryPattern
+description: Links plan to document entry patterns (accounting).
+depends on: Accounting.DocumentEntryPattern, InsurancePlan.InsurancePlan, dbo.User
+
+table: InsurancePlan.InsurancePlanGeneralCondition
+description: General condition (clause) for the plan.
+depends on: dbo.Wording
+
+table: InsurancePlan.InsurancePlanGeneralConditionMapping
+description: Mapping of general conditions to plan.
+depends on: InsurancePlan.InsurancePlan, InsurancePlan.InsurancePlanGeneralCondition
+
+table: InsurancePlan.InsurancePlanGetPremiumMapping
+description: How premium is derived (e.g. by risk, age) for the plan.
+depends on: InsurancePlan.InsurancePlan
+
+table: InsurancePlan.InsurancePlanHasRisk
+description: Junction: plan includes a risk (coverage) with parameters.
+depends on: BasicInformation.Currency, BasicInformation.Measurement, InsurancePlan.ConditionOfRiskPolicy, InsurancePlan.InsurancePlan, InsuranceRisks.InsuranceRisk
+
+table: InsurancePlan.InsurancePlanHasRiskAdjustmentRate
+description: Adjustment rates for plan-risk (e.g. by age, term).
+depends on: InsurancePlan.InsurancePlanHasRisk, dbo.User
+
+table: InsurancePlan.InsurancePlanHasRiskConstraintMapping
+description: Constraints (e.g. min/max) for plan-risk.
+depends on: InsurancePlan.InsurancePlanHasRisk
+
+table: InsurancePlan.InsurancePlanHasRiskContingent
+description: Contingent risk (e.g. secondary life) for plan-risk.
+depends on: InsurancePlan.InsurancePlanHasRisk, dbo.User
+
+table: InsurancePlan.InsurancePlanInstallmentTax
+description: Tax rules per installment for the plan.
+depends on: InsurancePlan.InsurancePlan, dbo.User
+
+table: InsurancePlan.InsurancePlanInsurerAndInsuredRelationshipMapping
+description: Allowed insurer-insured relationships (e.g. self, spouse).
+depends on: InsurancePlan.InsurancePlan
+
+table: InsurancePlan.InsurancePlanInterestRateDepost
+description: Deposit interest rate for the plan (typo: Depost).
+depends on: InsurancePlan.InsurancePlan
+
+table: InsurancePlan.InsurancePlanJobMapping
+description: Jobs or job categories allowed/restricted for the plan.
+depends on: InsurancePlan.InsurancePlan, dbo.Job
+
+table: InsurancePlan.InsurancePlanLoanInstallmentIntervalsMapping
+description: Allowed loan installment intervals for the plan.
+depends on: InsurancePlan.InsurancePlan
+
+table: InsurancePlan.InsurancePlanPayGateway
+description: Payment gateways enabled for the plan.
+depends on: InsurancePlan.InsurancePlan, Receives.OnlineReceiveGateway, dbo.User
+
+table: InsurancePlan.InsurancePlanPayPensionMapping
+description: Pension payment mapping (e.g. obligation payment rules).
+depends on: InsurancePlan.InsurancePlan, InsurancePlan.InsurancePlanHasRisk
+
+table: InsurancePlan.InsurancePlanPensionConversionRate
+description: Conversion rate for pension (e.g. lump sum to annuity).
+depends on: InsurancePlan.InsurancePlan, dbo.User
+
+table: InsurancePlan.InsurancePlanProposalAttachmentGroupMapping
+description: Required or optional attachment groups for proposals.
+depends on: InsurancePlan.InsurancePlan
+
+table: InsurancePlan.InsurancePlanQuestionnaireMapping
+description: Questionnaires required or optional for the plan.
+depends on: InsurancePlan.InsurancePlan
+
+table: InsurancePlan.InsurancePlanQuestionPointMapping
+description: Question points or scoring for plan questionnaires.
+depends on: InsurancePlan.InsurancePlan, dbo.QuestionBank
+
+table: InsurancePlan.InsurancePlanReinsurance
+description: Reinsurance arrangement or parameters for the plan.
+depends on: InsurancePlan.InsurancePlan, InsurancePlan.InsurancePlanHasRisk, dbo.User
+
+table: InsurancePlan.InsurancePlanRiskMapping
+description: Mapping between plan and insurance risk (coverage) definitions.
+depends on: InsurancePlan.InsurancePlan, InsuranceRisks.InsuranceRisk
+
+table: InsurancePlan.InsurancePlanShortTermPremiumRate
+description: Short-term or single premium rate for the plan.
+depends on: InsurancePlan.InsurancePlan, dbo.User
+
+table: InsurancePlan.InsurancePlanUnitLinkPlanning
+description: Unit-linked fund or allocation planning for the plan.
+depends on: InsurancePlan.InsurancePlan, InsuranceRisks.InsuranceRisk, dbo.User
+
+table: InsurancePlan.InsurancePlanUnitTransferPlanning
+description: Unit transfer (switch) rules or planning.
+depends on: InsurancePlan.InsurancePlan, InsuranceRisks.InsuranceRisk, dbo.User
+
+table: InsurancePlan.InsuranceRiskFactor
+description: Risk factor (e.g. age, smoking) affecting risk or premium.
+depends on: InsurancePlan.InsurancePlanHasRisk, InsuranceRisks.RiskFactor
+
+table: InsurancePlan.InsuranceRiskPatternOfRiskOccurrenceMapping
+description: Pattern of risk occurrence (e.g. claim pattern) for risk.
+depends on: InsurancePlan.InsurancePlanHasRisk, InsurancePlan.PatternOfRiskOccurrence
+
+table: InsurancePlan.InsuranceTechnicalProfitRate
+description: Technical profit rate assumption for the plan.
+depends on: InsurancePlan.InsurancePlan, InsurancePlan.InsurancePlanHasRisk
+
+table: InsurancePlan.NonInsuranceBenefit
+description: Non-insurance benefit (e.g. service) attached to the plan.
+depends on: InsurancePlan.InsurancePlan
+
+table: InsurancePlan.OperationUnitInsurancePlanAgreement
+description: Operation-unit-specific agreement or terms for a plan.
+depends on: InsurancePlan.InsurancePlanAgreement, SalesNetwork.OperationUnit, dbo.User
+
+table: InsurancePlan.PatternOfRiskOccurrence
+description: Pattern definition for risk occurrence (e.g. mortality, morbidity).
+depends on: none
+
+table: InsurancePlan.PatternOfRiskOccurrenceTable
+description: Table (e.g. rates) for pattern of risk occurrence.
+depends on: InsurancePlan.PatternOfRiskOccurrence
+
+table: InsurancePlan.ProposalPrivateCondition
+description: Private or custom condition for proposals under the plan.
+depends on: Proposals.Proposal, dbo.Wording
+
+table: InsurancePlan.ProposalPrivateConditionTextTemplate
+description: Text template for proposal private conditions.
+depends on: InsurancePlan.InsurancePlan, dbo.Wording
+
+table: InsurancePlanLifeInquiry.InsurancePlanBaseRateOfRisk
+description: Base rate of risk for life inquiry (e.g. premium basis).
+depends on: none
+
+table: InsuranceRisks.InsurableObject
+description: Object or entity that can be insured (e.g. person, property type).
+depends on: dbo.User
+
+table: InsuranceRisks.InsuranceRelianceRate
+description: Reliance or dependency rate (e.g. for beneficiary).
+depends on: InsuranceRisks.InsuranceRisk, dbo.User
+
+table: InsuranceRisks.InsuranceRisk
+description: Insurance risk (coverage) definition (death, disability, etc.).
+depends on: InsuranceRisks.InsurableObject, InsuranceRisks.InsuranceRiskGroup
+
+table: InsuranceRisks.InsuranceRiskGroup
+description: Grouping of insurance risks (e.g. for display or rules).
+depends on: none
+
+table: InsuranceRisks.ProposalTemplate
+description: Template for proposal (default risks, wordings).
+depends on: SalePlans.SalePlan, dbo.User
+
+table: InsuranceRisks.ProposalTemplateInsuranceRisk
+description: Risks included in a proposal template.
+depends on: InsuranceRisks.ProposalTemplate
+
+table: InsuranceRisks.ProposalTemplateInsuranceRiskRiskFactor
+description: Risk factors and values in proposal template.
+depends on: InsuranceRisks.ProposalTemplateInsuranceRisk
+
+table: InsuranceRisks.RiskFactor
+description: Risk factor definition (age, job, health, etc.).
+depends on: none
+
+table: Investment.InvestmentProductPrice
+description: Price or NAV of investment product (e.g. unit-linked).
+depends on: none
+
+table: Investment.PurchaseTransaction
+description: Purchase transaction for investment product.
+depends on: Investment.InvestmentProductPrice, Proposals.Proposal, Proposals.ProposalInsuredInsuranceRisk
+
+table: Loans.LoanSettlementReceipt
+description: Receipt or record of loan settlement (e.g. payoff).
+depends on: Loans.PeoposalLoanInstallmentSchedule
+
+table: Loans.PeoposalLoanInstallmentSchedule
+description: Installment schedule for proposal loan (typo: Peoposal).
+depends on: Loans.ProposalLoan
+
+table: Loans.ProposalLoan
+description: Loan attached to a proposal (e.g. premium finance).
+depends on: none
+
+table: Loans.ProposalLoanAttachment
+description: Attachments for proposal loan.
+depends on: Loans.ProposalLoan
+
+table: Loans.RedemptionLoan
+description: Loan linked to redemption (surrender) of policy.
+depends on: Loans.ProposalLoan
+
+table: Loans.RevocationLoan
+description: Loan linked to revocation (cancellation) of policy.
+depends on: Loans.ProposalLoan
+
+table: Logging.CinsApiLog
+description: Log of calls to CINS (or similar) API.
+depends on: none
+
+table: Logging.EmailLog
+description: Log of sent (or received) emails.
+depends on: none
+
+table: Logging.EntityOperationErrorLog
+description: Log of errors during entity operations (create, update, delete).
+depends on: common.EntityReferences, dbo.User
+
+table: Logging.EntityOperationErrorLogInfo
+description: Additional info or payload for entity operation errors.
+depends on: Logging.EntityOperationErrorLog
+
+table: Logging.ErrorLogOfImportingExcelFile
+description: Log of errors when importing Excel files.
+depends on: dbo.User
+
+table: Logging.SmsLog
+description: Log of SMS sent or received.
+depends on: none
+
+table: Logging.TaxAffairsOrganizationLog
+description: Log of interactions with tax authority (e.g. e-invoice).
+depends on: dbo.User
+
+table: MathReserve.MathReserveCalculateDetail
+description: Detail lines of a mathematical reserve calculation run.
+depends on: none
+
+table: MathReserve.MathReserveLastCalculated
+description: Last reserve calculation summary (e.g. per policy or plan).
+depends on: none
+
+table: MathReserve.MathReserveLastProposalCalculated
+description: Last reserve calculation at proposal level.
+depends on: none
+
+table: MathReserve.MathSavingMonthlyReport
+description: Monthly report of mathematical savings (reserve).
+depends on: none
+
+table: MathReserve.MathSavingMonthlyReportDetail
+description: Detail lines of monthly math saving report.
+depends on: MathReserve.MathSavingMonthlyReport
+
+table: MessageTemplates.EmailMessageTemplate
+description: Template for email content (body, subject).
+depends on: none
+
+table: MessageTemplates.SmsMessageTemplate
+description: Template for SMS content.
+depends on: none
+
+table: Notification.PolicyNotification
+description: Notification related to a policy (e.g. expiry, payment).
+depends on: Notification.ReminderNotification
+
+table: Notification.ReminderNotification
+description: Reminder notification (e.g. task, follow-up).
+depends on: none
+
+table: Pages.Page
+description: CMS or app page (e.g. for portal or marketing).
+depends on: Pages.PageGroup
+
+table: Pages.PageGroup
+description: Group of pages (menu or section).
+depends on: none
+
+table: PaymentFiles.AccumulationWithdrawalRequest
+description: Request to withdraw from accumulation (e.g. savings balance).
+depends on: PaymentFiles.Request
+
+table: PaymentFiles.AccumulationWithdrawalTransference
+description: Transfer representing accumulation withdrawal.
+depends on: PaymentFiles.Transference
+
+table: PaymentFiles.BankPaymentSettlement
+description: Settlement paid or received via bank transfer.
+depends on: BasicInformation.SystemBankAccount, PaymentFiles.PaymentSettlement
+
+table: PaymentFiles.CashByBankWithdrawalPaymentSettlement
+description: Settlement by cash after bank withdrawal.
+depends on: BasicInformation.SystemBankAccount, PaymentFiles.PaymentSettlement
+
+table: PaymentFiles.CashPaymentSettlement
+description: Cash payment settlement.
+depends on: PaymentFiles.PaymentSettlement, Receives.ReceiveReceipt
+
+table: PaymentFiles.ChequePaymentSettlement
+description: Cheque payment settlement.
+depends on: PaymentFiles.PaymentSettlement
+
+table: PaymentFiles.CommissionRequest
+description: Request for commission payment (to agent, unit).
+depends on: PaymentFiles.Request, SalesNetwork.OperationUnit
+
+table: PaymentFiles.CommissionRequestInsurancePlanMapping
+description: Insurance plans included in commission request.
+depends on: PaymentFiles.CommissionRequest
+
+table: PaymentFiles.CommissionRequestOperationUnitMapping
+description: Operation units in commission request.
+depends on: PaymentFiles.CommissionRequest
+
+table: PaymentFiles.CommissionTransference
+description: Transfer of commission (payment to network).
+depends on: InsurancePlan.InsurancePlan, PaymentFiles.Transference, Proposals.Proposal
+
+table: PaymentFiles.ContributionInBenefitsTransference
+description: Transfer for contribution in benefits (e.g. profit share).
+depends on: PaymentFiles.Transference
+
+table: PaymentFiles.CooperationBenefitsRequest
+description: Request for cooperation benefits payment.
+depends on: PaymentFiles.Request, Proposals.CooperationBenefitDetail
+
+table: PaymentFiles.CooperationBenefitsTransference
+description: Transfer of cooperation benefits.
+depends on: PaymentFiles.Transference, Proposals.CooperationBenefitDetail
+
+table: PaymentFiles.CoverageOccurrenceRequest
+description: Request for payment due to coverage occurrence (claim).
+depends on: PaymentFiles.Request
+
+table: PaymentFiles.CoverageOccurrenceTransference
+description: Transfer for coverage occurrence payment.
+depends on: PaymentFiles.Transference, Proposals.ProposalInsuredInsuranceRisk
+
+table: PaymentFiles.DamageRecycleTransference
+description: Transfer for damage recycle (e.g. recovery).
+depends on: PaymentFiles.Transference
+
+table: PaymentFiles.DamageSettlingExpensesTransference
+description: Transfer for damage settling expenses.
+depends on: PaymentFiles.Transference
+
+table: PaymentFiles.DamageTransference
+description: Transfer for damage (claim) payment.
+depends on: PaymentFiles.Transference
+
+table: PaymentFiles.DeathAnyReasonRequest
+description: Request for death benefit (any reason) payment.
+depends on: PaymentFiles.Request
+
+table: PaymentFiles.DeathAnyReasonTransference
+description: Transfer for death-any-reason benefit.
+depends on: PaymentFiles.Transference
+
+table: PaymentFiles.DeathByAccidentRequest
+description: Request for accidental death benefit payment.
+depends on: PaymentFiles.Request
+
+table: PaymentFiles.DeathByAccidentTransference
+description: Transfer for accidental death benefit.
+depends on: PaymentFiles.Transference
+
+table: PaymentFiles.FirstVisitExpensesRequest
+description: Request for first visit or medical expenses.
+depends on: PaymentFiles.Request
+
+table: PaymentFiles.FirstVisitExpensesTransference
+description: Transfer for first visit expenses.
+depends on: PaymentFiles.Transference
+
+table: PaymentFiles.IncomeRequest
+description: Request for income (e.g. premium, fee) to be received.
+depends on: PaymentFiles.Request
+
+table: PaymentFiles.IncomeTransference
+description: Transfer representing income received.
+depends on: PaymentFiles.Transference
+
+table: PaymentFiles.InsurerTransferPaymentSettlement
+description: Settlement for insurer transfer (e.g. reinsurance).
+depends on: PaymentFiles.PaymentSettlement
+
+table: PaymentFiles.ItemsWithPolicyTransference
+description: Transfer of items (e.g. units) with policy.
+depends on: PaymentFiles.Transference
+
+table: PaymentFiles.LoanRequest
+description: Request for loan (e.g. policy loan) disbursement or repayment.
+depends on: PaymentFiles.Request
+
+table: PaymentFiles.LoanTransference
+description: Transfer related to loan.
+depends on: PaymentFiles.Transference
+
+table: PaymentFiles.MaimRequest
+description: Request for maim/disability benefit payment.
+depends on: PaymentFiles.Request
+
+table: PaymentFiles.MaimTransference
+description: Transfer for maim benefit.
+depends on: PaymentFiles.Transference
+
+table: PaymentFiles.MarketingExpensesRequest
+description: Request for marketing expenses payment.
+depends on: PaymentFiles.Request
+
+table: PaymentFiles.MarketingExpensesTransference
+description: Transfer for marketing expenses.
+depends on: PaymentFiles.Transference
+
+table: PaymentFiles.MedicalExpensesRequest
+description: Request for medical expenses payment.
+depends on: PaymentFiles.Request
+
+table: PaymentFiles.MedicalExpensesTransference
+description: Transfer for medical expenses.
+depends on: PaymentFiles.Transference
+
+table: PaymentFiles.MutualPaymentSettlement
+description: Mutual or netted payment settlement.
+depends on: PaymentFiles.PaymentSettlement, Persons.Person
+
+table: PaymentFiles.ObligationsPensionRequest
+description: Request for obligation/pension payment.
+depends on: PaymentFiles.Request
+
+table: PaymentFiles.ObligationsPensionTransference
+description: Transfer for obligation pension.
+depends on: PaymentFiles.Transference, Proposals.ObligationInsurerPensionItem
+
+table: PaymentFiles.OutSystemItemsRequest
+description: Request for items coming from external system.
+depends on: InsurancePlan.InsurancePlan, PaymentFiles.Request, Persons.Person, SalesNetwork.OperationUnit
+
+table: PaymentFiles.OutSystemItemsTransference
+description: Transfer for out-of-system items.
+depends on: InsurancePlan.InsurancePlan, PaymentFiles.Transference, Persons.Person, SalesNetwork.OperationUnit
+
+table: PaymentFiles.PartialRedemptionRequest
+description: Request for partial redemption (surrender) payment.
+depends on: PaymentFiles.Request
+
+table: PaymentFiles.PartialRedemptionTransference
+description: Transfer for partial redemption.
+depends on: InsurancePlan.InsurancePlan, PaymentFiles.Transference, Proposals.Proposal
+
+table: PaymentFiles.PayaPaymentSettlement
+description: Paya (domestic transfer) payment settlement.
+depends on: PaymentFiles.PaymentSettlement
+
+table: PaymentFiles.PaymentFile
+description: Header or batch for a set of payment transactions.
+depends on: SalesNetwork.OperationUnit, dbo.User
+
+table: PaymentFiles.PaymentOrder
+description: Order or instruction to pay (e.g. to bank).
+depends on: PaymentFiles.PaymentOrder, PaymentFiles.PaymentSettlement, PaymentFiles.Transference, Persons.BankAccount, Persons.Person, SalesNetwork.OperationUnit, dbo.User
+
+table: PaymentFiles.PaymentOrderStateHistory
+description: State history of payment order (e.g. sent, executed).
+depends on: PaymentFiles.PaymentOrder, dbo.User
+
+table: PaymentFiles.PaymentSettlement
+description: Settlement record (debit/credit) for payments.
+depends on: PaymentFiles.PaymentSettlement, SalesNetwork.OperationUnit, dbo.User
+
+table: PaymentFiles.PaymentSettlementAttachmentMapping
+description: Attachments for payment settlement.
+depends on: PaymentFiles.PaymentSettlement
+
+table: PaymentFiles.PaymentSettlementStateHistory
+description: State history of payment settlement.
+depends on: PaymentFiles.PaymentSettlement, dbo.User
+
+table: PaymentFiles.PaymentSubFile
+description: Sub-file or sub-batch within a payment file.
+depends on: PaymentFiles.PaymentFile, SalesNetwork.OperationUnit, dbo.User
+
+table: PaymentFiles.RedemptionRequest
+description: Request for redemption (surrender) payment.
+depends on: PaymentFiles.Request
+
+table: PaymentFiles.RedemptionTransference
+description: Transfer for redemption.
+depends on: PaymentFiles.Transference
+
+table: PaymentFiles.ReinsuranceCommissionTransference
+description: Transfer of reinsurance commission.
+depends on: PaymentFiles.Transference
+
+table: PaymentFiles.ReinsurancePremiumTransference
+description: Transfer of reinsurance premium.
+depends on: PaymentFiles.Transference
+
+table: PaymentFiles.Request
+description: Base or generic payment request (type and common fields).
+depends on: PaymentFiles.PaymentSubFile, SalesNetwork.OperationUnit, dbo.User
+
+table: PaymentFiles.ReturnedPremiumRequest
+description: Request for returned premium (refund).
+depends on: PaymentFiles.Request
+
+table: PaymentFiles.ReturnedPremiumTransference
+description: Transfer for returned premium.
+depends on: PaymentFiles.Transference
+
+table: PaymentFiles.ReturnedRequest
+description: Request that was returned or rejected.
+depends on: PaymentFiles.Request
+
+table: PaymentFiles.TransferDepositAccountPaymentSettlement
+description: Settlement for transfer between deposit accounts.
+depends on: PaymentFiles.PaymentSettlement, Receives.DepositAccount
+
+table: PaymentFiles.Transference
+description: Core transfer record (money movement between accounts or parties).
+depends on: PaymentFiles.Request, PaymentFiles.Transference, SalesNetwork.OperationUnit, dbo.User
+
+table: PaymentFiles.TransferencePersonShare
+description: Person’s share in a transference (e.g. commission split).
+depends on: PaymentFiles.Transference, Persons.Person
+
+table: PaymentFiles.VatTransference
+description: VAT portion or transfer related to tax.
+depends on: PaymentFiles.Transference
+
+table: PaymentFiles.VendorPaymentRequest
+description: Request for payment to vendor.
+depends on: Investment.PurchaseTransaction, PaymentFiles.Request
+
+table: PaymentFiles.VendorPaymentTransference
+description: Transfer to vendor.
+depends on: Investment.PurchaseTransaction, PaymentFiles.Transference
+
+table: PaymentFiles.WithdrawRequest
+description: Request to withdraw (e.g. from deposit or accumulation).
+depends on: PaymentFiles.Request
+
+table: PaymentFiles.WithdrawTransference
+description: Transfer representing withdrawal.
+depends on: PaymentFiles.Transference
+
+table: Payments.BankTransaction
+description: Bank transaction (e.g. gateway or statement line).
+depends on: none
+
+table: Payments.ChangePaymentStatusLog
+description: Log of payment status changes (e.g. failed to success).
+depends on: Payments.PaymentValue
+
+table: Payments.Deposit
+description: Deposit record (premium, savings, or other) with receipt and type.
+depends on: none
+
+table: Payments.DepositPayOffMapping
+description: Mapping between deposits (e.g. settlement vs removal) for payoff.
+depends on: Payments.DepositPayOffMappingLog
+
+table: Payments.DepositPayOffMappingLog
+description: Log or header for deposit payoff mapping (document, flags).
+depends on: none
+
+table: Payments.PaymentLog
+description: Log of payment attempt (gateway response, tracking).
+depends on: Payments.PaymentMethod, Payments.PaymentValue
+
+table: Payments.PaymentMethod
+description: Payment method (gateway, bank, cash) with config and validity.
+depends on: none
+
+table: Payments.PaymentUniquNumber
+description: Unique number or id for a payment value (e.g. idempotency).
+depends on: Payments.PaymentValue
+
+table: Payments.PaymentValue
+description: Core payment value (amount, status, method, linked to proposal/deposit).
+depends on: Payments.PaymentMethod
+
+table: Payments.PremiumDepositPaymentLog
+description: Log of premium deposit payment (e.g. gateway).
+depends on: Proposals.ProposalDeposit
+
+table: Payments.PremiumInstallmentPaymentLog
+description: Log of premium installment payment.
+depends on: Proposals.Proposal
+
+table: Persons.BankAccount
+description: Bank account of a person (IBAN, branch, currency).
+depends on: BasicInformation.Currency, Persons.Person, dbo.User
+
+table: Persons.LegalPerson
+description: Legal entity (company) linked to Person; registration and CEO.
+depends on: Persons.Person, Persons.RealPerson
+
+table: Persons.Person
+description: Core person (natural or legal); national code, name, blacklist, partner link.
+depends on: dbo.PartnerShip
+
+table: Persons.PersonChangeLog
+description: Audit log of person data changes.
+depends on: none
+
+table: Persons.PersonCoding
+description: Coding or internal ID assigned to person (e.g. insurer code, validity period).
+depends on: Persons.Person
+
+table: Persons.PersonInsurerDeposite
+description: Deposit or balance linked to person and insurer (e.g. premium account).
+depends on: none
+
+table: Persons.RealPerson
+description: Natural person (individual) linked to Person; birth, identity, marital status.
+depends on: Persons.Person, dbo.Country
+
+table: ProposalCalculation.ProposalCalculationQueue
+description: Queue of proposals waiting for or being calculated.
+depends on: none
+
+table: Proposals.AccumulationCertificate
+description: Certificate or record of accumulation (e.g. savings) for proposal.
+depends on: Proposals.Proposal, Proposals.ProposalInsuredInsuranceRisk, dbo.User
+
+table: Proposals.CapitalFormation
+description: Capital formation (savings, reserve) by proposal, year, and insured.
+depends on: Proposals.Proposal, Proposals.SubProposal
+
+table: Proposals.CooperationBenefit
+description: Cooperation benefit type or definition.
+depends on: dbo.User
+
+table: Proposals.CooperationBenefitDetail
+description: Detail of cooperation benefit per proposal (amount, year, status).
+depends on: Proposals.CooperationBenefit, Proposals.CooperationBenefitDetail
+
+table: Proposals.IssuanceCommitment
+description: Commitment or invoice for issuance (tax, discount, document).
+depends on: Accounting.Document, Proposals.Proposal, dbo.User
+
+table: Proposals.IssuanceCommitmentRevoke
+description: Revocation of an issuance commitment (e.g. cancellation).
+depends on: Accounting.Document, Proposals.IssuanceCommitment, dbo.User
+
+table: Proposals.ObligationInsurerPension
+description: Insurer obligation (pension) per proposal and year.
+depends on: InsurancePlan.InsurancePlanHasRisk, Proposals.Proposal, dbo.User
+
+table: Proposals.ObligationInsurerPensionItem
+description: Item or installment of obligation pension (due date, amount).
+depends on: InsurancePlan.InsurancePlanHasRisk, Proposals.ObligationInsurerPension, Proposals.Proposal, dbo.User
+
+table: Proposals.PremiumSettlementReceipt
+description: Receipt for premium settlement (bordereau, tax, revoke).
+depends on: Proposals.ProposalInstallmentSchedule
+
+table: Proposals.PremiumSettlementReceiptManualRevoke
+description: Manual revoke of premium settlement receipt.
+depends on: none
+
+table: Proposals.PremiumSettlementReceiptRevoke
+description: Revoke of premium settlement receipt.
+depends on: Accounting.Document, Proposals.PremiumSettlementReceipt, dbo.User
+
+table: Proposals.Proposal
+description: Core insurance proposal (quote or application) before or after issuance.
+depends on: InsurancePlan.InsurancePlan
+
+table: Proposals.ProposalAdministrativeCost
+description: Administrative cost applied to proposal.
+depends on: Proposals.Proposal, Proposals.SubProposal
+
+table: Proposals.ProposalAttachment
+description: Attachment (file) linked to proposal.
+depends on: Proposals.Proposal
+
+table: Proposals.ProposalComision
+description: Commission calculated or assigned for proposal.
+depends on: Proposals.SubProposal
+
+table: Proposals.ProposalCommissionAdministrativeCosts
+description: Administrative cost portion of commission.
+depends on: Proposals.SubProposal
+
+table: Proposals.ProposalDeposit
+description: Deposit (premium or savings) linked to proposal.
+depends on: Proposals.Proposal
+
+table: Proposals.ProposalInfoVersion
+description: Version of proposal info (e.g. for history or comparison).
+depends on: Proposals.Proposal
+
+table: Proposals.ProposalInstallmentSchedule
+description: Schedule of premium installments for proposal.
+depends on: Proposals.ProposalObligationsInsurer, Proposals.SubProposal
+
+table: Proposals.ProposalInstallmentSelfPlan
+description: Self-plan or override for installment schedule.
+depends on: Proposals.Proposal, Proposals.ProposalInstallmentSchedule, dbo.User
+
+table: Proposals.ProposalInsured
+description: Insured person on the proposal (life, relationship to policyholder).
+depends on: Proposals.Proposal
+
+table: Proposals.ProposalInsuredBeneficiary
+description: Beneficiary of insured (death or other benefit).
+depends on: Proposals.ProposalInsured
+
+table: Proposals.ProposalInsuredInsuranceRisk
+description: Risk (coverage) selected for an insured on the proposal.
+depends on: InsuranceRisks.InsuranceRisk, Investment.InvestmentProductPrice, Investment.PurchaseTransaction, Proposals.ProposalInsured, Proposals.SubProposal
+
+table: Proposals.ProposalInsuredInsuranceRiskDetail
+description: Detail (amount, term, options) for proposal insured risk.
+depends on: Proposals.Proposal, Proposals.SubProposal
+
+table: Proposals.ProposalInsuredInsuranceRiskDetailAdministrativeCost
+description: Administrative cost for proposal insured risk detail.
+depends on: Proposals.SubProposal
+
+table: Proposals.ProposalInsuredInsuranceRiskMathReserve
+description: Math reserve for proposal insured risk.
+depends on: InsurancePlan.InsurancePlanHasRisk, InsuranceRisks.InsuranceRisk, Investment.InvestmentProductPrice, Investment.PurchaseTransaction, Proposals.Proposal
+
+table: Proposals.ProposalInsuredInsuranceRiskRiskFactor
+description: Risk factor values (e.g. age, smoking) for proposal insured risk.
+depends on: Proposals.ProposalInsuredInsuranceRisk, Proposals.SubProposal
+
+table: Proposals.ProposalInsuredObligationsInsurer
+description: Insurer obligations linked to proposal insured.
+depends on: Proposals.Proposal
+
+table: Proposals.ProposalInsuredQuestionnaireAnswerMapping
+description: Questionnaire answers for proposal insured.
+depends on: Proposals.ProposalQuestionnaireAnswer
+
+table: Proposals.ProposalObligationsInsurer
+description: Insurer obligations at proposal level.
+depends on: Proposals.Proposal, Proposals.SubProposal
+
+table: Proposals.ProposalObligationUnderwriter
+description: Underwriter or unit responsible for obligation.
+depends on: Proposals.Proposal, Proposals.SubProposal
+
+table: Proposals.ProposalOnlineRequest
+description: Online proposal request (e.g. from portal).
+depends on: none
+
+table: Proposals.ProposalOnlineRequestMapping
+description: Mapping or link for online proposal request.
+depends on: Proposals.ProposalOnlineRequest
+
+table: Proposals.ProposalQuestionnaireAnswer
+description: Questionnaire answer at proposal level.
+depends on: Proposals.ProposalInsured
+
+table: Proposals.ProposalSharedPremium
+description: Shared premium (e.g. group or split) for proposal.
+depends on: Proposals.Proposal, dbo.User
+
+table: Proposals.SubProposal
+description: Sub-proposal or sub-contract (e.g. additional insured or rider).
+depends on: Addendums.SoloInstallmentAddendum, Proposals.Proposal, dbo.User
+
+table: ProposalStates.ProposalAdmissionConsideration
+description: State: proposal under admission consideration.
+depends on: Proposals.Proposal, dbo.User
+
+table: ProposalStates.ProposalConfirmation
+description: State: proposal confirmed.
+depends on: Proposals.Proposal, dbo.User
+
+table: ProposalStates.ProposalExternalAdmissionConsideration
+description: State: external admission consideration.
+depends on: Proposals.Proposal, dbo.User
+
+table: ProposalStates.ProposalInscription
+description: State: proposal inscribed (registered).
+depends on: Proposals.Proposal, dbo.User
+
+table: ProposalStates.ProposalIssuing
+description: State: proposal being issued (policy creation).
+depends on: Proposals.Proposal, dbo.User
+
+table: ProposalStates.ProposalIssuingConsideration
+description: State: issuing consideration.
+depends on: Proposals.Proposal, dbo.User
+
+table: ProposalStates.ProposalStateAttachment
+description: Attachment linked to a proposal state or step.
+depends on: none
+
+table: ProposalTemplates.ProposalTemplateQuestionnaireAnswer
+description: Default questionnaire answer in template.
+depends on: InsuranceRisks.ProposalTemplate
+
+table: ProposalTemplates.ProposalTemplateQuestionnaireAnswerMapping
+description: Mapping of template answers to questions.
+depends on: ProposalTemplates.ProposalTemplateQuestionnaireAnswer
+
+table: Receives.BankInvoiceReceive
+description: Receive (incoming payment) linked to bank invoice.
+depends on: BasicInformation.SystemBankAccount, Receives.BaseReceive, SalesNetwork.OperationUnit, dbo.User
+
+table: Receives.BaseOnlineReceiveRequest
+description: Base record for online payment request (gateway).
+depends on: BasicInformation.PaymentIdentity, Receives.OnlineReceive, Receives.OnlineReceiveGateway
+
+table: Receives.BaseOnlineReceiveRequestLog
+description: Log of online receive request (status, response).
+depends on: BasicInformation.PaymentIdentity
+
+table: Receives.BaseReceive
+description: Base receive (incoming payment) with type and amount.
+depends on: BasicInformation.PaymentIdentity, Receives.DepositAccount
+
+table: Receives.BehPardakhtOnlineReceiveRequest
+description: BehPardakht gateway online receive request.
+depends on: Receives.BaseOnlineReceiveRequest
+
+table: Receives.BehPardakhtOnlineReceiveRequestLog
+description: Log for BehPardakht online receive.
+depends on: Receives.BaseOnlineReceiveRequestLog, Receives.BehPardakhtOnlineReceiveRequest
+
+table: Receives.Bill
+description: Bill or invoice (e.g. for premium) that can be paid.
+depends on: Receives.DepositAccount
+
+table: Receives.BillAndPaymentIdentifierReceive
+description: Receive identified by bill and payment identifier.
+depends on: BasicInformation.SystemBankAccount, Receives.BaseReceive, dbo.User
+
+table: Receives.BillReceive
+description: Receive (payment) against a bill.
+depends on: BasicInformation.SystemBankAccount, Receives.BaseReceive, SalesNetwork.OperationUnit, dbo.User
+
+table: Receives.CertificateDepositTransfer
+description: Transfer of certificate or deposit (e.g. between accounts).
+depends on: BasicInformation.SystemBankAccount, Receives.TransferDepositRequest
+
+table: Receives.ChequeReceive
+description: Receive (payment) by cheque.
+depends on: BasicInformation.SystemBankAccount, Receives.BaseReceive, SalesNetwork.OperationUnit, dbo.User
+
+table: Receives.CreditReceive
+description: Receive (payment) by credit or internal transfer.
+depends on: BasicInformation.SystemBankAccount, Receives.BaseReceive, SalesNetwork.OperationUnit, dbo.User
+
+table: Receives.DepositAccount
+description: Deposit account (e.g. for premium or savings) to which receives are posted.
+depends on: none
+
+table: Receives.DepositTransaction
+description: Transaction (credit/debit) on a deposit account.
+depends on: Receives.DepositAccount, Receives.DepositTransaction
+
+table: Receives.FreeBlockedDepositTransfer
+description: Transfer that frees or blocks deposit.
+depends on: BasicInformation.SystemBankAccount
+
+table: Receives.IranKishOnlineReceiveRequest
+description: IranKish gateway online receive request.
+depends on: Receives.BaseOnlineReceiveRequest
+
+table: Receives.IranKishOnlineReceiveRequestLog
+description: Log for IranKish online receive.
+depends on: Receives.BaseOnlineReceiveRequestLog, Receives.IranKishOnlineReceiveRequest
+
+table: Receives.OnlineReceive
+description: Online receive (payment via gateway) record.
+depends on: Receives.BaseReceive, Receives.OnlineReceiveGateway, dbo.User
+
+table: Receives.OnlineReceiveGateway
+description: Gateway configuration for online receive (e.g. Mehr, Mellat).
+depends on: BasicInformation.SystemBankAccount
+
+table: Receives.OnlineReceiveRequestChangeStatusLog
+description: Log of status changes for online receive request.
+depends on: dbo.User
+
+table: Receives.ReceiveReceipt
+description: Receipt issued for a receive (payment confirmation).
+depends on: BasicInformation.PaymentIdentity, Receives.BaseReceive
+
+table: Receives.ReceiveReceiptRevoke
+description: Revoke of receive receipt.
+depends on: Accounting.Document, Receives.ReceiveReceipt
+
+table: Receives.TransferDeposit
+description: Transfer between deposit accounts.
+depends on: Accounting.Document, Receives.DepositAccount, dbo.User
+
+table: Receives.TransferDepositLog
+description: Log of transfer deposit operations.
+depends on: none
+
+table: Receives.TransferDepositRequest
+description: Request to transfer between deposit accounts.
+depends on: none
+
+table: Receives.UnknownRequestLog
+description: Log of unknown or unparsed requests (e.g. webhook).
+depends on: Receives.BaseOnlineReceiveRequestLog
+
+table: Reports.BaseReportRequest
+description: Base record for report request (params, status).
+depends on: dbo.User
+
+table: Reports.BordereauGettingPremium
+description: Bordereau (batch) of premium received or get-premium.
+depends on: none
+
+table: Reports.BordereauGettingPremiumInsuranceRiskDetail
+description: Risk-level detail in bordereau getting premium.
+depends on: Reports.BordereauGettingPremium
+
+table: Reports.MathsSaveReport
+description: Math save (reserve) report.
+depends on: none
+
+table: Reports.MathsSaveReportRequest
+description: Request or parameters for math save report.
+depends on: none
+
+table: Reports.ProposalCommissionAggregateSeasonalReport
+description: Seasonal aggregate report of proposal commission.
+depends on: Reports.BaseReportRequest, SalesNetwork.OperationUnit
+
+table: SalePlans.AgeAdjustment
+description: Age-based adjustment (e.g. for VIP or discount) in sale plan.
+depends on: SalePlans.SalePlan
+
+table: SalePlans.BaseVipCustomerTemp
+description: Base temp record for VIP customer (sale plan import/staging).
+depends on: none
+
+table: SalePlans.CategoriesOfBuyerGoalMapping
+description: Mapping of sale plan to categories of buyer goal.
+depends on: CategoriesOfBuyerGoal.CategoriesOfBuyerGoal, SalePlans.SalePlan
+
+table: SalePlans.CostAdjustment
+description: Cost adjustment (e.g. discount) in sale plan.
+depends on: SalePlans.SalePlan
+
+table: SalePlans.SalePlan
+description: Sale plan (promotion, VIP package) with conditions and risks.
+depends on: InsurancePlan.InsurancePlan
+
+table: SalePlans.SalePlanAdvanceSettlement
+description: Advance settlement rules or config for sale plan.
+depends on: SalePlans.SalePlan, dbo.User
+
+table: SalePlans.SalePlanBeneficiary
+description: Default or template beneficiary for sale plan.
+depends on: SalePlans.SalePlan, SalePlans.SalePlanInsured, dbo.User
+
+table: SalePlans.SalePlanBeneficiaryTemp
+description: Temp beneficiary for sale plan (import/staging).
+depends on: SalePlans.BaseVipCustomerTemp
+
+table: SalePlans.SalePlanCondition
+description: Condition (clause or rule) for sale plan.
+depends on: SalePlans.SalePlan
+
+table: SalePlans.SalePlanConditionWordingMapping
+description: Wording linked to sale plan condition.
+depends on: SalePlans.SalePlanCondition
+
+table: SalePlans.SalePlanDenyInsuranceRisk
+description: Insurance risks denied or excluded in sale plan.
+depends on: SalePlans.SalePlan
+
+table: SalePlans.SalePlanInsuranceRisk
+description: Insurance risks included in sale plan with multiplier.
+depends on: SalePlans.SalePlan
+
+table: SalePlans.SalePlanInsured
+description: Insured (or slot) in sale plan.
+depends on: SalePlans.SalePlan, SalePlans.SalePlanPolicyHolder, dbo.User
+
+table: SalePlans.SalePlanInsuredTemp
+description: Temp insured for sale plan (import/staging).
+depends on: SalePlans.BaseVipCustomerTemp
+
+table: SalePlans.SalePlanLimitedDuration
+description: Limited duration (start/end) for sale plan validity.
+depends on: SalePlans.SalePlan
+
+table: SalePlans.SalePlanMandatoryConditionMapping
+description: Mandatory wordings or conditions for sale plan.
+depends on: SalePlans.SalePlan
+
+table: SalePlans.SalePlanPersonVipCustomerMapping
+description: Person to VIP customer (sale plan) mapping.
+depends on: SalePlans.SalePlan
+
+table: SalePlans.SalePlanPolicyHolder
+description: Policy holder (or slot) in sale plan.
+depends on: SalePlans.SalePlan, dbo.User
+
+table: SalePlans.SalePlanPolicyHolderTemp
+description: Temp policy holder for sale plan (import/staging).
+depends on: SalePlans.BaseVipCustomerTemp
+
+table: SalePlans.SalesNetworkSalePlanMapping
+description: Mapping of sale plan to sales network (e.g. operation unit).
+depends on: SalePlans.SalePlan
+
+table: SalesNetwork.AdmissionUnit
+description: Admission unit (receives applications) in sales hierarchy.
+depends on: SalesNetwork.OperationUnit, dbo.User
+
+table: SalesNetwork.Advisor
+description: Advisor in sales network (links to unit, coach, levels).
+depends on: SalesNetwork.OperationUnit, SalesNetwork.OperationalLevelOfSalesNetwork, dbo.User
+
+table: SalesNetwork.AdvisorSalesManMapping
+description: Salesmen under an advisor with rate.
+depends on: SalesNetwork.Advisor, SalesNetwork.SalesMan
+
+table: SalesNetwork.AssessorExpert
+description: Assessor or expert (e.g. medical) linked to person and dates.
+depends on: Persons.Person, dbo.User
+
+table: SalesNetwork.AssessorExpertAllowedInsurancePlan
+description: Insurance plans an assessor expert can assess.
+depends on: InsurancePlan.InsurancePlan, SalesNetwork.AssessorExpert
+
+table: SalesNetwork.AssessorUnit
+description: Assessor unit (e.g. branch or team).
+depends on: none
+
+table: SalesNetwork.CooperationRequest
+description: Request to cooperate (e.g. join as agent) with status and token.
+depends on: none
+
+table: SalesNetwork.CooperationRequestAttachment
+description: Attachment for cooperation request.
+depends on: SalesNetwork.CooperationRequest
+
+table: SalesNetwork.IssuingUnit
+description: Issuing unit (can issue policies) in sales hierarchy.
+depends on: SalesNetwork.OperationUnit, SalesNetwork.OperationalLevelOfSalesNetwork, dbo.User
+
+table: SalesNetwork.LeaderUnit
+description: Leader unit in sales hierarchy.
+depends on: none
+
+table: SalesNetwork.OperationalLevelOfSalesNetwork
+description: Level in sales network (grade, percent, type).
+depends on: none
+
+table: SalesNetwork.OperationUnit
+description: Operation unit (branch, agency, advisor) with person, type, license.
+depends on: Persons.Person, dbo.StateProvince, dbo.User
+
+table: SalesNetwork.OperationUnitAdvancedSettlementRule
+description: Advanced settlement rule (e.g. min count, percent) for unit.
+depends on: dbo.User
+
+table: SalesNetwork.OperationUnitAdvancedSettlementRuleInsurancePlan
+description: Plan scope of advanced settlement rule.
+depends on: InsurancePlan.InsurancePlan, SalesNetwork.OperationUnitAdvancedSettlementRule, dbo.User
+
+table: SalesNetwork.OperationUnitAllowedInsurancePlan
+description: Which insurance plans an operation unit can sell or issue.
+depends on: InsurancePlan.InsurancePlan, SalesNetwork.OperationUnit, dbo.User
+
+table: SalesNetwork.OperationUnitCenterInsCodeLog
+description: History of central insurance code for operation unit.
+depends on: SalesNetwork.OperationUnit, dbo.User
+
+table: SalesNetwork.OperationUnitChangeLog
+description: Audit log of operation unit data changes.
+depends on: none
+
+table: SalesNetwork.OperationUnitLicenseMapping
+description: License (e.g. processing system) for operation unit.
+depends on: SalesNetwork.OperationUnit
+
+table: SalesNetwork.OperationUnitSertificateValueAdded
+description: Value-added certificate for operation unit (typo: Sertificate).
+depends on: SalesNetwork.OperationUnit, dbo.User
+
+table: SalesNetwork.OperationUnitStatusLog
+description: History of operation unit status (e.g. active, suspended).
+depends on: SalesNetwork.OperationUnit
+
+table: SalesNetwork.OperationUnitSupervisorLog
+description: History of supervisor (parent unit) for operation unit.
+depends on: SalesNetwork.OperationUnit
+
+table: SalesNetwork.SalesCoach
+description: Sales coach in hierarchy (parent, level, unit).
+depends on: SalesNetwork.OperationUnit, SalesNetwork.OperationalLevelOfSalesNetwork, dbo.User
+
+table: SalesNetwork.SalesMan
+description: Salesman (person) in sales network with active flag.
+depends on: Persons.Person, dbo.User
+
+table: Security.ApiKey
+description: API key for external or programmatic access.
+depends on: none
+
+table: Statements.BankStatement
+description: Bank statement (file or batch) uploaded for reconciliation.
+depends on: dbo.User
+
+table: Statements.MehrBankStatementItem
+description: Single line/item from Mehr bank statement import.
+depends on: Receives.DepositAccount, SalesNetwork.OperationUnit, Statements.BankStatement, dbo.User
+
+table: Statements.MellatBankStatementItem
+description: Single line/item from Mellat bank statement import.
+depends on: Persons.Person, Receives.BaseReceive, Receives.DepositAccount, Receives.OnlineReceiveGateway, Statements.BankStatement, dbo.User
+
+table: Stories.Story
+description: Story or content block (e.g. for homepage or marketing).
+depends on: none
+
+table: Tickets.Ticket
+description: Support or inquiry ticket (e.g. linked to proposal, status, referrer).
+depends on: dbo.User
+
+table: Tickets.TicketAttachmentMapping
+description: Attachment linked to a ticket.
+depends on: Tickets.Ticket
+
+table: Tickets.TicketPost
+description: Post or reply in a ticket thread.
+depends on: Tickets.Ticket, dbo.User
+
+table: Treasury.ImportedBankAcountReps01
+description: Imported bank account report header (typo: Acount).
+depends on: BasicInformation.SystemBankAccount
+
+table: Treasury.ImportedBankAcountReps02
+description: Imported bank account report line/item (typo: Acount).
+depends on: BasicInformation.SystemBankAccount, Treasury.ImportedBankAcountReps01
+
+table: Users.OperationalUser
+description: User linked to operation unit for operational access (e.g. branch user).
+depends on: none

@@ -1,0 +1,9 @@
+# Forbidden columns – one per line: schema.table.column or table.column
+# These columns must never appear in generated SELECT queries.
+# Lines starting with # are ignored.
+
+# Example entries (uncomment and add your own):
+# Users.Password
+# Security.User.PasswordHash
+# Payments.CardNumber
+# person.Person.NationalId

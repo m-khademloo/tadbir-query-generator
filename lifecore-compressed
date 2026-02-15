@@ -1,0 +1,5575 @@
+TABLE Accounting.AmendmentDocumentRequest
+Id int [PK]
+DocumentType int
+DocumentId int [FK->Accounting.Document.Id]
+Reason str
+AmendmentDocumentId int [FK->Accounting.Document.Id]
+Status int
+CreateDate datetime
+CreateUserId int [FK->dbo.User.Id]
+ConfirmDate datetime
+ConfirmUserId int [FK->dbo.User.Id]
+
+TABLE Accounting.Coding
+Id int [PK]
+Title str
+CodeOne int
+CodeTwo int
+CodeThree int
+CodeFour int
+CodeFive int
+CreateDate datetime
+LastUpdateDate datetime
+
+TABLE Accounting.Document
+Id int [PK]
+ReferenceNumber int
+Date datetime
+Type int
+ParentId int [FK->Accounting.Parent.Id]
+RelatedDocumentId int [FK->Accounting.Document.Id]
+RelatedDocumentType int
+
+TABLE Accounting.DocumentEntryPattern
+Id int [PK]
+Title str
+DocumentType int
+IsActive bool
+Debit_CodeOne_FixValue int
+Debit_CodeOne_DynamicValue int
+Debit_CodeTwo_FixValue int
+Debit_CodeTwo_DynamicValue int
+Debit_CodeThree_FixValue int
+Debit_CodeThree_DynamicValue int
+Debit_CodeFour_FixValue int
+Debit_CodeFour_DynamicValue int
+Debit_CodeFive_FixValue int
+Debit_CodeFive_DynamicValue int
+Debit_NumberOne_FixValue float
+Debit_NumberOne_DynamicValue int
+Debit_NumberTwo_FixValue float
+Debit_NumberTwo_DynamicValue int
+Debit_NumberThree_FixValue float
+Debit_NumberThree_DynamicValue int
+Debit_NumberFour_FixValue float
+Debit_NumberFour_DynamicValue int
+Debit_NumberFive_FixValue float
+Debit_NumberFive_DynamicValue int
+Debit_StringOne_FixValue str
+Debit_StringOne_DynamicValue int
+Debit_StringTwo_FixValue str
+Debit_StringTwo_DynamicValue int
+Debit_StringThree_FixValue str
+Debit_StringThree_DynamicValue int
+Debit_StringFour_FixValue str
+Debit_StringFour_DynamicValue int
+Debit_StringFive_FixValue str
+Debit_StringFive_DynamicValue int
+Debit_DateOne_FixValue datetime
+Debit_DateOne_DynamicValue int
+Debit_DateTwo_FixValue datetime
+Debit_DateTwo_DynamicValue int
+Debit_DescriptionTemplate str
+Credit_CodeOne_FixValue int
+Credit_CodeOne_DynamicValue int
+Credit_CodeTwo_FixValue int
+Credit_CodeTwo_DynamicValue int
+Credit_CodeThree_FixValue int
+Credit_CodeThree_DynamicValue int
+Credit_CodeFour_FixValue int
+Credit_CodeFour_DynamicValue int
+Credit_CodeFive_FixValue int
+Credit_CodeFive_DynamicValue int
+Credit_NumberOne_FixValue float
+Credit_NumberOne_DynamicValue int
+Credit_NumberTwo_FixValue float
+Credit_NumberTwo_DynamicValue int
+Credit_NumberThree_FixValue float
+Credit_NumberThree_DynamicValue int
+Credit_NumberFour_FixValue float
+Credit_NumberFour_DynamicValue int
+Credit_NumberFive_FixValue float
+Credit_NumberFive_DynamicValue int
+Credit_StringOne_FixValue str
+Credit_StringOne_DynamicValue int
+Credit_StringTwo_FixValue str
+Credit_StringTwo_DynamicValue int
+Credit_StringThree_FixValue str
+Credit_StringThree_DynamicValue int
+Credit_StringFour_FixValue str
+Credit_StringFour_DynamicValue int
+Credit_StringFive_FixValue str
+Credit_StringFive_DynamicValue int
+Credit_DateOne_FixValue datetime
+Credit_DateOne_DynamicValue int
+Credit_DateTwo_FixValue datetime
+Credit_DateTwo_DynamicValue int
+Credit_DescriptionTemplate str
+Confirmed bool
+ConfirmUserId int [FK->dbo.User.Id]
+ConfirmDate datetime
+CreateUserId int [FK->dbo.User.Id]
+CreateDate datetime
+UpdateUserId int [FK->dbo.User.Id]
+UpdateDate datetime
+
+TABLE Accounting.DocumentSavingError
+Id int [PK]
+Type int
+Message str
+RawDocument str
+RawObject str
+CreateDate datetime
+
+TABLE Accounting.Entry
+Id int [PK]
+DocumentId int [FK->Accounting.Document.Id]
+CodingId int [FK->Accounting.Coding.Id]
+SubCodingId int [FK->Accounting.SubCoding.Id]
+EntryType int
+Amount float
+Description str
+CreateDate datetime
+
+TABLE Accounting.EntryPattern
+Id int [PK]
+Title str
+DescriptionPattern str
+CodeOne int
+CodeTwo int
+CodeThree int
+CodeFour int
+CodeFive int
+StringOne str
+StringTwo str
+StringThree str
+StringFour str
+StringFive str
+DateOne datetime
+DateTwo datetime
+CodeOneDynamic int
+CodeTwoDynamic int
+CodeThreeDynamic int
+CodeFourDynamic int
+CodeFiveDynamic int
+StringOneDynamic int
+StringTwoDynamic int
+StringThreeDynamic int
+StringFourDynamic int
+StringFiveDynamic int
+DateOneDynamic int
+DateTwoDynamic int
+CreateDate datetime
+LastUpdateDate datetime
+Confirmed bool
+ConfirmUserId int [FK->dbo.User.Id]
+ConfirmDateTime datetime
+Published bool
+NumberOne float
+NumberTwo float
+NumberThree float
+NumberFour float
+NumberFive float
+NumberOneDynamic int
+NumberTwoDynamic int
+NumberThreeDynamic int
+NumberFourDynamic int
+NumberFiveDynamic int
+IsDistinctExceptionNumberOne bool
+IsDistinctExceptionNumberTwo bool
+IsDistinctExceptionNumberThree bool
+IsDistinctExceptionNumberFour bool
+IsDistinctExceptionNumberFive bool
+IsDistinctExceptionStringOne bool
+IsDistinctExceptionStringTwo bool
+IsDistinctExceptionStringThree bool
+IsDistinctExceptionStringFour bool
+IsDistinctExceptionStringFive bool
+
+TABLE Accounting.Parent
+Id int [PK]
+Date datetime
+CreateDate datetime
+SentDate datetime
+State int
+Type int
+
+TABLE Accounting.SubCoding
+Id int [PK]
+StringOne str
+StringTwo str
+StringThree str
+StringFour str
+StringFive str
+DateOne datetime
+DateTwo datetime
+CreateDate datetime
+NumberOne float
+NumberTwo float
+NumberThree float
+NumberFour float
+NumberFive float
+
+TABLE Addendums. ChangeFirstYearPremiumAddendum
+Id int [PK] [FK->Addendums.BaseAddendum.Id]
+OldFirstYearPremium float
+NewFirstYearPremium float
+InsuranceYear int
+
+TABLE Addendums.AddendumAttachment
+Id int [PK]
+BaseAddendumId int [FK->Addendums.BaseAddendum.Id]
+ThumbnailStreamId str
+StreamId str
+Title str
+Description str
+AttachmentGroupId int
+
+TABLE Addendums.BaseAddendum
+Id int [PK]
+CreateDateTime datetime
+RegisterUserId int
+IssuingDateTime datetime
+PolicyId int
+EndDateTime datetime
+RegisterIssuingDateTime datetime
+RegisterOperationUnitId int
+IssuingOperationUnitId int
+AddendumNumber int
+ProposalId int
+AddendumPrintNumber str
+AddendumStatus int
+Description str
+AddendumRegisterType int
+AdvisorUnitId int
+AdmissionUnitId int
+AddendumType int
+ConfirmUserId int
+IssuingUserId int
+AcceptTheTermsAndConditions bool
+AddendumLifPlcyCod int
+CalculationdateTime datetime
+IsCalculation bool
+AddendumReason int
+CostAmount int
+IncomeAmount int
+AddendumTrcCod int
+ReturnPremiumAmount int
+StartDateTime datetime
+
+TABLE Addendums.BeneficiaryChangeAddendum
+Id int [PK] [FK->Addendums.BaseAddendum.Id]
+
+TABLE Addendums.ChangePaymentMethodeAddendum
+Id int [PK] [FK->Addendums.BaseAddendum.Id]
+AmountOfRedemptionValue int
+OldPaymentMethod int
+NewPaymentMethod int
+InsuranceYear int
+
+TABLE Addendums.ChangePremiumPaymentTermAddendum
+Id int [PK] [FK->Addendums.BaseAddendum.Id]
+OldPremiumPaymentTerm int
+NewPremiumPaymentTerm int
+InsuranceYear int
+
+TABLE Addendums.ChangeProposalInsuredInsuranceRiskAddendum
+Id int [PK] [FK->Addendums.BaseAddendum.Id]
+InsuranceYear int
+
+TABLE Addendums.ChangeRisingBonusFactorAddendum
+Id int [PK] [FK->Addendums.BaseAddendum.Id]
+OldRisingBonusFactor float
+NewRisingBonusFactor float
+InsuranceYear int
+
+TABLE Addendums.ChnageCapitalFormationAddendum
+Id int [PK] [FK->Addendums.BaseAddendum.Id]
+OldCapitalFormation float
+NewCapitalFormation float
+InsuranceYear int
+
+TABLE Addendums.CoverageOccurrenceAddendum
+Id int [PK] [FK->Addendums.BaseAddendum.Id]
+ProposalInsuredInsuranceRiskId int [FK->Proposals.ProposalInsuredInsuranceRisk.Id]
+InsuranceYear int
+Amount int
+AmountOfCooperationBenefits int
+DepositInventory int
+ReceiverType int
+
+TABLE Addendums.CoverageOccurrenceAddendumContingentRisk
+Id int [PK]
+Amount int
+CoverageOccurrenceAddendumId int [FK->Addendums.CoverageOccurrenceAddendum.Id]
+ProposalInsuredInsuranceRiskId int [FK->Proposals.ProposalInsuredInsuranceRisk.Id]
+ReceiverType int
+
+TABLE Addendums.DeathAnyReasonAddendum
+Id int [PK] [FK->Addendums.BaseAddendum.Id]
+AmountOfDamage int
+InsuranceYear int
+DeathDate datetime
+AmountOfRedemptionValue int
+DeathReason str
+DepositInventory int
+AmountOfCooperationBenefits int
+
+TABLE Addendums.DeathByAccidentAddendum
+Id int [PK] [FK->Addendums.BaseAddendum.Id]
+AmountDeath int
+AmountAccident int
+InsuranceYear int
+DeathDate datetime
+AmountOfRedemptionValue int
+DeathReason str
+DepositInventory int
+AmountOfCooperationBenefits int
+
+TABLE Addendums.DurationOfPolicyAddendum
+Id int [PK] [FK->Addendums.BaseAddendum.Id]
+OldDurationOfPolicy int
+NewDurationOfPolicy int
+InsuranceYear int
+
+TABLE Addendums.ExecuteMortgageAddendum
+Id int [PK] [FK->Addendums.BaseAddendum.Id]
+Amount int
+DepositInventory int
+RemainCashValue int
+MortgageAddendumId int [FK->Addendums.MortgageAddendum.Id]
+
+TABLE Addendums.GradualReductionAddendum
+Id int [PK] [FK->Addendums.BaseAddendum.Id]
+Amount int
+DepositInventory int
+InstallmentReferenceId int
+InstallmentType int
+EffectiveDate datetime
+
+TABLE Addendums.InsurancePlanAddendum
+Id int [PK] [FK->Addendums.BaseAddendum.Id]
+OldInsurancePlanId int
+NewInsurancePlanId int
+InsuranceYear int
+NewSalePlanId int
+OldSalePlanId int
+
+TABLE Addendums.MaimAddendum
+Id int [PK] [FK->Addendums.BaseAddendum.Id]
+Amount int
+Percent float
+InsuranceYear int
+AccidentDate datetime
+
+TABLE Addendums.MedicalExpensesAddendum
+Id int [PK] [FK->Addendums.BaseAddendum.Id]
+Amount int
+InsuranceYear int
+ExpensesDate datetime
+MedicalExpensesDescription str
+
+TABLE Addendums.MortgageAddendum
+Id int [PK] [FK->Addendums.BaseAddendum.Id]
+Amount float
+PersonId int [FK->Persons.Person.Id]
+Reason str
+AdjustmentPercent float
+
+TABLE Addendums.ObligationAddendum
+Id int [PK] [FK->Addendums.BaseAddendum.Id]
+InsuranceYear int
+OldYearPremium float
+NewYearPremium float
+OldRisingBonusFactor float
+NewRisingBonusFactor float
+OldPaymentMethod int
+NewPaymentMethod int
+OldPremiumPaymentTerm int
+NewPremiumPaymentTerm int
+OldDurationOfPolicy int
+NewDurationOfPolicy int
+OldCapitalFormation float
+NewCapitalFormation float
+ProposalInsuredId int [FK->Proposals.ProposalInsured.Id]
+
+TABLE Addendums.ObligationAddendumRiskMapping
+Id int [PK]
+proposalId int
+CreateDateTime datetime
+RegisterUserId int
+AddendumId int [FK->Addendums.ObligationAddendum.Id]
+CoverageAmount float
+IsMain bool
+CoverageRate float
+CoverageChangeRate float
+BaseRate float
+InsuranceParentRiskId int
+InsuranceParentRiskAmount float
+ProposalInsuredId int
+
+TABLE Addendums.PartialRedemptionAddendum
+Id int [PK] [FK->Addendums.BaseAddendum.Id]
+Amount int
+InsuranceYear int
+DepositInventory int
+Percent float
+ProposalInsuredInsuranceRiskId int [FK->Proposals.ProposalInsuredInsuranceRisk.Id]
+RedemptionDate datetime
+
+TABLE Addendums.PolicyHolderAddendum
+Id int [PK] [FK->Addendums.BaseAddendum.Id]
+OldPersonId int [FK->Persons.Person.Id]
+NewPersonId int
+
+TABLE Addendums.PolicyHolderChangeOligationsAddendum
+Id int [PK] [FK->Addendums.BaseAddendum.Id]
+InsuranceYear int
+OldYearPremium float
+NewYearPremium float
+OldRisingBonusFactor float
+NewRisingBonusFactor float
+OldPaymentMethod int
+NewPaymentMethod int
+OldPremiumPaymentTerm int
+NewPremiumPaymentTerm int
+
+TABLE Addendums.RedemptionAddendum
+Id int [PK] [FK->Addendums.BaseAddendum.Id]
+NonConditionAmount int
+DepositInventory int
+AmountOfCooperationBenefits int
+RedemptionDate datetime
+ConditionAmount int
+MortgageConditionAmount int
+MortgageNonConditionAmount int
+StatisticsAmount int
+
+TABLE Addendums.ReleaseMortgageAddendum
+Id int [PK] [FK->Addendums.BaseAddendum.Id]
+MortgageAddendumId int [FK->Addendums.MortgageAddendum.Id]
+
+TABLE Addendums.RemoveRedemptionEffectAddendum
+Id int [PK] [FK->Addendums.BaseAddendum.Id]
+RedemptionAddendumId int
+InsurerCode int
+RemoveRedemptionEffectReason str
+
+TABLE Addendums.RemoveRevocationEffectAddendum
+Id int [PK] [FK->Addendums.BaseAddendum.Id]
+RevocationAddendumId int
+InsurerCode int
+RemoveRevocationEffectReason str
+
+TABLE Addendums.RevocationAddendum
+Id int [PK] [FK->Addendums.BaseAddendum.Id]
+InsurerCode str
+AmountOfPay float
+RevocationReason str
+InsurerAmount float
+InsurerPersonId int [FK->Persons.Person.Id]
+MortgageAmount float
+MortgagePersonId int [FK->Persons.Person.Id]
+InsurancePolicyDepositBalance float
+SumSettledInsurancePremiumAmount float
+FinancialRepresentativePersonId int [FK->Persons.Person.Id]
+
+TABLE Addendums.SoloInstallmentAddendum
+Id int [PK] [FK->Addendums.BaseAddendum.Id]
+Coverage float
+StartDate datetime
+EndDate datetime
+InsuranceRiskId int [FK->InsuranceRisks.InsuranceRisk.Id]
+
+TABLE Addendums.TerminationAddendum
+Id int [PK] [FK->Addendums.BaseAddendum.Id]
+DayCount int
+Percent float
+ReturnMainAmount float
+ReturnTaxAmount float
+TaxPercent int
+
+TABLE BasicInformation.Bank
+Id int [PK]
+Title str
+AccountingCode int
+IsCreditFacilityProvider bool
+
+TABLE BasicInformation.Currency
+Id int [PK]
+Name str
+CustomFormatting str
+CreateDate datetime
+UpdateDate datetime
+CurrencyCentralInsCode int
+CurrencyAccountingCode int
+Code str
+
+TABLE BasicInformation.LongTermDepositInterest
+Id int [PK]
+ShamsiYear int
+StartDate datetime
+EndDate datetime
+AnnualLongTermInterestRates float
+Published bool
+CreateDateTime datetime
+IsDelete bool
+RegisterUserId int
+
+TABLE BasicInformation.Measurement
+Id int [PK]
+Name str
+CreateDate datetime
+CreateUserId int [FK->dbo.User.Id]
+UpdateDate datetime
+UpdateUserId int [FK->dbo.User.Id]
+
+TABLE BasicInformation.PaymentIdentity
+Id int [PK]
+SystemBankAccountId int [FK->BasicInformation.SystemBankAccount.Id]
+PayIdentity str
+IsUsed bool
+CreateUserId int [FK->dbo.User.Id]
+CreateDate datetime
+BaseReceiveId int
+ReceiveReceiptId int
+BaseOnlineReceiveRequestId int
+BaseOnlineReceiveRequestLogId int
+
+TABLE BasicInformation.ReportFile
+Id int [PK]
+ReportMode int
+InsurancePlanId int [FK->InsurancePlan.InsurancePlan.Id]
+FileName str
+CreateDate datetime
+CreateUserId int [FK->dbo.User.Id]
+UpdateDate datetime
+UpdateUserId int [FK->dbo.User.Id]
+IsActive bool
+CertificateBack str
+CertificateFront str
+
+TABLE BasicInformation.ShortLink
+Id int [PK]
+Code str
+Type int
+ReferenceId int
+Domain int
+ExpireDate datetime
+ClickCount int
+LastClickDate datetime
+LastClickIp str
+ExtraInfo str
+CreateUserId int [FK->dbo.User.Id]
+CreateDate datetime
+
+TABLE BasicInformation.SystemBankAccount
+Id int [PK]
+AccountType int
+BranchCode str
+BranchName str
+AccountNumber str
+AccountingCode str
+IBAN str
+HasCheque bool
+OpeningDate datetime
+CreateDate datetime
+Published bool
+AgentAlborzCode int
+BankId int [FK->BasicInformation.Bank.Id]
+BackupBankAccountId int [FK->BasicInformation.SystemBankAccount.Id]
+InitialBalance float
+CreateUserId int [FK->dbo.User.Id]
+Description str
+ExcelType int
+UpdateDate datetime
+UpdateUserId int [FK->dbo.User.Id]
+CurrencyId int [FK->BasicInformation.Currency.Id]
+HasPaymentIdentity bool
+
+TABLE BasicInformation.Tax
+Id int [PK]
+Year int
+TaxPercent int
+DuesPercent int
+Published bool
+CreateDate datetime
+UpdateDate datetime
+
+TABLE Campaigns.Campaign
+Id int [PK]
+Title str
+Description text
+CreateDate datetime
+StartDate datetime
+EndDate datetime
+Published bool
+RegisterUserId int [FK->dbo.User.Id]
+
+TABLE Campaigns.CampaignAndQuestionnaireMapping
+Id int [PK]
+CampaignId int [FK->Campaigns.Campaign.Id]
+QuestionnaireId int [FK->dbo.Questionnaire.Id]
+
+TABLE Campaigns.CampaignQuestionnaireAnswerMapping
+Id int [PK]
+CampaignId int [FK->Campaigns.Campaign.Id]
+QuestionnaireId int [FK->dbo.Questionnaire.Id]
+QuestionBankId int [FK->dbo.QuestionBank.Id]
+AnswerBankId int [FK->dbo.AnswerBank.Id]
+Answer str
+RespondentUserId int [FK->dbo.User.Id]
+CreateDateTime datetime
+Confirmed bool
+
+TABLE Campaigns.CampaignQuestionnaireMultiChoiceAnswersMapping
+Id int [PK]
+AnswerBankId int [FK->dbo.AnswerBank.Id]
+CreateDateTime datetime
+CampaignQuestionnaireAnswerMappingId int [FK->Campaigns.CampaignQuestionnaireAnswerMapping.Id]
+
+TABLE CategoriesOfBuyerGoal.CategoriesOfBuyerGoal
+Id int [PK]
+Title str
+DisplayOrder int
+Published bool
+CreateDate datetime
+UpdateDate datetime
+Description str
+
+TABLE Comision.AdministrativeCostCategoryComision
+Id int [PK]
+AdministrativeCostCategoryId int
+Amount float
+ProposalComisionId int [FK->Proposals.ProposalComision.Id]
+InsuranceRiskId int
+ComisionType int
+
+TABLE Comision.AdvisorComision
+Id int [PK]
+AdvisorUnitId int
+OperationalLevelId int
+Amount float
+ProposalComisionId int [FK->Proposals.ProposalComision.Id]
+TaxAmount float
+DuesAmount float
+HasCommissionTransference bool
+CommissionTransferenceId int
+ReturnTransferenceId int
+ReturnRequestId int
+
+TABLE Comision.IssuingComision
+Id int [PK]
+IssuingUnitId int
+OperationalLevelId int
+Amount float
+ProposalComisionId int [FK->Proposals.ProposalComision.Id]
+TaxAmount float
+DuesAmount float
+HasCommissionTransference bool
+CommissionTransferenceId int
+ReturnTransferenceId int
+ReturnRequestId int
+
+TABLE Comision.SalesCoachComision
+Id int [PK]
+OperationalLevelId int
+Amount float
+ProposalComisionId int [FK->Proposals.ProposalComision.Id]
+SalesCoachId int
+TaxAmount float
+DuesAmount float
+HasCommissionTransference bool
+CommissionTransferenceId int
+ReturnTransferenceId int
+ReturnRequestId int
+
+TABLE Comision.SalesManComision
+Id int [PK]
+SalesManId int
+Amount float
+ProposalComisionId int [FK->Proposals.ProposalComision.Id]
+TaxAmount float
+DuesAmount float
+HasCommissionTransference bool
+CommissionTransferenceId int
+OperationalLevelId int
+ReturnTransferenceId int
+ReturnRequestId int
+
+TABLE Comments.Answer
+Id int [PK]
+CommentId int [FK->Comments.Comment.Id]
+Title str
+Description str
+RegisterUserId int
+Published bool
+CreateDate datetime
+
+TABLE Comments.Comment
+Id int [PK]
+Title str
+Description str
+FirsName str
+LastName str
+CreateDate datetime
+Published bool
+RegisterUserId int
+Deleted bool
+Ip str
+Email str
+Mobile str
+
+TABLE common.Attachments
+Id int [PK]
+Title str
+Description str
+StreamId str
+ThumbnailStreamId str
+EntityReferenceId int [FK->common.EntityReferences.Id]
+AttachmentGroupId int [FK->dbo.AttachmentGroup.Id]
+CreateDate datetime
+CreateUserId int [FK->dbo.User.Id]
+Deleted bool
+
+TABLE common.EntityReferences
+Id int [PK]
+EntityId int
+EntityType str
+
+TABLE Configuration.ReportContentConfiguration
+Id int [PK]
+Title str
+Description text
+RegisterUserId int
+CreateDate datetime
+DisplayOrder int
+Published bool
+ReportType int
+InsurancePlanId int
+
+TABLE ContentManagement.News
+Id int [PK]
+Title str
+ShortDescription text
+FullDescription str
+RegisterUserId int [FK->dbo.User.Id]
+CreateDate datetime
+StartDate datetime
+EndDate datetime
+Published bool
+Author str
+Identifier str
+
+TABLE dbo.__EFMigrationsHistory
+MigrationId int [PK]
+ProductVersion str
+
+TABLE dbo.__MigrationHistory
+MigrationId str
+ContextKey str
+Model str
+ProductVersion str
+
+TABLE dbo.aacnum
+opCode str
+accnum str
+national str
+id int
+propid int
+
+TABLE dbo.aacnum_copy
+opCode str
+accnum str
+national str
+id int
+
+TABLE dbo.Ability
+Id int [PK]
+PersonId int [FK->Persons.Person.Id]
+Title str
+AbilityLevelType int
+BeginDate datetime
+EndDate datetime
+CreateDate datetime
+UpdateDate datetime
+Description str
+
+TABLE dbo.AbilityAttachmentMapping
+Id int [PK]
+StreamId str
+Title str
+Description str
+AttachmentGroupId int
+AbilityId int [FK->dbo.Ability.Id]
+ThumbnailStreamId str
+
+TABLE dbo.Acceleration
+Id int [PK]
+TypeResolutionAcceleration int
+TypeManagementAcceleration int
+InsurancePlanId int [FK->InsurancePlan.InsurancePlan.Id]
+InsuranceRiskId int
+RateOfPercent int
+Year int
+
+TABLE dbo.AclRecord
+Id int [PK]
+EntityId int
+EntityName str
+UserRoleId int [FK->dbo.UserRole.Id]
+
+TABLE dbo.ActivityLog
+Id int [PK]
+ActivityLogTypeId int [FK->dbo.ActivityLogType.Id]
+UserId int [FK->dbo.User.Id]
+Comment str
+CreatedOnUtc datetime
+IpAddress str
+
+TABLE dbo.ActivityLogType
+Id int [PK]
+SystemKeyword str
+Name str
+Enabled bool
+
+TABLE dbo.AdditionalAttributeLegalPerson
+Id int [PK]
+LegalPersonName str
+EndDate datetime
+FounderName str
+IsActive bool
+Logo str
+LegalPersonType int
+OwnershipType int
+LegalPersonId int
+LegalPersonNameEn str
+ActivityTitle str
+BeginDate datetime
+CreateDate datetime
+UpdateDate datetime
+
+TABLE dbo.AdditionalAttributeLegalPersonAttachmentMapping
+Id int [PK]
+StreamId str
+Title str
+Description str
+AttachmentGroupId int
+AdditionalAttributeLegalPersonId int [FK->dbo.AdditionalAttributeLegalPerson.Id]
+ThumbnailStreamId str
+
+TABLE dbo.Address
+Id int [PK]
+CountryId int [FK->dbo.Country.Id]
+ProvinceId int [FK->dbo.StateProvince.Id]
+StateId int [FK->dbo.StateProvince.Id]
+PostalCode str
+LocalAddress str
+IsPublished bool
+CreateDate datetime
+RegisterUserId int
+UpdateDate datetime
+Deleted bool
+Radius float
+AddressType int
+PersonId int [FK->Persons.Person.Id]
+
+TABLE dbo.AnswerBank
+Id int [PK]
+QuestionBankId int [FK->dbo.QuestionBank.Id]
+AnswerTitle str
+DisplayOrder int
+RatePointOfAnswer float
+IsCorrectAnswer bool
+PreDefineAnswer bool
+
+TABLE dbo.AttachmentGroup
+Id int [PK]
+Title str
+DisplayOrder int
+CreateDate datetime
+AttachmentType int
+Published bool
+
+TABLE dbo.BankAccountAttachmentMapping
+Id int [PK]
+StreamId str
+Title str
+Description str
+AttachmentGroupId int
+BankAccountId int [FK->Persons.BankAccount.Id]
+ThumbnailStreamId str
+
+TABLE dbo.BlackList
+Id int [PK]
+PersonId int [FK->Persons.Person.Id]
+BeginDate datetime
+EndDate datetime
+Explain str
+CreateDate datetime
+UpdateDate datetime
+BlackListType int
+RegisterUserId int [FK->dbo.User.Id]
+Deactivate bool
+DeactivateDescription str
+UpdateUserId int [FK->dbo.User.Id]
+
+TABLE dbo.BlackListAttachmentMapping
+Id int [PK]
+StreamId str
+Title str
+Description str
+AttachmentGroupId int
+BlackListId int [FK->dbo.BlackList.Id]
+ThumbnailStreamId str
+
+TABLE dbo.ChatGroup
+Id int [PK]
+Title str
+Published bool
+Deleted bool
+
+TABLE dbo.ChatGroupUserMapping
+Id int [PK]
+ChatGroupId int [FK->dbo.ChatGroup.Id]
+UserId int
+
+TABLE dbo.ChatMessage
+Id int [PK]
+Title str
+Body str
+ConversationId int [FK->dbo.Conversation.Id]
+UserId int
+AttachmentId str
+RegisterDate datetime
+Seen bool
+
+TABLE dbo.Condemnation
+Id int [PK]
+PersonId int [FK->Persons.Person.Id]
+Type str
+Clearances str
+BeginDate datetime
+EndDate datetime
+
+TABLE dbo.ConditionOfInsurer
+Id int [PK]
+Title str
+Published bool
+DisplayOrder int
+WordingId int [FK->dbo.Wording.Id]
+
+TABLE dbo.Conversation
+Id int [PK]
+Title str
+ConnectionGuid str
+ClientUserId int
+ServerUserId int
+ChatGroupId int [FK->dbo.ChatGroup.Id]
+ChatPriority int
+StartTime datetime
+EndTime datetime
+Rating int
+ReasonOfEnd str
+
+TABLE dbo.CostLoading0101_01
+ProposalId int
+InsuranceRiskId int
+InsuranceYear int
+decription str
+Amount float
+CommercialPremium float
+InsurancePlanGetPremium int
+vat float
+IssuanceYear str
+beginYear str
+InsurancePlanId int
+Title str
+amntPerInstall float
+
+TABLE dbo.Country
+Id int [PK]
+Name str
+CreateDate datetime
+UpdateDate datetime
+Deleted bool
+NameEn str
+Capital str
+Published bool
+CurrencyId int
+ValidateNationCode bool
+IsDefault bool
+
+TABLE dbo.CourseType
+Id int [PK]
+Title str
+
+TABLE dbo.Disability
+Id int [PK]
+RealPersonId int [FK->Persons.RealPerson.Id]
+DisabilityType int
+DateOfDiagnosis datetime
+BeginDate datetime
+EndDate datetime
+Title str
+CreateDate datetime
+UpdateDate datetime
+
+TABLE dbo.DisabilityAttachmentMapping
+Id int [PK]
+StreamId str
+Title str
+Description str
+AttachmentGroupId int
+DisabilityId int [FK->dbo.Disability.Id]
+ThumbnailStreamId str
+
+TABLE dbo.DrivingType
+Id int [PK]
+Title str
+
+TABLE dbo.Education
+Id int [PK]
+RealPersonId int [FK->Persons.RealPerson.Id]
+DegreeOfEducation str
+Average float
+HasDegree bool
+UniversityName str
+UniversityAddress str
+BeginDate datetime
+EndDate datetime
+CreateDate datetime
+UpdateDate datetime
+FieldOfStudyId int
+
+TABLE dbo.EducationAttachmentMapping
+Id int [PK]
+StreamId str
+Title str
+Description str
+AttachmentGroupId int
+EducationId int [FK->dbo.Education.Id]
+ThumbnailStreamId str
+
+TABLE dbo.EmailAccount
+Id int [PK]
+Email str
+DisplayName str
+Host str
+Port int
+Username str
+Password str
+EnableSsl bool
+UseDefaultCredentials bool
+
+TABLE dbo.Entertainment
+Id int [PK]
+RealPersonId int [FK->Persons.RealPerson.Id]
+Title str
+BeginDate datetime
+EndDate datetime
+Frequency int
+CreateDate datetime
+UpdateDate datetime
+
+TABLE dbo.EntertainmentAttachmentMapping
+Id int [PK]
+StreamId str
+Title str
+Description str
+EntertainmentId int [FK->dbo.Entertainment.Id]
+AttachmentGroupId int
+ThumbnailStreamId str
+
+TABLE dbo.Experience
+Id int [PK]
+PersonId int [FK->Persons.Person.Id]
+Title str
+BeginDate datetime
+EndDate datetime
+
+TABLE dbo.ExternalAuthenticationRecord
+Id int [PK]
+UserId int [FK->dbo.User.Id]
+Email str
+ExternalIdentifier str
+ExternalDisplayIdentifier str
+OAuthToken str
+OAuthAccessToken str
+ProviderSystemName str
+
+TABLE dbo.Faq_FaqTag_Mapping
+Faq_Id int [FK->Faqs.Faq.Id]
+FaqTag_Id int [FK->Faqs.FaqTag.Id]
+
+TABLE dbo.FieldOfStudy
+Id int [PK]
+Title str
+Published bool
+DisplayOrder int
+CreateDate datetime
+UpdateDate datetime
+
+TABLE dbo.HistoryOfDriving
+Id int [PK]
+RealPersonId int [FK->Persons.RealPerson.Id]
+DrivingLicenceType int
+BeginDate datetime
+EndDate datetime
+CreateDate datetime
+UpdateDate datetime
+Frequency int
+Description str
+DrivingTypeId int [FK->dbo.DrivingType.Id]
+
+TABLE dbo.HistoryOfDrivingAttachmentMapping
+Id int [PK]
+StreamId str
+Title str
+Description str
+AttachmentGroupId int
+HistoryOfDrivingId int [FK->dbo.HistoryOfDriving.Id]
+ThumbnailStreamId str
+
+TABLE dbo.HistoryOfMaritalStatus
+Id int [PK]
+RealPersonId int [FK->Persons.RealPerson.Id]
+MarriageDate datetime
+PartnerName str
+DateOfSeparation datetime
+TypeOfSeparation int
+PartnerPersonId int
+CreateDate datetime
+UpdateDate datetime
+
+TABLE dbo.HistoryOfMaritalStatusAttachmentMapping
+Id int [PK]
+StreamId str
+Title str
+Description str
+AttachmentGroupId int
+MaritalStatusId int [FK->dbo.HistoryOfMaritalStatus.Id]
+ThumbnailStreamId str
+
+TABLE dbo.HistoryOfSportActivity
+Id int [PK]
+RealPersonId int [FK->Persons.RealPerson.Id]
+SportId int
+Title str
+BeginDate datetime
+EndDate datetime
+CreateDate datetime
+UpdateDate datetime
+Frequency int
+
+TABLE dbo.HistoryOfSportActivityAttachmentMapping
+Id int [PK]
+StreamId str
+Title str
+Description str
+AttachmentGroupId int
+HistoryOfSportActivityId int [FK->dbo.HistoryOfSportActivity.Id]
+ThumbnailStreamId str
+
+TABLE dbo.HonorAndMedal
+Id int [PK]
+PersonId int [FK->Persons.Person.Id]
+Title str
+Date datetime
+HonorDegree int
+CreateDate datetime
+UpdateDate datetime
+
+TABLE dbo.HonorAndMedalAttachmentMapping
+Id int [PK]
+StreamId str
+Title str
+Description str
+AttachmentGroupId int
+HonorAndMedalId int [FK->dbo.HonorAndMedal.Id]
+ThumbnailStreamId str
+
+TABLE dbo.ImpersonateUserHistory
+Id int [PK]
+UserId int
+ImpersonatedUserId int
+StartSession datetime
+EndSession datetime
+
+TABLE dbo.InsurancePlanAllowedAddendums
+Id int [PK]
+InsurancePlanId int [FK->InsurancePlan.InsurancePlan.Id]
+AddendumType int
+RegistrationDeadline int
+
+TABLE dbo.InsurancePlanCommisionMapping
+Id int [PK]
+InsurancePlanId int
+AdministrativeCostCategoryId int
+moshaver bool
+morabi bool
+paziresh bool
+sodoor bool
+
+TABLE dbo.Job
+Id int [PK]
+Title str
+CreateDate datetime
+RegisterUserId int
+JobCategoryId int [FK->dbo.JobCategory.Id]
+IsPublished bool
+Deleted bool
+UpdateDate datetime
+JobCode str
+
+TABLE dbo.JobCategory
+Id int [PK]
+Title str
+CreateDate datetime
+IsPublished bool
+RegisterUserId int
+UpdateDate datetime
+
+TABLE dbo.Language
+Id int [PK]
+Name str
+LanguageCulture str
+UniqueSeoCode str
+FlagImageFileName str
+Rtl bool
+DefaultCurrencyId int
+Published bool
+DisplayOrder int
+
+TABLE dbo.LegalPersonAttachmentMapping
+Id int [PK]
+StreamId str
+Title str
+Description str
+LegalPersonId int [FK->Persons.LegalPerson.Id]
+AttachmentGroupId int
+ThumbnailStreamId str
+
+TABLE dbo.LocaleStringResource
+Id int [PK]
+LanguageId int [FK->dbo.Language.Id]
+ResourceName str
+ResourceValue str
+
+TABLE dbo.Log
+Id int [PK]
+LogLevelId int
+ShortMessage str
+FullMessage str
+IpAddress str
+UserId int [FK->dbo.User.Id]
+PageUrl str
+ReferrerUrl str
+CreatedOnUtc datetime
+
+TABLE dbo.Mandate
+Id int [PK]
+PersonId int [FK->Persons.Person.Id]
+Type str
+Usage str
+LawyerName str
+beginDate datetime
+EndDate datetime
+MandateImage str
+
+TABLE dbo.MilitaryActivity
+Id int [PK]
+RealPersonId int [FK->Persons.RealPerson.Id]
+ActivityType int
+BeginDate datetime
+EndDate datetime
+CityOfDuty str
+CreateDate datetime
+UpdateDate datetime
+
+TABLE dbo.MilitaryActivityAttachmentMapping
+Id int [PK]
+StreamId str
+Title str
+Description str
+AttachmentGroupId int
+MilitaryActivityId int [FK->dbo.MilitaryActivity.Id]
+ThumbnailStreamId str
+
+TABLE dbo.PartnerPerson
+Id int [PK]
+PartnerShipId int [FK->dbo.PartnerShip.Id]
+PersonId int
+BeginDate datetime
+EndDate datetime
+MainPartnerShip bool
+Share float
+
+TABLE dbo.PartnerPersonAttachmentMapping
+Id int [PK]
+StreamId str
+Title str
+Description str
+AttachmentGroupId int
+EqualToOriginalDate datetime
+EqualToOriginalUserId int
+PartnerPersonId int [FK->dbo.PartnerPerson.Id]
+ThumbnailStreamId str
+
+TABLE dbo.PartnerShip
+Id int [PK]
+PersonId int
+Name str
+BeginDate datetime
+City str
+EndDate datetime
+UpdateDate datetime
+Published bool
+Logo str
+
+TABLE dbo.PartnerShipAttachmentMapping
+Id int [PK]
+StreamId str
+Title str
+Description str
+AttachmentGroupId int
+EqualToOriginalDate datetime
+EqualToOriginalUserId int
+PartnerShipId int [FK->dbo.PartnerShip.Id]
+ThumbnailStreamId str
+
+TABLE dbo.PartnerShipAttribute
+Id int [PK]
+PartnerShipId int [FK->dbo.PartnerShip.Id]
+Type str
+ActivityTitle str
+BeginDate datetime
+EndDate datetime
+CreateDate datetime
+UpdateDate datetime
+
+TABLE dbo.PartnerShipAttributeAttachmentMapping
+Id int [PK]
+StreamId str
+Title str
+Description str
+AttachmentGroupId int
+EqualToOriginalDate datetime
+EqualToOriginalUserId int
+PartnerShipAttributeId int [FK->dbo.PartnerShipAttribute.Id]
+ThumbnailStreamId str
+
+TABLE dbo.Passport
+Id int [PK]
+RealPersonId int [FK->Persons.RealPerson.Id]
+FirstName str
+LastName str
+FatherName str
+BirthDate datetime
+PlaceOfBirth str
+GenderType int
+PassportNumber str
+DateOfIssue datetime
+DateOfExpiry datetime
+ExporterCountry str
+IsActive bool
+EnFirstName str
+EnLastName str
+Nationality str
+CreateDate datetime
+UpdateDate datetime
+NationalityId int
+
+TABLE dbo.PassportAttachmentMapping
+Id int [PK]
+StreamId str
+Title str
+Description str
+AttachmentGroupId int
+RealPersonPassportId int [FK->dbo.Passport.Id]
+ThumbnailStreamId str
+
+TABLE dbo.PermissionRecord
+Id int [PK]
+Name str
+SystemName str
+Category str
+PermissionType int
+IsNew bool
+
+TABLE dbo.PermissionRecord_Role_Mapping
+PermissionRecord_Id int [FK->dbo.PermissionRecord.Id]
+UserRole_Id int [FK->dbo.UserRole.Id]
+
+TABLE dbo.PersonContactInfo
+Id int [PK]
+CountryId int
+ProvinceId int
+StateId int
+PersonId int [FK->Persons.Person.Id]
+IsDefault bool
+PostalCode str
+LocalAddress str
+Phone str
+Mobile str
+AddressType int
+CreateDate datetime
+Email str
+UpdateDate datetime
+Website str
+LatAndLong str
+
+TABLE dbo.PersonContactInfoAttachmentMapping
+Id int [PK]
+StreamId str
+Title str
+Description str
+AttachmentGroupId int
+PersonContactInfoId int [FK->dbo.PersonContactInfo.Id]
+ThumbnailStreamId str
+
+TABLE dbo.PersonCustomerRoleTypeMapping
+Id int [PK]
+PersonId int [FK->Persons.Person.Id]
+PersonCustomerInsRoleType int
+Code str
+
+TABLE dbo.Policy
+Id int [PK]
+ProposalId int
+CreateDateTime datetime
+PolicyNumber str
+InsuranceIssuanceDate datetime
+PolicyBeginDate datetime
+PolicyEndDate datetime
+CentralInsurancePolicyUniqeCode int
+CentralInsurancePolicyTrackingCode int
+PolicyId int
+PolicyStatus int
+SendPlcyTb bool
+SendplcyLifeTb bool
+SendPlcyLifeBaseTb bool
+SendPlcyCrvTb bool
+TerminateDate datetime
+IsMortgage bool
+TerminationReason int
+StatisticalSystemStatus int
+
+TABLE dbo.proTemp
+proposalId int
+
+TABLE dbo.QuestionBank
+Id int [PK]
+QuestionTitle str
+Required bool
+IsKey bool
+QuestionAnswerType int
+TypeOfStatisticalVariable int
+PreDefineAnswer bool
+QuestionnaireId int [FK->dbo.Questionnaire.Id]
+
+TABLE dbo.Questionnaire
+Id int [PK]
+Title str
+DisplayOrder int
+
+TABLE dbo.RabbitLog
+Id int [PK]
+LogLevelId int
+ShortMessage str
+FullMessage str
+CreatedOnUtc datetime
+
+TABLE dbo.RealPersonAttachmentMapping
+Id int [PK]
+StreamId str
+Title str
+Description str
+AttachmentGroupId int
+RealPersonId int [FK->Persons.RealPerson.Id]
+ThumbnailStreamId str
+
+TABLE dbo.RealPersonJobMappings
+Id int [PK]
+Published bool
+JobId int [FK->dbo.Job.Id]
+MainJob bool
+CreateDate datetime
+UpdateDate datetime
+RealPerson_Id int [FK->Persons.RealPerson.Id]
+PersonId int
+
+TABLE dbo.ScheduleTask
+Id int [PK]
+Name str
+Seconds int
+Type str
+Enabled bool
+StopOnError bool
+LeasedByMachineName str
+ThreadsCount int
+LeasedUntil datetime
+LastStart datetime
+LastEnd datetime
+LastSuccess datetime
+StartDateTime datetime
+
+TABLE dbo.Setting
+Id int [PK]
+Name str
+Value str
+
+TABLE dbo.ShokaUnitIBAN
+Id int
+AlborzInsCode int
+NationalCode int
+Bank_Name str
+Account_No str
+Card_No str
+Sheba_No str
+
+TABLE dbo.SignatureSample
+Id int [PK]
+PersonId int [FK->Persons.Person.Id]
+Signature str
+BeginDate datetime
+EndDate datetime
+
+TABLE dbo.Sport
+Id int [PK]
+Title str
+CreateDate datetime
+UpdateDate datetime
+RateCoefficient float
+IsPublished bool
+DisplayOrder int
+
+TABLE dbo.StateProvince
+Id int [PK]
+CountryId int [FK->dbo.Country.Id]
+Name str
+ValidityDate datetime
+CreateDate datetime
+UpdateDate datetime
+Deleted bool
+ParentId int
+NameEn str
+Published bool
+CiisCode int
+IsDefault bool
+
+TABLE dbo.tempaccvira01
+Id int
+ParentId int
+
+TABLE dbo.TempCP
+ProposalId int
+PolicyNumber str
+PolicyBeginDate datetime
+PolicyEndDate datetime
+InsuranceIssuanceDate datetime
+PolicyId int
+SalePlanId int
+FirstYearPremium float
+InsurancePlanTitle str
+AdvisorAlborzCode int
+IssuingUnitAlborzCode int
+
+TABLE dbo.TempShellerId
+ShellerId int
+
+TABLE dbo.TrainingCourse
+Id int [PK]
+RealPersonId int [FK->Persons.RealPerson.Id]
+Title str
+BeginDate datetime
+EndDate datetime
+Score float
+HasDegree bool
+CreateDate datetime
+UpdateDate datetime
+NameOfTrainingCenter str
+AddressOfTrainingCenter str
+CourseTypeId int [FK->dbo.CourseType.Id]
+
+TABLE dbo.TrainingCoursesAttachmentMapping
+Id int [PK]
+StreamId str
+Title str
+Description str
+AttachmentGroupId int
+TrainingCourseId int [FK->dbo.TrainingCourse.Id]
+ThumbnailStreamId str
+
+TABLE dbo.UrlRecord
+Id int [PK]
+EntityId int
+EntityName str
+Slug str
+IsActive bool
+LanguageId int
+
+TABLE dbo.User
+Id int [PK]
+UserGuid str
+Username str
+Email str
+Password str
+PasswordFormatId int
+PasswordSalt str
+AdminComment str
+IsTaxExempt bool
+AffiliateId int
+Active bool
+Deleted bool
+IsSystemAccount bool
+SystemName str
+LastIpAddress str
+CreatedOnUtc datetime
+LastLoginDateUtc datetime
+LastActivityDateUtc datetime
+FirstName str
+LastName str
+MobileNumber str
+NationalCode str
+BirthCertificateNumber str
+EmailToRevalidate str
+RequireReLogin bool
+Phone str
+ZipPostalCode str
+LastVisitedPage str
+Gender str
+PasswordRecoveryToken str
+PasswordRecoveryTokenDateGenerated datetime
+AccountActivationToken str
+EmailRevalidationToken str
+ImpersonatedUserId int
+DisplayName str
+
+TABLE dbo.User_UserRole_Mapping
+User_Id int [FK->dbo.User.Id]
+UserRole_Id int [FK->dbo.UserRole.Id]
+
+TABLE dbo.UserAttribute
+Id int [PK]
+Name str
+IsRequired bool
+AttributeControlTypeId int
+DisplayOrder int
+
+TABLE dbo.UserAttributeValue
+Id int [PK]
+UserAttributeId int [FK->dbo.UserAttribute.Id]
+Name str
+IsPreSelected bool
+DisplayOrder int
+
+TABLE dbo.UserClientChangeLog
+Id int [PK]
+UserId int
+CurrentUser int
+CreateDateTime datetime
+OldData str
+NewData str
+
+TABLE dbo.UserGroup
+Id int [PK]
+UserGroupTitle str
+Published bool
+CreateDate datetime
+DisplayOrder int
+
+TABLE dbo.UserGroup_User_Mapping
+UserGroup_Id int [FK->dbo.UserGroup.Id]
+User_Id int [FK->dbo.User.Id]
+
+TABLE dbo.UserGroupUserRoleMapping
+Id int [PK]
+UserGroupId int [FK->dbo.UserGroup.Id]
+UserRoleId int [FK->dbo.UserRole.Id]
+
+TABLE dbo.UserRole
+Id int [PK]
+Name str
+FreeShipping bool
+TaxExempt bool
+Active bool
+IsSystemRole bool
+SystemName str
+PurchasedWithProductId int
+SubjectToAcl bool
+
+TABLE dbo.UserToken
+Id int [PK]
+UserId int [FK->dbo.User.Id]
+Token str
+Active bool
+CreateDate datetime
+ExpireDate datetime
+UserIp str
+
+TABLE dbo.Wording
+Id int [PK]
+Title str
+Idioms str
+ExceptionDefine str
+IsAddition bool
+Obligations str
+
+TABLE dbo.WorkExperience
+Id int [PK]
+Title str
+StartDate datetime
+EndDate datetime
+JobCode str
+AverageIncome float
+ReasonOfLeavingJob str
+LeaveDate datetime
+PersonId int [FK->Persons.Person.Id]
+JobId int [FK->dbo.Job.Id]
+
+TABLE dbo.WorkExperienceAttachmentMapping
+Id int [PK]
+StreamId str
+Title str
+Description str
+AttachmentGroupId int
+WorkExperienceId int [FK->dbo.WorkExperience.Id]
+ThumbnailStreamId str
+
+TABLE Facilities.ProposalCreditFacility
+Id int [PK]
+ProposalId int [FK->Proposals.Proposal.Id]
+ProposalCreditFacilityRequestId int
+ReferenceNumber str
+Number str
+DepositReferenceNumber str
+Amount float
+CommissionPercent float
+Status int
+CreateDate datetime
+UpdateDate datetime
+Provider int
+ExternalStatus_Description str
+ExternalStatus_Provider int
+ExternalStatus_StateCode int
+AgreementCode str
+ApiVersion int
+BankId int [FK->BasicInformation.Bank.Id]
+CreateType int
+CustomerNumber str
+DepositDate datetime
+InquiryStatus int
+InstallmentStatus int
+LastSyncedAt datetime
+ReceiverFullName str
+ReceiverMobile str
+ReceiverNationalCode str
+ReferenceDate datetime
+
+TABLE Facilities.ProposalCreditFacilityInstallment
+Id int [PK]
+ProposalCreditFacilityId int [FK->Facilities.ProposalCreditFacility.Id]
+Amount float
+DueDate datetime
+PaidAmount float
+PenaltyAmount float
+Status int
+ExternalStatus_Description str
+ExternalStatus_Provider int
+ExternalStatus_StateCode int
+
+TABLE Facilities.ProposalCreditFacilityRequest
+Id int [PK]
+RequestId int
+FirstName str
+LastName str
+NationalCode str
+BirthDate datetime
+Email str
+Mobile str
+HomeAddress str
+Type int
+Amount int
+IssuedAt datetime
+ApprovalDate datetime
+IsDeleted bool
+Identifier str
+
+TABLE Faqs.Faq
+Id int [PK]
+Question str
+QuestionerUserId int [FK->dbo.User.Id]
+Published bool
+CreateDate datetime
+PublishDate datetime
+PublisherUserId int [FK->dbo.User.Id]
+AnswerDate datetime
+Answer str
+ResponderUserId int [FK->dbo.User.Id]
+
+TABLE Faqs.FaqTag
+Id int [PK]
+Title str
+
+TABLE FnPolicies.FnPolicy
+Id int [PK]
+FnId int
+InsuranceFieldId int
+PolicyNumber str
+PolicyIssuingDate datetime
+PolicyStartDate datetime
+PolicyEndDate datetime
+InsuredAgeInIssuingTime int
+InsurerNationalCode str
+InsurerFullName str
+InsurerCode int
+InsuredFullName str
+InsuredNationalCode str
+InsuredCode int
+InsurancePlanType int
+NationalCodeUpdated bool
+
+TABLE FnPolicies.FnPolicyLoan
+Id int [PK]
+FnId int
+FnPolicyId int [FK->FnPolicies.FnPolicy.Id]
+LoanNumber str
+LoanDateTime datetime
+LoanAmount float
+InexplicitProfitOfLoan float
+ProfitRatesOnLoan float
+Duration int
+LoanStatus int
+ValueOfTheReleaseOfTheLoan float
+RemainingCalculationDate datetime
+
+TABLE FnPolicies.FnPolicySavingMath
+Id int [PK]
+FnPolicyId int [FK->FnPolicies.FnPolicy.Id]
+InsuredCurrentdAge int
+InsuranceTechnicalProfitRate float
+InsuranceYear int
+FinancialYear int
+SavingContribution float
+SavingMathAmount float
+SavingMathCalculationDate datetime
+CashValue float
+DefinitiveProfit float
+PremiumDeposit float
+
+TABLE Histories.OperationalUserHistory
+Id int [PK]
+ActionType int
+TargetId int
+ModificationType int
+ModifiedDate datetime
+ModifiedUserId int [FK->dbo.User.Id]
+
+TABLE Histories.OperationUnitAllowedInsurancePlanHistory
+Id int [PK]
+OperationUnitId int
+InsurancePlanId int
+IsIssuingUnit bool
+IsAdvisor bool
+TargetId int
+ModificationType int
+ModifiedDate datetime
+ModifiedUserId int [FK->dbo.User.Id]
+
+TABLE Inquiry.IbanInquiry
+Id int [PK]
+NationalCode str
+Iban str
+PersonType int
+IsVerified bool
+HasError bool
+Executed bool
+Error str
+CreateDate datetime
+CreateUserId int [FK->dbo.User.Id]
+
+TABLE InsurancePlan.AdministrativeCost
+Id int [PK]
+Title str
+InsurancePlanId int [FK->InsurancePlan.InsurancePlan.Id]
+InsuranceYear int
+PlaceOfPayment int
+CostAdjustmentApproach int
+CustomerClass int
+InsurancePlanGroupingType int
+EffectiveInPolicy bool
+PercentCalculationMethodType int
+PercentCalculationMethod float
+Published bool
+InsurancePlanGetPremium int
+InsuranceRiskId int
+ParentAdministrativeCostMaxConstraintId int
+ParentAdministrativeCostMinConstraintId int
+AdministrativeCostCategoryId int [FK->InsurancePlan.AdministrativeCostCategory.Id]
+ValueOfAward float
+ValueOfFine float
+Related bool
+OperationOrder int
+ToFineYearDateTime int
+FromAwardYearDateTime int
+FromAge int
+ToAge int
+HasAgeConstraint bool
+FromInsuranceYear int
+ToInsuranceYear int
+MinInsuredCount int
+MaxInsuredCount int
+ComputingEffectiveSolarYear int
+TariffCalculationTime int
+InsuredType int
+RelianceRate float
+PensionRefundMethod int
+EffectiveDateEnd datetime
+EffectiveDateStart datetime
+NeedToAdjustCostInMathReserve bool
+
+TABLE InsurancePlan.AdministrativeCostCategory
+Id int [PK]
+Title str
+AdministrativeCostType int
+AccountCode int
+
+TABLE InsurancePlan.BordereauCentralInsuranceMapping
+Id int [PK]
+InsurancePlanId int
+AdministrativeCostId int
+BordereauCentralInsuranceValueType int
+
+TABLE InsurancePlan.ComparativeProfit
+Id int [PK]
+FixedInterestRate float
+CooperationBenefitRate float
+Year int
+Type int
+IsActive bool
+Description str
+Title str
+InsurancePlanId int [FK->InsurancePlan.InsurancePlan.Id]
+CreateUserId int [FK->dbo.User.Id]
+CreateDate datetime
+UpdateUserId int [FK->dbo.User.Id]
+UpdateDate datetime
+
+TABLE InsurancePlan.ConditionOfRiskPolicy
+Id int [PK]
+Title str
+Published bool
+ConditionType int
+
+TABLE InsurancePlan.ConditionOfRiskPolicyWordingMapping
+Id int [PK]
+ConditionOfRiskPolicyId int [FK->InsurancePlan.ConditionOfRiskPolicy.Id]
+WordingId int [FK->dbo.Wording.Id]
+
+TABLE InsurancePlan.InsurancePlan
+Id int [PK]
+Title str
+InsurableObjectId int [FK->InsuranceRisks.InsurableObject.Id]
+InsuredBaseRate float
+PolicyDurationFloor int
+PolicyDurationRoof int
+InsuredAgeFloor int
+InsuredAgeRoof int
+Deleted bool
+CreateDateTime datetime
+UpdatedateTime datetime
+StartInsurancePlanDate datetime
+EndInsurancePlanDate datetime
+DisplayOrder int
+PolicyDurationDefault int
+InsuredAgeDefault int
+HasJobConstraint bool
+HasCityConstraint bool
+HasInsurerAndInsuredRelationship bool
+HasGetPremiumConstraint bool
+MinInsuredCount int
+MaxInsuredCount int
+Published bool
+CanEdit bool
+LlifeCapitalRateRoof float
+LlifeCapitalRateDefault float
+LlifeCapitalRateFloor float
+RateCapitalCoverageAffiliates float
+MinimumAgeOfTheInsurer int
+ProductCode int
+ProductAccountCode str
+CertaintyPeriod int
+StatisticalCode int
+SavingMarginWithConditionAccountingCode int
+SavingMarginWithoutConditionAccountingCode int
+HasSavingMargin bool
+PointOfSales int
+HasCertificateOnline bool
+lifPlcyTypGrpTb int
+lifPlcyTypTb int
+RqsCod int
+RqsIsuDte datetime
+RqsVldDte datetime
+HasLoan bool
+LoanWillPossbleAfterFewMonthsFromIssuanceInsurancePolicy int
+PercentageLoanRepaymentValueCanLent float
+MaximumLoanRepaymentPeriod int
+MinimumInterestRateloan float
+DefiniteProfit int
+percentageOfPenaltyForLateRepayment float
+FormulaCalculatingLoanAmountAndInstallment int
+FormulaCalculatingLoanJaw int
+LoanInstallmentModel int
+CentralInsuranceCompanyStringCode int
+AddendumIssuing bool
+InstallmentCalculationType int
+CmpFldDtlCod str
+CmpFldMidId int
+CompanyProductCode str
+ProductGroupName str
+ProductGroupCode int
+ServiceID int
+Identifier str
+Ciis_CmpFldDtlCod str
+Ciis_CmpFldDtlNam str
+Ciis_CmpFldMidId int
+Ciis_CmpPrntFldDtlNam str
+Ciis_FldDtlCod int
+Ciis_GrpngCod int
+Ciis_MapFldDtlCod str
+Ciis_MapPrntFldDtlCod int
+InsuranceObjectType int
+PolicyIssuingType int
+PortfolioProductionType int
+ProposalInsuredType int
+SavingMarginHasMortgagePercent bool
+SavingMarginMortgagePercent float
+ObligationsFulfillInsurancePlanId int [FK->InsurancePlan.InsurancePlan.Id]
+ObligationsFulfillMethod int
+HasRedemption bool
+RedemptionPercent float
+MathReserveCalculationDate int
+InstallmentDelayRespite int
+ObligationsFulfillWaitingDurationDefault int
+ObligationsFulfillWaitingDurationMax int
+ObligationsFulfillWaitingDurationMin int
+PatternOfRiskOccurrenceId int [FK->InsurancePlan.PatternOfRiskOccurrence.Id]
+ObligationsPensionDefaultSystemBankAccountId int [FK->BasicInformation.SystemBankAccount.Id]
+HasPolicyExpirationReminder bool
+StatisticalSystem_PortfolioProductionType int
+StatisticalSystem_Reshte int
+StatisticalSystem_ReshteGroup int
+StatisticalSystem_Title str
+LoanDefaultSystemBankAccountId int [FK->BasicInformation.SystemBankAccount.Id]
+InstallmentRoundingType int
+LoanRewardPercent float
+ObligationGenerationType int
+
+TABLE InsurancePlan.InsurancePlanAccountingDocumentsProduction
+Id int [PK]
+InsurancePlanId int [FK->InsurancePlan.InsurancePlan.Id]
+FinancialOperationsType int
+OperationOrder int
+AccountingType int
+TotalAccount str
+MeaageTemplate str
+DetailedAccountTypeOne int
+DetailedAccountTypeTwo int
+DetailedAccountTypeThree int
+HasDefinitiveAccountValue bool
+DefinitiveAccountValue str
+DefinitiveAccountType int
+HasDetailedAccountTypeOneValue bool
+DetailedAccountTypeOneValue int
+DetailedAccountTypeTwoValue int
+HasDetailedAccountTypeTwoValue bool
+DetailedAccountTypeThreeValue int
+HasDetailedAccountTypeThreeValue bool
+Title str
+Deleted bool
+CreateDate datetime
+DeletedDate datetime
+RegisterUserId int
+DeletedUserId int
+AccountAssistanceIntegerOne int
+AccountAssistanceIntegerTwo int
+AccountAssistanceIntegerThree int
+AccountAssistanceIntegerFour int
+AccountAssistanceIntegerFive int
+AccountAssistanceStringOne int
+AccountAssistanceStringTwo int
+AccountAssistanceStringThree int
+AccountAssistanceStringFour int
+AccountAssistanceStringFive int
+AccountAssistanceDateOne int
+AccountAssistanceDateTwo int
+SensitiveSupply bool
+AdministrativeCostCategoryId int
+InsuranceRiskId int
+AllInsuranceRisk bool
+OperationalLevelOfSalesNetworkId int
+UseAdministrativeCostCategoryType int
+OperationUnitStatus int
+
+TABLE InsurancePlan.InsurancePlanAccountingEntryPattern
+Id int [PK]
+InsurancePlanId int [FK->InsurancePlan.InsurancePlan.Id]
+EntryPatternId int [FK->Accounting.EntryPattern.Id]
+Type int
+EntryTypes int
+
+TABLE InsurancePlan.InsurancePlanAdjustedDepositInterest
+Id int [PK]
+InsurancePlanId int
+RegisterUserId int
+CreateDateTime datetime
+FirstMonth float
+SecondMonth float
+ThirdMonth float
+FourthMonth float
+FifthMonth float
+SixthMonth float
+SeventhMonth float
+EighthMonth float
+NinthMonth float
+TenthMonth float
+EleventMonth float
+TwelfthMonth float
+Published bool
+IsDelete bool
+
+TABLE InsurancePlan.InsurancePlanAgreement
+Id int [PK]
+InsurancePlanId int [FK->InsurancePlan.InsurancePlan.Id]
+AgreementBodyId int [FK->InsurancePlan.InsurancePlanAgreementBody.Id]
+CreateUserId int [FK->dbo.User.Id]
+UpdateUserId int [FK->dbo.User.Id]
+CreateDate datetime
+UpdateDate datetime
+
+TABLE InsurancePlan.InsurancePlanAgreementBody
+Id int [PK]
+Text str
+
+TABLE InsurancePlan.InsurancePlanBeneficiary
+Id int [PK]
+Death_MinCount int
+Death_MaxCount int
+Death_IsRequired bool
+Death_HasDefaultRelationship bool
+Death_AddDefaultRelationship bool
+Death_DefaultRelationship int
+Death_HasRequiredLegalLegacy bool
+Life_MinCount int
+Life_MaxCount int
+Life_IsRequired bool
+Life_HasDefaultRelationship bool
+Life_AddDefaultRelationship bool
+Life_DefaultRelationship int
+Life_HasRequiredLegalLegacy bool
+InsurancePlanId int [FK->InsurancePlan.InsurancePlan.Id]
+UpdateUserId int [FK->dbo.User.Id]
+UpdateDate datetime
+CreateUserId int [FK->dbo.User.Id]
+CreateDate datetime
+IsBankAccountRequired bool
+
+TABLE InsurancePlan.InsurancePlanCityMapping
+Id int [PK]
+InsurancePlanId int [FK->InsurancePlan.InsurancePlan.Id]
+StateProvinceId int [FK->dbo.StateProvince.Id]
+
+TABLE InsurancePlan.InsurancePlanComision
+Id int [PK]
+InsurancePlanId int [FK->InsurancePlan.InsurancePlan.Id]
+AdministrativeCostCategoryId int
+ComisionType int
+
+TABLE InsurancePlan.InsurancePlanComparativeProfitMapping
+Id int [PK]
+GeneralComparativeProfitId int [FK->InsurancePlan.ComparativeProfit.Id]
+InsurancePlanComparativeProfitId int [FK->InsurancePlan.ComparativeProfit.Id]
+
+TABLE InsurancePlan.InsurancePlanCurrencyMapping
+Id int [PK]
+InsurancePlanId int [FK->InsurancePlan.InsurancePlan.Id]
+CreateDate datetime
+CurrencyId int [FK->BasicInformation.Currency.Id]
+
+TABLE InsurancePlan.InsurancePlanDepositPlanning
+Id int [PK]
+RegisterUserId int
+RegisterDateTime datetime
+InsuranceYear int
+DepositInterestPercentageAtBeginningInsuranceYear float
+DepositInterestPercentageAtEndInsuranceYear float
+InsurancePlanId int [FK->InsurancePlan.InsurancePlan.Id]
+
+TABLE InsurancePlan.InsurancePlanDocumentEntryPattern
+Id int [PK]
+InsurancePlanId int [FK->InsurancePlan.InsurancePlan.Id]
+DocumentEntryPatternId int [FK->Accounting.DocumentEntryPattern.Id]
+CreateUserId int [FK->dbo.User.Id]
+CreateDate datetime
+UpdateUserId int [FK->dbo.User.Id]
+UpdateDate datetime
+
+TABLE InsurancePlan.InsurancePlanGeneralCondition
+Id int [PK]
+Title str
+Published bool
+CreateDateTime datetime
+WordingId int [FK->dbo.Wording.Id]
+ConditionType int
+
+TABLE InsurancePlan.InsurancePlanGeneralConditionMapping
+Id int [PK]
+InsurancePlanId int [FK->InsurancePlan.InsurancePlan.Id]
+InsurancePlanGeneralConditionId int [FK->InsurancePlan.InsurancePlanGeneralCondition.Id]
+
+TABLE InsurancePlan.InsurancePlanGetPremiumMapping
+Id int [PK]
+InsurancePlanGetPremium int
+InsurancePlanId int [FK->InsurancePlan.InsurancePlan.Id]
+PayPremiumAmountFloor float
+PayPremiumAmountDefault float
+PayPremiumAmountRoof float
+PayPremiumRateFloor float
+PayPremiumRateDefault float
+PayPremiumRateRoof float
+CiisIsOneTime bool
+
+TABLE InsurancePlan.InsurancePlanHasRisk
+Id int [PK]
+InsuranceRiskId int [FK->InsuranceRisks.InsuranceRisk.Id]
+BaseRate float
+ConditionOfRiskPolicyId int [FK->InsurancePlan.ConditionOfRiskPolicy.Id]
+HasInsuranceRiskFactor bool
+HasPatternOfRiskOccurrence bool
+InsurancePlanId int [FK->InsurancePlan.InsurancePlan.Id]
+InsuranceRiskTypeForPlan int
+IsRequired bool
+ChangeFundRateRoof float
+ChangeFundRateFloor float
+FundRateFloor float
+FundRateRoof float
+BasisCapitalRatio int
+InsuredAgeType int
+RelatedInsuranceRiskId int
+FromAgeInSelection int
+ToAgeInSelection int
+AccountingCode str
+ObligationsFulfillMethod int
+ReserveType int
+HasMortgagePercent bool
+MortgagePercent float
+ObligationsFulfillInsurancePlanId int [FK->InsurancePlan.InsurancePlan.Id]
+DefaultAmount float
+UseDefaultAmount bool
+HasPensionFinalInstallment bool
+PensionFinalInstallmentBasisCapitalRatio int
+PensionFinalInstallmentRateDefault float
+PensionFinalInstallmentRateMax float
+PensionFinalInstallmentRateMin float
+PensionFinalInstallmentUseDefault bool
+CalculationRangeFrom int
+CalculationRangeTo int
+HasCalculationRange bool
+CoverageOccurrence_IsActive bool
+CoverageOccurrence_IsTerminator bool
+CoverageOccurrence_MaxCount int
+CoverageOccurrence_Type int
+CoverageOccurrence_WaitingDays int
+CoverageOccurrence_ReceiverTypes str
+CurrencyId int [FK->BasicInformation.Currency.Id]
+DisplayName str
+FixedIncomeFundType int
+InvestmentCalculateType int
+InvestmentType int
+ProductType int
+StockFundType int
+MeasurementId int [FK->BasicInformation.Measurement.Id]
+InvestmentUnitValue float
+AdjustCommercialPremiumInMathReserve bool
+
+TABLE InsurancePlan.InsurancePlanHasRiskAdjustmentRate
+Id int [PK]
+InsurancePlanHasRiskId int [FK->InsurancePlan.InsurancePlanHasRisk.Id]
+FromAge int
+ToAge int
+Rate float
+CreateUserId int [FK->dbo.User.Id]
+CreateDate datetime
+UpdateUserId int [FK->dbo.User.Id]
+UpdateDate datetime
+
+TABLE InsurancePlan.InsurancePlanHasRiskConstraintMapping
+Id int [PK]
+InsurancePlanHasRiskId int [FK->InsurancePlan.InsurancePlanHasRisk.Id]
+PrincipleCapitalRoof float
+PrincipleCapitalRoofAge int
+PrincipleCapitalFloor float
+PrincipleCapitalFloorAge int
+
+TABLE InsurancePlan.InsurancePlanHasRiskContingent
+Id int [PK]
+PrimaryRiskId int [FK->InsurancePlan.InsurancePlanHasRisk.Id]
+DependentRiskId int [FK->InsurancePlan.InsurancePlanHasRisk.Id]
+CreateUserId int [FK->dbo.User.Id]
+CreateDate datetime
+
+TABLE InsurancePlan.InsurancePlanInstallmentTax
+Id int [PK]
+InsurancePlanId int [FK->InsurancePlan.InsurancePlan.Id]
+StartDate datetime
+EndDate datetime
+CreateUserId int [FK->dbo.User.Id]
+CreateDate datetime
+UpdateUserId int [FK->dbo.User.Id]
+UpdateDate datetime
+
+TABLE InsurancePlan.InsurancePlanInsurerAndInsuredRelationshipMapping
+Id int [PK]
+InsurancePlanId int [FK->InsurancePlan.InsurancePlan.Id]
+InsurerAndInsuredRelationship int
+CreateDateTime datetime
+UpdateDateTime datetime
+
+TABLE InsurancePlan.InsurancePlanInterestRateDepost
+Id int [PK]
+RegisterUserId int
+RegisterDateTime datetime
+FromDate datetime
+ToDate datetime
+InterestRateofTheDepositAccount float
+InsurancePlanId int [FK->InsurancePlan.InsurancePlan.Id]
+
+TABLE InsurancePlan.InsurancePlanJobMapping
+Id int [PK]
+InsurancePlanId int [FK->InsurancePlan.InsurancePlan.Id]
+JobId int [FK->dbo.Job.Id]
+CreateDateTime datetime
+UpdateDateTime datetime
+
+TABLE InsurancePlan.InsurancePlanLoanInstallmentIntervalsMapping
+Id int [PK]
+InsurancePlanId int [FK->InsurancePlan.InsurancePlan.Id]
+LoanInstallmentIntervalsId int
+CreateDate datetime
+
+TABLE InsurancePlan.InsurancePlanPayGateway
+Id int [PK]
+InsurancePlanId int [FK->InsurancePlan.InsurancePlan.Id]
+OnlineReceiveGatewayId int [FK->Receives.OnlineReceiveGateway.Id]
+IsActive bool
+OrderIndex int
+CreateUserId int [FK->dbo.User.Id]
+UpdateUserId int [FK->dbo.User.Id]
+CreateDate datetime
+UpdateDate datetime
+
+TABLE InsurancePlan.InsurancePlanPayPensionMapping
+Id int [PK]
+InsurancePlanId int [FK->InsurancePlan.InsurancePlan.Id]
+RetirementRatioMin float
+RetirementRatioMax float
+RetirementRatioDefault float
+PeriodInstallmentYearMin int
+PeriodInstallmentYearMax int
+PeriodInstallmentYearDefault int
+InsurancePlanGetPremium int
+InsurancePlanHasRiskId int [FK->InsurancePlan.InsurancePlanHasRisk.Id]
+PensionPayType int
+
+TABLE InsurancePlan.InsurancePlanPensionConversionRate
+Id int [PK]
+InsuredAge int
+Rate float
+Duration int
+Type int
+InsurancePlanId int [FK->InsurancePlan.InsurancePlan.Id]
+CreateUserId int [FK->dbo.User.Id]
+UpdateUserId int [FK->dbo.User.Id]
+CreateDate datetime
+UpdateDate datetime
+
+TABLE InsurancePlan.InsurancePlanProposalAttachmentGroupMapping
+Id int [PK]
+InsurancePlanId int [FK->InsurancePlan.InsurancePlan.Id]
+AttachmentGroupId int
+
+TABLE InsurancePlan.InsurancePlanQuestionnaireMapping
+Id int [PK]
+QuestionnaireId int
+DisplayOrder int
+CreateDateTime datetime
+SumOfPoint float
+InsurancePlanId int [FK->InsurancePlan.InsurancePlan.Id]
+
+TABLE InsurancePlan.InsurancePlanQuestionPointMapping
+Id int [PK]
+InsurancePlanId int [FK->InsurancePlan.InsurancePlan.Id]
+PointOfQuestion float
+QuestionBankId int [FK->dbo.QuestionBank.Id]
+CreateDateTime datetime
+LastUpdateDateTime datetime
+
+TABLE InsurancePlan.InsurancePlanReinsurance
+Id int [PK]
+InsurancePlanId int [FK->InsurancePlan.InsurancePlan.Id]
+InsurancePlanHasRiskId int [FK->InsurancePlan.InsurancePlanHasRisk.Id]
+FromDate datetime
+ToDate datetime
+Percent float
+CreatedUserId int [FK->dbo.User.Id]
+UpdatedUserId int [FK->dbo.User.Id]
+CreatedDate datetime
+UpdatedDate datetime
+
+TABLE InsurancePlan.InsurancePlanRiskMapping
+Id int [PK]
+InsuranceRiskId int [FK->InsuranceRisks.InsuranceRisk.Id]
+InsurancePlanId int [FK->InsurancePlan.InsurancePlan.Id]
+CreateDateTime datetime
+UpdateDateTime datetime
+IsRequired bool
+InsuranceRiskTypeForPlan int
+HasAgeConstraint bool
+FromAge int
+ToAge int
+FromYear int
+ToYear int
+FundAmountFloor float
+FundAmountRoof float
+FundRateFloor float
+FundRateRoof float
+InsuredAgeType int
+BasisCapitalRatio int
+RelatedInsuranceRiskId int
+ChangeFundRateRoof float
+ChangeFundRateFloor float
+
+TABLE InsurancePlan.InsurancePlanShortTermPremiumRate
+Id int [PK]
+DaysFrom int
+DaysTo int
+Percent float
+Type int
+IsActive bool
+InsurancePlanId int [FK->InsurancePlan.InsurancePlan.Id]
+CreateUserId int [FK->dbo.User.Id]
+CreateDate datetime
+UpdateUserId int [FK->dbo.User.Id]
+UpdateDate datetime
+
+TABLE InsurancePlan.InsurancePlanUnitLinkPlanning
+Id int [PK]
+InsuranceMonthFrom int
+InsuranceMonthTo int
+Rate float
+InsurancePlanId int [FK->InsurancePlan.InsurancePlan.Id]
+InsuranceRiskId int [FK->InsuranceRisks.InsuranceRisk.Id]
+CreateDate datetime
+CreateUserId int [FK->dbo.User.Id]
+UpdateDate datetime
+UpdateUserId int [FK->dbo.User.Id]
+
+TABLE InsurancePlan.InsurancePlanUnitTransferPlanning
+Id int [PK]
+InsurancePlanId int [FK->InsurancePlan.InsurancePlan.Id]
+SourceUnitId int [FK->InsuranceRisks.InsuranceRisk.Id]
+TargetUnitId int [FK->InsuranceRisks.InsuranceRisk.Id]
+TransferDate datetime
+Percent float
+CreateDate datetime
+CreateUserId int [FK->dbo.User.Id]
+UpdateDate datetime
+UpdateUserId int [FK->dbo.User.Id]
+
+TABLE InsurancePlan.InsuranceRiskFactor
+Id int [PK]
+BaseRateAdjustmentSum float
+BaseRateAdjustmentMultiplication float
+InsurancePlanHasRiskId int [FK->InsurancePlan.InsurancePlanHasRisk.Id]
+RiskFactorId int [FK->InsuranceRisks.RiskFactor.Id]
+
+TABLE InsurancePlan.InsuranceRiskPatternOfRiskOccurrenceMapping
+Id int [PK]
+CreateDate datetime
+UpdateDate datetime
+PatternOfRiskOccurrenceId int [FK->InsurancePlan.PatternOfRiskOccurrence.Id]
+FormulaTypes int
+InsurancePlanHasRiskId int [FK->InsurancePlan.InsurancePlanHasRisk.Id]
+
+TABLE InsurancePlan.InsuranceTechnicalProfitRate
+Id int [PK]
+RateOfPercent float
+InsuranceYears int
+InsurancePlanId int [FK->InsurancePlan.InsurancePlan.Id]
+InsurancePlanHasRiskId int [FK->InsurancePlan.InsurancePlanHasRisk.Id]
+Type int
+BreakRate float
+
+TABLE InsurancePlan.NonInsuranceBenefit
+Id int [PK]
+Title str
+Description str
+InsurancePlanId int [FK->InsurancePlan.InsurancePlan.Id]
+StartDateTimeInPlan datetime
+EndDateTimeInPlan datetime
+LifeSpan str
+
+TABLE InsurancePlan.OperationUnitInsurancePlanAgreement
+Id int [PK]
+AgreementId int [FK->InsurancePlan.InsurancePlanAgreement.Id]
+OperationUnitId int [FK->SalesNetwork.OperationUnit.Id]
+CreateUserId int [FK->dbo.User.Id]
+CreateDate datetime
+
+TABLE InsurancePlan.PatternOfRiskOccurrence
+Id int [PK]
+Title str
+CreateDate datetime
+UpdateDate datetime
+
+TABLE InsurancePlan.PatternOfRiskOccurrenceTable
+Id int [PK]
+PossibilityOfX float
+X int
+NonOccurrenceOfX float
+PatternOfRiskOccurrenceId int [FK->InsurancePlan.PatternOfRiskOccurrence.Id]
+NumberOfPx float
+NumberOfNx float
+
+TABLE InsurancePlan.ProposalPrivateCondition
+Id int [PK]
+ProposalId int [FK->Proposals.Proposal.Id]
+Published bool
+RegisterUserId int
+OperationUnitId int
+DisplayOrder int
+CreateDateTime datetime
+WordingId int [FK->dbo.Wording.Id]
+Description str
+
+TABLE InsurancePlan.ProposalPrivateConditionTextTemplate
+Id int [PK]
+RegisterUserId int
+Published bool
+CreateDateTime datetime
+DisplayOrder int
+InsurancePlanId int [FK->InsurancePlan.InsurancePlan.Id]
+WordingId int [FK->dbo.Wording.Id]
+
+TABLE InsurancePlanLifeInquiry.InsurancePlanBaseRateOfRisk
+Id int [PK]
+InsurancePlanId int
+InsuranceRiskId int
+PolicyDuration int
+InsuredAgeInIssuing int
+InsuranceYear int
+FormulaTypes int
+BaseRate float
+
+TABLE InsuranceRisks.InsurableObject
+Id int [PK]
+Title str
+IsActive bool
+InsurableObjectType int
+CreateDataTime datetime
+UpdateDateTime datetime
+InsurableObjectCode str
+AccountCode str
+Description str
+CreateUserId int [FK->dbo.User.Id]
+InsuranceCategory int
+UpdateUserId int [FK->dbo.User.Id]
+
+TABLE InsuranceRisks.InsuranceRelianceRate
+Id int [PK]
+StartDate datetime
+EndDate datetime
+Rate float
+InsuranceRiskId int [FK->InsuranceRisks.InsuranceRisk.Id]
+CreateDate datetime
+CreateUserId int [FK->dbo.User.Id]
+UpdateDate datetime
+UpdateUserId int [FK->dbo.User.Id]
+
+TABLE InsuranceRisks.InsuranceRisk
+Id int [PK]
+Title str
+InsurableObjectId int [FK->InsuranceRisks.InsurableObject.Id]
+InsuranceRiskType int
+FieldCode str
+CiisCvrCode str
+Description str
+AccountCode str
+IsActive bool
+InsuranceRiskGroupId int [FK->InsuranceRisks.InsuranceRiskGroup.Id]
+
+TABLE InsuranceRisks.InsuranceRiskGroup
+Id int [PK]
+Title str
+
+TABLE InsuranceRisks.ProposalTemplate
+Id int [PK]
+Title str
+RegisterUserId int [FK->dbo.User.Id]
+ConfirmerUserId int
+CreateDate datetime
+DateOfConfirming datetime
+RegisterOperationUnitId int
+IssuingUnitId int
+AdvisiorId int
+SalesManId int
+SalePlanId int [FK->SalePlans.SalePlan.Id]
+PurposeOfPurchase str
+DurationOfPolicy int
+PremiumPaymentTerm int
+InsurancePlanGetPremium int
+FirstYearPremium float
+RisingBonusFactor float
+CapitalFormation float
+CurrencyId int
+Confirmed bool
+ProposalTemplateState int
+HasSavingMargin bool
+RequestedPolicyBeginDate datetime
+
+TABLE InsuranceRisks.ProposalTemplateInsuranceRisk
+Id int [PK]
+ProposalTemplateId int [FK->InsuranceRisks.ProposalTemplate.Id]
+InsuranceRiskId int
+CoverageAmount float
+CoverageRate float
+CoverageChangeRate float
+
+TABLE InsuranceRisks.ProposalTemplateInsuranceRiskRiskFactor
+Id int [PK]
+RiskFactorId int
+HasRisk bool
+ProposalTemplateInsuranceRiskId int [FK->InsuranceRisks.ProposalTemplateInsuranceRisk.Id]
+
+TABLE InsuranceRisks.RiskFactor
+Id int [PK]
+Title str
+Published bool
+ShowInPrint bool
+
+TABLE Investment.InvestmentProductPrice
+Id int [PK]
+FutureGramPrice float
+FutureKilogramPrice float
+SpotGramPrice float
+SpotKilogramPrice float
+CreateDateTime datetime
+VendorType int
+Hash str
+RegisterType int
+
+TABLE Investment.PurchaseTransaction
+Id int [PK]
+ProposalId int [FK->Proposals.Proposal.Id]
+VendorType int
+TrackingCode str
+PurchaseDate datetime
+ProposalInsuredInsuranceRiskId int [FK->Proposals.ProposalInsuredInsuranceRisk.Id]
+InvestmentProductPriceId int [FK->Investment.InvestmentProductPrice.Id]
+Quantity float
+Rate float
+Amount float
+TransactionStatus int
+
+TABLE Loans.LoanSettlementReceipt
+Id int [PK]
+ProposalLoanInstallmentScheduleId int [FK->Loans.PeoposalLoanInstallmentSchedule.Id]
+CreateDateTime datetime
+HasDocument bool
+Revoked bool
+
+TABLE Loans.PeoposalLoanInstallmentSchedule
+Id int [PK]
+ProposalLoanId int [FK->Loans.ProposalLoan.Id]
+InstallmentNumber int
+InstallmentDueDate datetime
+InstallmentAmount int
+RealizedInterest int
+UnRealizedInterest int
+LoanSettlement int
+LoanRemaining int
+Status int
+IsSettell bool
+EffectiveDate datetime
+HasDocument bool
+PenaltyRewardAmount float
+ActualInterestAmount float
+ActualInterestCalculationDate datetime
+
+TABLE Loans.ProposalLoan
+Id int [PK]
+PolicyNumber str
+ProposalId int
+CreateDateTime datetime
+UserId int
+LoanStatus int
+RegisterOperationUnitId int
+IssuingUserId int
+LoanIssuanceDate datetime
+IssuingOperationUnitId int
+Amount float
+PremiumPaymentTerm int
+LoanGetPremium int
+Description str
+SupervisorOperationUnitId int
+InstallmentCount int
+WorthTheRedemption float
+IsDelete bool
+LoanNumber str
+LoanId int
+TransferenceId int
+PersonId int
+ReturnTransferenceId int
+InterestRate float
+
+TABLE Loans.ProposalLoanAttachment
+Id int [PK]
+LoanId int
+AttachmentGroupId int
+StreamId str
+ThumbStreamId str
+Description str
+CreateDateTime datetime
+UserId int
+ProposalLoan_Id int [FK->Loans.ProposalLoan.Id]
+
+TABLE Loans.RedemptionLoan
+Id int [PK]
+CreateDateTime datetime
+UserId int
+RegisterOperationUnitId int
+RedemptionLoanType int
+RedemptionIssueType int
+Amount int
+CalculateDateTime datetime
+Description str
+ProposalLoanId int [FK->Loans.ProposalLoan.Id]
+
+TABLE Loans.RevocationLoan
+Id int [PK]
+ProposalLoanId int [FK->Loans.ProposalLoan.Id]
+CreateDateTime datetime
+UserId int
+RegisterOperationUnitId int
+Description str
+
+TABLE Logging.CinsApiLog
+Id int [PK]
+StatusCode int
+RequestHeader str
+ResponseHeader str
+RequestBody str
+ResponseBody str
+ApiFullUrl str
+RegistrationDateTime datetime
+RegistrarUserId int
+RegisterDateTime datetime
+ProposalId int
+ApiType int
+Errors str
+
+TABLE Logging.EmailLog
+Id int [PK]
+Body str
+NationalCode str
+SendDate datetime
+EmailAddress str
+TemplateName str
+
+TABLE Logging.EntityOperationErrorLog
+Id int [PK]
+EntityReferenceId int [FK->common.EntityReferences.Id]
+Message str
+MethodName str
+ServiceName str
+Type int
+GroupId int
+CreateDate datetime
+CreateUserId int [FK->dbo.User.Id]
+
+TABLE Logging.EntityOperationErrorLogInfo
+Id int [PK] [FK->Logging.EntityOperationErrorLog.Id]
+Text str
+
+TABLE Logging.ErrorLogOfImportingExcelFile
+Id int [PK]
+SalePlanId int
+BaseVipCustomerTempId int
+RegisterUserId int [FK->dbo.User.Id]
+CreateDate datetime
+SheetName str
+Message text
+
+TABLE Logging.SmsLog
+Id int [PK]
+Body str
+SendSmsType int
+NationalCode str
+SendDate datetime
+Mobile str
+TemplateName str
+
+TABLE Logging.TaxAffairsOrganizationLog
+Id int [PK]
+EntityId int
+BillIssuingDate datetime
+BillType int
+BillSerial str
+BillAlgorithm int
+BillTitle int
+SellerFinancialNumber str
+BuyerType int
+BuyerFinancialNumber str
+SumPriceBeforeDiscount float
+SumDiscount float
+SumPriceAfterDiscount float
+SumTax float
+SumOtherTaxes float
+SumBill float
+SettlementType int
+SumTaxSharingFromPayment float
+CashPaymentPrice float
+Tax17 float
+ServiceID int
+Amount float
+Fee float
+PriceBeforeDiscount float
+DiscountPrice float
+PriceAfterDiscount float
+TaxRate float
+TaxPrice float
+SumPriceOfServices float
+SamRequestTraceId str
+SamInno str
+SamUid str
+SamTaxId str
+SamResult str
+SamRequest str
+SamBatchId int
+SamInquiryCode int
+SamTryCount int
+CreateDate datetime
+CreateUserId int [FK->dbo.User.Id]
+Type int
+
+TABLE MathReserve.MathReserveCalculateDetail
+Id int [PK]
+ProposalId int
+SettlementWithdrawalOprationId int
+InstallmentId int
+InstallmentAmount float
+SettleAmount float
+PaymentType int
+InstallmentCountInYear int
+InstallmentInsuranceYear float
+InstallmentDueDate datetime
+SettleCreateDateTime datetime
+SettleInsuranceYear float
+RateOfPercentOfSettleInsuranceYear float
+SavingMarginInYear float
+SavingMarginSettelment float
+Insured str
+Age float
+AgeInThatYear float
+MrNoneCondition float
+MrCondition float
+MathsSavedPlaning float
+DateTimeNow str
+ReportEffectDateTime str
+FromDateTime datetime
+ToDateTime datetime
+FromDateTimePersian str
+ToDateTimePersian str
+DayCount float
+InsuredId int
+InsuredPersonId int
+InsllmantGap int
+InsurancePlanReinsurancePercent float
+CreateAt datetime
+CreateBy str
+PolicyStatus int
+AddemdunId int
+HasRiskId int
+AdvisiorId int
+IssuingUnitId int
+YearOfReporting int
+PolicyBeginDate datetime
+InsuranceIssuanceDate datetime
+InsurerPersonId int
+MathsSavedOnConditionOfLife float
+MathsSavedNonConditionOfLife float
+MathReserveCalculationDate int
+CurrencyId int
+PolicyNumber str
+Lp float
+RedemptionValueCondition float
+RedemptionValueNoneCondition float
+SavingMarginInYearCondition float
+SavingMarginInYearNoneCondition float
+
+TABLE MathReserve.MathReserveLastCalculated
+Id int [PK]
+ProposalId int
+MrNoneCondition float
+MrCondition float
+CalcUntilDateTime datetime
+
+TABLE MathReserve.MathReserveLastProposalCalculated
+Id int [PK]
+LastProposalId int
+CalcUntilDateTime datetime
+
+TABLE MathReserve.MathSavingMonthlyReport
+Id int [PK]
+ProposalId int
+CurrentInsuranceYear float
+InterestRateInTheFirstYearOfInsurance float
+InterestRateInTheCurrentInsuranceYear float
+RisingBonusFactor float
+InstallmentCount int
+TheNumberOfOverdueInstallments int
+MathematicalSavingsExceptForInsurance float
+ConditionMathReserve float
+ReliabilityPercentage float
+DayValueOfTheDepositAccount float
+DeathInsuranceValueForAnyReasonInTheFirstYearOfInsurance float
+DeathInsuranceValueDueToAnAccidentInTheFirstYearOfInsurance float
+TheValueOfDisabilityInsuranceForTheAccidentOfTheFirstYearOfInsurance float
+InsuranceValueExemptionFromInsurancePremiumPaymentForLoan float
+InsuranceValueExemptionFromInsurancePremiumPaymentForTheInsuredInTheFirstYearOfInsurance str
+InsuranceValueExemptionFromPayingInsurancePremiumsForThePolicyholderOfTheFirstYearOfInsurance str
+TheValueOfLifeSavingInsuranceInTheDeadlyFactOfTheFirstYearOfInsurance float
+InsuranceValueOfIncurableDiseasesForTheFirstInsuranceYear float
+InsuranceValueIncreaseFactorForTheFirstYearOfInsurance str
+LifeFeature2 float
+LifeFeature3 float
+CalculationDate datetime
+
+TABLE MathReserve.MathSavingMonthlyReportDetail
+Id int [PK]
+Title str
+Key str
+FundRisk float
+PurePremium float
+ReserveMath float
+InsuranceRiskId int
+ReserveType int
+MathSavingMonthlyReportId int [FK->MathReserve.MathSavingMonthlyReport.Id]
+
+TABLE MessageTemplates.EmailMessageTemplate
+Id int [PK]
+EmailMessageTemplateTypes int
+Name str
+Body text
+IsActive bool
+RegisterUserId int
+CreateDateTime datetime
+
+TABLE MessageTemplates.SmsMessageTemplate
+Id int [PK]
+SmsMessageTemplateTypes int
+Name str
+Body text
+IsActive bool
+RegisterUserId int
+CreateDateTime datetime
+
+TABLE Notification.PolicyNotification
+Id int [PK]
+PolicyId int
+ReminderNotificationId int [FK->Notification.ReminderNotification.Id]
+
+TABLE Notification.ReminderNotification
+Id int [PK]
+Title str
+DayLeft int
+ReminderType int
+
+TABLE Pages.Page
+Id int [PK]
+PageGroupId int [FK->Pages.PageGroup.Id]
+Title str
+Description text
+Published bool
+DisplayOrder int
+RegisterUserId int
+CreateDate datetime
+SubjectToAcl bool
+FilePath str
+
+TABLE Pages.PageGroup
+Id int [PK]
+Title str
+Published bool
+RegisterUserId int
+DisplayOrder int
+FontIcon str
+DisplayLocation int
+
+TABLE PaymentFiles.AccumulationWithdrawalRequest
+Id int [PK] [FK->PaymentFiles.Request.Id]
+ProposalId int
+ProposalInsuredInsuranceRiskId int
+Amount float
+SourceType int
+
+TABLE PaymentFiles.AccumulationWithdrawalTransference
+Id int [PK] [FK->PaymentFiles.Transference.Id]
+ProposalId int
+ProposalInsuredInsuranceRiskId int
+SourceType int
+
+TABLE PaymentFiles.BankPaymentSettlement
+Id int [PK] [FK->PaymentFiles.PaymentSettlement.Id]
+SystemBankAccountId int [FK->BasicInformation.SystemBankAccount.Id]
+TransactionNo str
+BankTrackingCode str
+
+TABLE PaymentFiles.CashByBankWithdrawalPaymentSettlement
+Id int [PK] [FK->PaymentFiles.PaymentSettlement.Id]
+SettlementNumber str
+SettlementDate datetime
+SystemBankAccountId int [FK->BasicInformation.SystemBankAccount.Id]
+
+TABLE PaymentFiles.CashPaymentSettlement
+Id int [PK] [FK->PaymentFiles.PaymentSettlement.Id]
+ReceiveReceiptId int [FK->Receives.ReceiveReceipt.Id]
+
+TABLE PaymentFiles.ChequePaymentSettlement
+Id int [PK] [FK->PaymentFiles.PaymentSettlement.Id]
+Number str
+SerialNumber str
+IssuDateTime datetime
+DateTime datetime
+SystemBankAccountId int
+
+TABLE PaymentFiles.CommissionRequest
+Id int [PK] [FK->PaymentFiles.Request.Id]
+ApplicantOperationUnitId int [FK->SalesNetwork.OperationUnit.Id]
+EffectiveDateTime datetime
+HasCommissionTransference bool
+
+TABLE PaymentFiles.CommissionRequestInsurancePlanMapping
+Id int [PK]
+InsurancePlanId int
+CommissionRequestId int [FK->PaymentFiles.CommissionRequest.Id]
+
+TABLE PaymentFiles.CommissionRequestOperationUnitMapping
+Id int [PK]
+OperationUnitId int
+CommissionRequestId int [FK->PaymentFiles.CommissionRequest.Id]
+IsGenerate bool
+
+TABLE PaymentFiles.CommissionTransference
+Id int [PK] [FK->PaymentFiles.Transference.Id]
+OperationUnitId int
+InsurancePlanId int [FK->InsurancePlan.InsurancePlan.Id]
+ProposalId int [FK->Proposals.Proposal.Id]
+
+TABLE PaymentFiles.ContributionInBenefitsTransference
+Id int [PK] [FK->PaymentFiles.Transference.Id]
+
+TABLE PaymentFiles.CooperationBenefitsRequest
+Id int [PK] [FK->PaymentFiles.Request.Id]
+AddendumId int
+CooperationBenefitDetailId int [FK->Proposals.CooperationBenefitDetail.Id]
+
+TABLE PaymentFiles.CooperationBenefitsTransference
+Id int [PK] [FK->PaymentFiles.Transference.Id]
+AddendumId int
+CooperationBenefitDetailId int [FK->Proposals.CooperationBenefitDetail.Id]
+
+TABLE PaymentFiles.CoverageOccurrenceRequest
+Id int [PK] [FK->PaymentFiles.Request.Id]
+AddendumId int
+ProposalInsuredInsuranceRiskId int
+
+TABLE PaymentFiles.CoverageOccurrenceTransference
+Id int [PK] [FK->PaymentFiles.Transference.Id]
+AddendumId int
+ProposalInsuredInsuranceRiskId int [FK->Proposals.ProposalInsuredInsuranceRisk.Id]
+
+TABLE PaymentFiles.DamageRecycleTransference
+Id int [PK] [FK->PaymentFiles.Transference.Id]
+DamageFileNumber str
+
+TABLE PaymentFiles.DamageSettlingExpensesTransference
+Id int [PK] [FK->PaymentFiles.Transference.Id]
+DamageFileNumber str
+
+TABLE PaymentFiles.DamageTransference
+Id int [PK] [FK->PaymentFiles.Transference.Id]
+DamageFileNumber str
+
+TABLE PaymentFiles.DeathAnyReasonRequest
+Id int [PK] [FK->PaymentFiles.Request.Id]
+DeathAnyReasonAddendumId int
+
+TABLE PaymentFiles.DeathAnyReasonTransference
+Id int [PK] [FK->PaymentFiles.Transference.Id]
+AddendumId int
+
+TABLE PaymentFiles.DeathByAccidentRequest
+Id int [PK] [FK->PaymentFiles.Request.Id]
+DeathByAccidentAddendumId int
+
+TABLE PaymentFiles.DeathByAccidentTransference
+Id int [PK] [FK->PaymentFiles.Transference.Id]
+AddendumId int
+
+TABLE PaymentFiles.FirstVisitExpensesRequest
+Id int [PK] [FK->PaymentFiles.Request.Id]
+
+TABLE PaymentFiles.FirstVisitExpensesTransference
+Id int [PK] [FK->PaymentFiles.Transference.Id]
+InsurancePlanId int
+ProposalId int
+TransactionDate datetime
+Type int
+
+TABLE PaymentFiles.IncomeRequest
+Id int [PK] [FK->PaymentFiles.Request.Id]
+AddendumId int
+TransferenceIncomeType int
+
+TABLE PaymentFiles.IncomeTransference
+Id int [PK] [FK->PaymentFiles.Transference.Id]
+AddendumId int
+TransferenceIncomeType int
+
+TABLE PaymentFiles.InsurerTransferPaymentSettlement
+Id int [PK] [FK->PaymentFiles.PaymentSettlement.Id]
+
+TABLE PaymentFiles.ItemsWithPolicyTransference
+Id int [PK] [FK->PaymentFiles.Transference.Id]
+
+TABLE PaymentFiles.LoanRequest
+Id int [PK] [FK->PaymentFiles.Request.Id]
+LoanId int
+
+TABLE PaymentFiles.LoanTransference
+Id int [PK] [FK->PaymentFiles.Transference.Id]
+LoanNumber str
+ProposalLoanId int
+
+TABLE PaymentFiles.MaimRequest
+Id int [PK] [FK->PaymentFiles.Request.Id]
+MaimAddendumId int
+
+TABLE PaymentFiles.MaimTransference
+Id int [PK] [FK->PaymentFiles.Transference.Id]
+AddendumId int
+
+TABLE PaymentFiles.MarketingExpensesRequest
+Id int [PK] [FK->PaymentFiles.Request.Id]
+AddendumId int
+
+TABLE PaymentFiles.MarketingExpensesTransference
+Id int [PK] [FK->PaymentFiles.Transference.Id]
+ProposalId int
+InsurancePlanId int
+TransactionDate datetime
+AddendumId int
+
+TABLE PaymentFiles.MedicalExpensesRequest
+Id int [PK] [FK->PaymentFiles.Request.Id]
+MedicalExpensesAddendumId int
+
+TABLE PaymentFiles.MedicalExpensesTransference
+Id int [PK] [FK->PaymentFiles.Transference.Id]
+AddendumId int
+
+TABLE PaymentFiles.MutualPaymentSettlement
+Id int [PK] [FK->PaymentFiles.PaymentSettlement.Id]
+ReceiverPersonId int [FK->Persons.Person.Id]
+
+TABLE PaymentFiles.ObligationsPensionRequest
+Id int [PK] [FK->PaymentFiles.Request.Id]
+
+TABLE PaymentFiles.ObligationsPensionTransference
+Id int [PK] [FK->PaymentFiles.Transference.Id]
+ObligationInsurerPensionItemId int [FK->Proposals.ObligationInsurerPensionItem.Id]
+
+TABLE PaymentFiles.OutSystemItemsRequest
+Id int [PK] [FK->PaymentFiles.Request.Id]
+ReceiverPersonId int [FK->Persons.Person.Id]
+ReceiverOperationUnitId int [FK->SalesNetwork.OperationUnit.Id]
+OutSystemItemsType int
+Amount float
+InsurancePlanId int [FK->InsurancePlan.InsurancePlan.Id]
+
+TABLE PaymentFiles.OutSystemItemsTransference
+Id int [PK] [FK->PaymentFiles.Transference.Id]
+ReceiverPersonId int [FK->Persons.Person.Id]
+ReceiverOperationUnitId int [FK->SalesNetwork.OperationUnit.Id]
+OutSystemItemsType int
+InsurancePlanId int [FK->InsurancePlan.InsurancePlan.Id]
+
+TABLE PaymentFiles.PartialRedemptionRequest
+Id int [PK] [FK->PaymentFiles.Request.Id]
+PartialRedemptionAddendumId int
+
+TABLE PaymentFiles.PartialRedemptionTransference
+Id int [PK] [FK->PaymentFiles.Transference.Id]
+AddendumId int
+InsurancePlanId int [FK->InsurancePlan.InsurancePlan.Id]
+ProposalId int [FK->Proposals.Proposal.Id]
+
+TABLE PaymentFiles.PayaPaymentSettlement
+Id int [PK] [FK->PaymentFiles.PaymentSettlement.Id]
+ReferenceNumber str
+FormNumber str
+IssuDateTime datetime
+DateTime datetime
+SystemBankAccountId int
+
+TABLE PaymentFiles.PaymentFile
+Id int [PK]
+Title str
+CreateDateTime datetime
+RegisterUserId int [FK->dbo.User.Id]
+OperationUnitId int [FK->SalesNetwork.OperationUnit.Id]
+CreationType int
+
+TABLE PaymentFiles.PaymentOrder
+Id int [PK]
+Amount float
+CreateDateTime datetime
+ConfirmDateTime datetime
+RegisterUserId int [FK->dbo.User.Id]
+ReceiverPersonId int [FK->Persons.Person.Id]
+ConfirmUserId int [FK->dbo.User.Id]
+PaymentSettlementId int [FK->PaymentFiles.PaymentSettlement.Id]
+TransferenceId int [FK->PaymentFiles.Transference.Id]
+Type int
+BankAccountId int [FK->Persons.BankAccount.Id]
+ConfirmOperationUnitId int [FK->SalesNetwork.OperationUnit.Id]
+Status int
+SettleDateTime datetime
+Returned bool
+BusinessType int
+ParentId int [FK->PaymentFiles.PaymentOrder.Id]
+
+TABLE PaymentFiles.PaymentOrderStateHistory
+Id int [PK]
+CreateUserId int [FK->dbo.User.Id]
+CreateDate datetime
+EntityId int [FK->PaymentFiles.PaymentOrder.Id]
+FromState int
+ToState int
+Description str
+
+TABLE PaymentFiles.PaymentSettlement
+Id int [PK]
+State int
+Amount float
+Description str
+CreateDateTime datetime
+RegisterUserId int [FK->dbo.User.Id]
+RegisterOperationUnitId int [FK->SalesNetwork.OperationUnit.Id]
+ConfirmUserId int [FK->dbo.User.Id]
+ConfirmDateTime datetime
+Type int
+HasDocument bool
+IsSmsSent bool
+SmsSendDate datetime
+BusinessType int
+RevokedRefPaymentSettlementId int [FK->PaymentFiles.PaymentSettlement.Id]
+
+TABLE PaymentFiles.PaymentSettlementAttachmentMapping
+Id int [PK]
+ThumbnailStreamId str
+StreamId str
+Title str
+AttachmentGroupId int
+PaymentSettlementId int [FK->PaymentFiles.PaymentSettlement.Id]
+
+TABLE PaymentFiles.PaymentSettlementStateHistory
+Id int [PK]
+CreateUserId int [FK->dbo.User.Id]
+CreateDate datetime
+EntityId int [FK->PaymentFiles.PaymentSettlement.Id]
+FromState int
+ToState int
+Description str
+
+TABLE PaymentFiles.PaymentSubFile
+Id int [PK]
+Amount float
+PaymentFileId int [FK->PaymentFiles.PaymentFile.Id]
+SubNumber int
+RegisterDateTime datetime
+RegisterUserId int [FK->dbo.User.Id]
+CloserUserId int [FK->dbo.User.Id]
+CloseDateTime datetime
+OperationUnitId int [FK->SalesNetwork.OperationUnit.Id]
+State int
+
+TABLE PaymentFiles.RedemptionRequest
+Id int [PK] [FK->PaymentFiles.Request.Id]
+RedemptionAddendumId int
+
+TABLE PaymentFiles.RedemptionTransference
+Id int [PK] [FK->PaymentFiles.Transference.Id]
+AddendumId int
+MathReserveType int
+
+TABLE PaymentFiles.ReinsuranceCommissionTransference
+Id int [PK] [FK->PaymentFiles.Transference.Id]
+
+TABLE PaymentFiles.ReinsurancePremiumTransference
+Id int [PK] [FK->PaymentFiles.Transference.Id]
+
+TABLE PaymentFiles.Request
+Id int [PK]
+PaymentFileId int
+PaymentSubFileId int [FK->PaymentFiles.PaymentSubFile.Id]
+Type int
+Status int
+RegisterUserId int [FK->dbo.User.Id]
+RegisterOperationUnitId int [FK->SalesNetwork.OperationUnit.Id]
+RegisterDateTime datetime
+ConfirmUserId int [FK->dbo.User.Id]
+ConfirmOperationUnitId int [FK->SalesNetwork.OperationUnit.Id]
+ConfirmDateTime datetime
+SettleDateTime datetime
+CreationType int
+DebtExchangeStatus int
+
+TABLE PaymentFiles.ReturnedPremiumRequest
+Id int [PK] [FK->PaymentFiles.Request.Id]
+AddendumId int
+
+TABLE PaymentFiles.ReturnedPremiumTransference
+Id int [PK] [FK->PaymentFiles.Transference.Id]
+AddendumId int
+
+TABLE PaymentFiles.ReturnedRequest
+Id int [PK] [FK->PaymentFiles.Request.Id]
+TransferenceId int
+Amount int
+Reason str
+ReferenceId int
+ReferenceType int
+
+TABLE PaymentFiles.TransferDepositAccountPaymentSettlement
+Id int [PK] [FK->PaymentFiles.PaymentSettlement.Id]
+DepositAccountId int [FK->Receives.DepositAccount.Id]
+DepositType int
+ReferenceId int
+
+TABLE PaymentFiles.Transference
+Id int [PK]
+Number int
+TransferenceStep int
+ConfirmUserId int [FK->dbo.User.Id]
+TransferenceSubmitType int
+RequestId int [FK->PaymentFiles.Request.Id]
+RegisterDateTime datetime
+RegisterUserId int [FK->dbo.User.Id]
+ConfirmOperationUnitId int [FK->SalesNetwork.OperationUnit.Id]
+ConfirmDateTime datetime
+SettleDateTime datetime
+TransferenceType int
+MainAmount float
+ExtraAmount float
+RefundAmount float
+Description str
+RegisterOperationUnitId int [FK->SalesNetwork.OperationUnit.Id]
+HasDocument bool
+Returned bool
+ReturnedRefTransferenceId int [FK->PaymentFiles.Transference.Id]
+InstinctType int
+Revoked bool
+
+TABLE PaymentFiles.TransferencePersonShare
+Id int [PK]
+TransferenceId int [FK->PaymentFiles.Transference.Id]
+PersonId int [FK->Persons.Person.Id]
+Share float
+Amount int
+ShareType int
+
+TABLE PaymentFiles.VatTransference
+Id int [PK] [FK->PaymentFiles.Transference.Id]
+ParentTransferenceId int [FK->PaymentFiles.Transference.Id]
+VatType int
+Percentage float
+VatGenerateType int
+
+TABLE PaymentFiles.VendorPaymentRequest
+Id int [PK] [FK->PaymentFiles.Request.Id]
+PurchaseTransactionId int [FK->Investment.PurchaseTransaction.Id]
+
+TABLE PaymentFiles.VendorPaymentTransference
+Id int [PK] [FK->PaymentFiles.Transference.Id]
+VendorType int
+ProposalId int
+ProposalInsuredInsuranceRiskId int
+PurchaseTransactionId int [FK->Investment.PurchaseTransaction.Id]
+
+TABLE PaymentFiles.WithdrawRequest
+Id int [PK] [FK->PaymentFiles.Request.Id]
+Reason str
+PolicyHolderPersonId int
+ReciverPersonId int
+Amount int
+
+TABLE PaymentFiles.WithdrawTransference
+Id int [PK] [FK->PaymentFiles.Transference.Id]
+Reason str
+PolicyHolderPersonId int
+ReciverPersonId int
+AddendumId int
+
+TABLE Payments.BankTransaction
+Id int [PK]
+PaymentMethodId int
+TrackingCode str
+TerminalId int
+TerminalName str
+TransactionDateTime datetime
+CardNumber str
+Amount float
+ReferenceId str
+TransactionStatus int
+TransactionResultMessage str
+
+TABLE Payments.ChangePaymentStatusLog
+Id int [PK]
+CustomerCardNumber str
+ChangePaymentReason str
+CreateDateTime datetime
+UserId int
+PaymentValueId int [FK->Payments.PaymentValue.Id]
+
+TABLE Payments.Deposit
+Id int [PK]
+PaymentValueId int
+Amount float
+TransactionDate datetime
+DepositOperation int
+DepositType int
+ReceiptNo int
+ReceiptNoDate datetime
+ProposalId int
+InsurerCode int
+ProposalInstallmentId int
+InstallmentLoanId int
+TypeOfTransfer int
+HasDocument bool
+
+TABLE Payments.DepositPayOffMapping
+Id int [PK]
+SettlementDepositId int
+RemovalDepositId int
+PayOffDateTime datetime
+DepositPayOffMappingLogId int [FK->Payments.DepositPayOffMappingLog.Id]
+Amount float
+ProposalInstallmentId int
+InstallmentLoanId int
+PayOffType int
+PayOffMethod int
+
+TABLE Payments.DepositPayOffMappingLog
+Id int [PK]
+DepositPayOffDateTime datetime
+HasDocument bool
+HasCalculateProposalComision bool
+SendToStatisticalSystem bool
+
+TABLE Payments.PaymentLog
+Id int [PK]
+TrackingCode str
+PaymentResponseCode str
+PaymentResponseMessage str
+IsSuccessful bool
+PaymentMethodId int [FK->Payments.PaymentMethod.Id]
+PaymentDate datetime
+PaymentValueId int [FK->Payments.PaymentValue.Id]
+
+TABLE Payments.PaymentMethod
+Id int [PK]
+Title str
+DisplayOrder int
+Published bool
+CreateDate datetime
+BeginDate datetime
+EndDate datetime
+AccountNumber str
+MerchantId str
+ISBN str
+BankName str
+BranchBankCode str
+PaymentType int
+BankCode str
+AccountCode str
+AccountType int
+
+TABLE Payments.PaymentUniquNumber
+Id int [PK]
+PaymentValueId int [FK->Payments.PaymentValue.Id]
+
+TABLE Payments.PaymentValue
+Id int [PK]
+Amount float
+CreateDateTime datetime
+UserId int
+PaymentStatus int
+PaymentValueType int
+ObjectId int
+InsurerCode int
+PaymentMethodId int [FK->Payments.PaymentMethod.Id]
+ProposalId int
+TrackingCode str
+PaymentResponseCode str
+PaymentResponseMessage str
+
+TABLE Payments.PremiumDepositPaymentLog
+Id int [PK]
+ProposalDepositId int [FK->Proposals.ProposalDeposit.Id]
+TrackingCode str
+IsSuccessful bool
+PaymentDate datetime
+
+TABLE Payments.PremiumInstallmentPaymentLog
+Id int [PK]
+ProposalInstallmentScheduleId int
+TrackingCode str
+IsSuccessful bool
+PaymentDate datetime
+ProposalId int [FK->Proposals.Proposal.Id]
+
+TABLE Persons.BankAccount
+Id int [PK]
+PersonId int [FK->Persons.Person.Id]
+BankName str
+AccountType int
+BranchCode str
+AccountNumber str
+IBAN str
+CardNumber str
+AccountOwner str
+CreateDate datetime
+UpdateDate datetime
+Active bool
+CurrencyId int [FK->BasicInformation.Currency.Id]
+TypeOfUse int
+InquiryStatus int
+InquiryDate datetime
+CreateUserId int [FK->dbo.User.Id]
+InquiryUserId int [FK->dbo.User.Id]
+UpdateUserId int [FK->dbo.User.Id]
+ActivationDate datetime
+ActivationUserId int [FK->dbo.User.Id]
+
+TABLE Persons.LegalPerson
+Id int [PK] [FK->Persons.Person.Id]
+PersonId int
+Nationality str
+NationalCode str
+RegistrationNumber str
+EstablishmentDate datetime
+DissolutionDate datetime
+UpdateDate datetime
+Published bool
+LegalPersonName str
+CreateDate datetime
+RegistrationCity str
+InquiryDate datetime
+InquiryStatus int
+CeoPersonId int [FK->Persons.RealPerson.Id]
+
+TABLE Persons.Person
+Id int [PK]
+PersonType int
+NationalCode str
+Nationality str
+CreateDate datetime
+UpdateDate datetime
+InBlackList bool
+PartnerShip_Id int [FK->dbo.PartnerShip.Id]
+Deleted bool
+BlackListId int
+NationalityId int
+BeneficiaryCode int
+InsuredCode int
+InsurerCode int
+FirstName str
+LastName str
+IsForeigner bool
+TaxIdentifier str
+
+TABLE Persons.PersonChangeLog
+Id int [PK]
+UserId int
+CreateDateTime datetime
+OldData str
+NewData str
+
+TABLE Persons.PersonCoding
+Id int [PK]
+PersonId int [FK->Persons.Person.Id]
+RegisterUserId int
+IsActive bool
+Code str
+BeginDate datetime
+EndDate datetime
+PersonCodingType int
+
+TABLE Persons.PersonInsurerDeposite
+Id int [PK]
+Amount float
+CreateDateTime datetime
+UserId int
+InsurerCode int
+PersonId int
+PaymentValueId int
+
+TABLE Persons.RealPerson
+Id int [PK] [FK->Persons.Person.Id]
+FirstName str
+LastName str
+Nationality str
+NationalCode str
+BirthDate datetime
+FatherName str
+BirthCertificateNumber str
+PlaceOfIssue str
+PlaceOfBirth str
+UpdateDate datetime
+Published bool
+Status int
+MaritalStatus int
+GenderType int
+PersonId int
+EnFirstName str
+EnLastName str
+EyeColor str
+SkinColor str
+CreateDate datetime
+NationalityCountryCode str
+Religion str
+MotherName str
+PlaceOfBirthCode str
+PlaceOfIssueCode str
+MotherPersonId int
+FatherPersonId int
+DeathStatus int
+DeathDate datetime
+InquiryDate datetime
+AncestorName str
+EnFatherName str
+BirthCountryId int [FK->dbo.Country.Id]
+
+TABLE ProposalCalculation.ProposalCalculationQueue
+Id int [PK]
+ProposalId int
+CreateDateTime datetime
+UserId int
+ProposalCalculationQueueStatus int
+StartDateTime datetime
+EndDateTime datetime
+
+TABLE Proposals.AccumulationCertificate
+Id int [PK]
+Amount float
+Number int
+Type int
+MathReserveType int
+ReferenceId int
+ProposalId int [FK->Proposals.Proposal.Id]
+InsuranceYear int
+ProposalInsuredInsuranceRiskId int [FK->Proposals.ProposalInsuredInsuranceRisk.Id]
+CreateDate datetime
+ConfirmDate datetime
+CiisUniqueCode int
+CiisTrackingCode int
+Description str
+ReferenceType int
+Status int
+ConfirmUserId int [FK->dbo.User.Id]
+CreateUserId int [FK->dbo.User.Id]
+
+TABLE Proposals.CapitalFormation
+Id int [PK]
+CapitalStandsLastYearAmount float
+ProposalId int [FK->Proposals.Proposal.Id]
+ProposalInsuredId int
+InsuranceYear int
+InsuranceAge int
+SavingMathCondition float
+SavingMathNonCondition float
+PremiumDepositAccount float
+PolicyCashValue float
+UserId int
+CreateDateTime datetime
+MathsSavedOnConditionOfLife float
+MathsSavedNonConditionOfLife float
+SavingMarginInYear float
+CommercialPremiumPolicyInYear float
+JustifiedSavingMargin float
+AddendumId int
+AddendumNumber int
+EffectiveDate datetime
+SumOfPenalyAdministrativeCost float
+DepositattheBeginningOftheInsuranceYear float
+DepositattheEndoftheInsuranceYear float
+TotalDepositattheEndoftheInsuranceYear float
+SubProposalId int [FK->Proposals.SubProposal.Id]
+TotalDepositUnitLinkPlanning float
+UnitTransferPlanningAmount float
+UnitTransferPlanningAmountProfit float
+
+TABLE Proposals.CooperationBenefit
+Id int [PK]
+Title str
+CreateDate datetime
+CreateUserId int [FK->dbo.User.Id]
+Type int
+
+TABLE Proposals.CooperationBenefitDetail
+Id int [PK]
+ProposalId int
+InsuranceYear int
+Amount float
+DepositDate datetime
+Type int
+Description str
+ParentId int [FK->Proposals.CooperationBenefitDetail.Id]
+CooperationBenefitId int [FK->Proposals.CooperationBenefit.Id]
+Status int
+
+TABLE Proposals.IssuanceCommitment
+Id int [PK]
+ProposalId int [FK->Proposals.Proposal.Id]
+TotalAmount float
+MainAmount float
+TaxAmount float
+TaxPercent float
+DiscountPercent float
+DiscountAmount float
+TaxAffairsOrganizationTaxId str
+Revoked bool
+DocumentId int [FK->Accounting.Document.Id]
+HasNumericBillSerial bool
+TaxInvoiceNumber str
+CreateUserId int [FK->dbo.User.Id]
+CreateDate datetime
+UpdateUserId int [FK->dbo.User.Id]
+UpdateDate datetime
+
+TABLE Proposals.IssuanceCommitmentRevoke
+Id int [PK]
+TaxAffairsOrganizationTaxId str
+DocumentId int [FK->Accounting.Document.Id]
+IssuanceCommitmentId int [FK->Proposals.IssuanceCommitment.Id]
+HasNumericBillSerial bool
+TaxInvoiceNumber str
+CreateUserId int [FK->dbo.User.Id]
+CreateDate datetime
+UpdateUserId int [FK->dbo.User.Id]
+UpdateDate datetime
+
+TABLE Proposals.ObligationInsurerPension
+Id int [PK]
+ProposalId int [FK->Proposals.Proposal.Id]
+InsuranceYear int
+PensionPeriodType int
+Amount float
+PensionAdjustmentRate float
+ObligationYear int
+CreateUserId int [FK->dbo.User.Id]
+CreateDate datetime
+AccumulatedAmount float
+InsurancePlanHasRiskId int [FK->InsurancePlan.InsurancePlanHasRisk.Id]
+StartDate datetime
+Type int
+
+TABLE Proposals.ObligationInsurerPensionItem
+Id int [PK]
+ObligationInsurerPensionId int [FK->Proposals.ObligationInsurerPension.Id]
+InstallmentNumber int
+TotalAmount float
+ProposalId int [FK->Proposals.Proposal.Id]
+DueDate datetime
+CreateDate datetime
+CreateUserId int [FK->dbo.User.Id]
+InsurancePlanHasRiskId int [FK->InsurancePlan.InsurancePlanHasRisk.Id]
+Status int
+ObligationAmount float
+TariffAmount float
+TransferenceId int
+
+TABLE Proposals.PremiumSettlementReceipt
+Id int [PK]
+ProposalInstallmentScheduleId int [FK->Proposals.ProposalInstallmentSchedule.Id]
+CreateDateTime datetime
+HasDocument bool
+Revoked bool
+GenerateBordereau bool
+SendToStatisticalSystem bool
+HasCalculateProposalComision bool
+TaxAffairsOrganizationTaxId str
+CiisTrackingCode int
+CiisUniqueCode int
+SettleDate datetime
+Amount float
+Returned bool
+SettlementType int
+Number int
+HasNumericBillSerial bool
+InstallmentPaymentType int
+TaxInvoiceNumber str
+
+TABLE Proposals.PremiumSettlementReceiptManualRevoke
+Id int [PK]
+PremiumSettlementReceiptId int
+PremiumSettlementReceiptManualId str
+Amount float
+TaxAffairsOrganizationTaxId str
+CreateDate datetime
+Type int
+TaxInvoiceNumber str
+
+TABLE Proposals.PremiumSettlementReceiptRevoke
+Id int [PK]
+PremiumSettlementReceiptId int [FK->Proposals.PremiumSettlementReceipt.Id]
+CreateDateTime datetime
+GenerateBordereau bool
+SendToStatisticalSystem bool
+RegisterUserId int [FK->dbo.User.Id]
+TaxAffairsOrganizationTaxId str
+DocumentId int [FK->Accounting.Document.Id]
+HasDocument bool
+CiisTrackingCode int
+CiisUniqueCode int
+Amount float
+SettlementReversalType int
+HasNumericBillSerial bool
+ReversalReferenceId int
+TaxInvoiceNumber str
+
+TABLE Proposals.Proposal
+Id int [PK]
+AdvisiorId int
+InsurerPersonId int
+InsurableObjectId int
+IssuingUnitId int
+InsurancePlanId int [FK->InsurancePlan.InsurancePlan.Id]
+PurposeOfPurchase str
+DurationOfPolicy int
+InsuranceDeposit float
+InsurancePlanGetPremium int
+FirstYearPremium float
+CapitalFormation float
+RisingBonusFactor float
+SalePlanId int
+UserId int
+PremiumPaymentTerm int
+CreateDateTime datetime
+LastUpdateDateTime datetime
+ProposalLockStatus int
+LockUserId int
+SalesManId int
+StepStatus int
+Blocked bool
+Deleted bool
+CurrencyId int
+IsCalculation bool
+CalculationDateTime datetime
+ConfirmAndSendAdmissionDate datetime
+AdmissionSendIssuingDate datetime
+InstallmentDueDate datetime
+SecondInsurerPersonId int
+ReceptionUserId int
+PolicyHolderNationalCode str
+PolicyHolderCodeOfPerson int
+PolicyId int
+CentralInsurancePolicyUniqueCode int
+InsuranceIssuanceDate datetime
+PolicyBeginDate datetime
+PolicyEndDate datetime
+PolicyStatus int
+LastAddendumNumber int
+AdvisiorUnitAlborzCode int
+AdvisiorSuperVisiorUnitAlborzCode int
+IssuingSuperVisiorUnitAlborzCode int
+AdmissionUnitAlborzCode int
+IssuingUnitAlborzCode int
+RequestedPolicyBeginDate datetime
+MainCoverCapitalInFirstYear float
+HasSavingMargin bool
+AutomaticAdmission bool
+ProposalIsSendToCenterIns bool
+ProposalLifPlcyCod int
+ProposalTrcCod int
+PolicyIsSendToCenterIns bool
+PolicyLifPlcyCod int
+PolicyTrcCod int
+SentToCenterStatus int
+Online bool
+PensionAdjustmentRate float
+PensionDuration int
+PensionPeriodType int
+InitialSavingMargin float
+ObligationsFulfillMethod int
+ObligationsFulfillWaitingDuration int
+PensionPayType int
+ShortTerm_Duration int
+ShortTerm_IsActive bool
+ShortTerm_Percent float
+ShortTerm_Premium float
+
+TABLE Proposals.ProposalAdministrativeCost
+Id int [PK]
+InsuranceYear int
+InsuranceAge int
+BaseCostValue float
+FinalCostValue float
+BaseAmount float
+AdministrativeCostId int
+ProposalId int [FK->Proposals.Proposal.Id]
+RoofCost float
+FloorCost float
+AdministrativeCostType int
+AdministrativeCostCategoryId int
+AdministrativeCostCategoryTitle str
+OperationOrder int
+AddendumId int
+AddendumNumber int
+EffectiveDate datetime
+SubProposalId int [FK->Proposals.SubProposal.Id]
+
+TABLE Proposals.ProposalAttachment
+Id int [PK]
+ProposalId int [FK->Proposals.Proposal.Id]
+AttachmentGroupId int
+StreamId str
+ThumbStreamId str
+Description str
+CreateDateTime datetime
+UserId int
+
+TABLE Proposals.ProposalComision
+Id int [PK]
+ProposalId int
+InsuranceYear int
+ProposalInstallmentId int
+ProposalInstallmentAmount float
+AdvisorComision float
+AdmissionComision float
+IssuingComision float
+TaxAdvisorComision float
+DuesAdvisorComision float
+TaxAdmissionComision float
+DuesAdmissionComision float
+DuesIssuingComision float
+TaxIssuingComision float
+DepositPayOffMappingLogId int
+IsTaxCalculate bool
+HasDocumentCalculate bool
+HasDocumentTaxCalculate bool
+HasDocumentTax bool
+Revoked bool
+IsMandehComissionNoPlace bool
+SubProposalId int [FK->Proposals.SubProposal.Id]
+CommissionPaymentType int
+
+TABLE Proposals.ProposalCommissionAdministrativeCosts
+Id int [PK]
+AdministrativeCostId int
+OperationOrder int
+BaseAmount float
+Amount float
+BeforPremium float
+InsuranceRiskId int
+InsuranceRiskTitle str
+EffictiveInPolicy bool
+Related bool
+AdministrativeCostCalculationConditionType int
+FloorCost float
+RoofCost float
+AdministrativeCostCategoryId int
+AdministrativeCostCategoryTitle str
+InsuranceYear int
+InsuredAge int
+AdministrativeCostType int
+ProposalId int
+ProposalInsuredInsuranceRiskDetailId int
+TaxAmount float
+DuesAmount float
+SalePlanCostAdjustmentId int
+CostAdjustmentPercentage float
+CostAdjustmentAmount float
+CostAdjustmentAmountWithAmount float
+AddendumId int
+AddendumNumber int
+EffectiveDate datetime
+SubProposalId int [FK->Proposals.SubProposal.Id]
+
+TABLE Proposals.ProposalDeposit
+Id int [PK]
+ProposalId int [FK->Proposals.Proposal.Id]
+Amount float
+CreateDate datetime
+PaymentValueId int
+ProposalDepositType int
+TypeOfTransferAmount int
+ProposalDepositOperation int
+
+TABLE Proposals.ProposalInfoVersion
+Id int [PK]
+ProposalId int [FK->Proposals.Proposal.Id]
+AdvisiorId int
+PolicyHolderCodeOfPerson int
+SalesManId int
+InsurerPersonId int
+PolicyHolderNationalCode str
+IssuingUnitId int
+InsurancePlanId int
+PurposeOfPurchase str
+DurationOfPolicy int
+PremiumPaymentTerm int
+InsuranceDeposit float
+InsurancePlanGetPremium int
+StepStatus int
+FirstYearPremium float
+CapitalFormation float
+RisingBonusFactor float
+SalePlanId int
+UserId int
+CurrencyId int
+CreateDateTime datetime
+IsCalculation bool
+LastUpdateDateTime datetime
+CalculationDateTime datetime
+ConfirmAndSendAdmissionDate datetime
+AdmissionSendIssuingDate datetime
+InstallmentDueDate datetime
+SecondInsurerPersonId int
+PolicyInsuranceIssuanceDate datetime
+PolicyBeginDate datetime
+PolicyEndDate datetime
+PolicyStatus int
+AddendumId int
+AddendumNumber int
+ProposalInfoVersionCreateDate datetime
+AdvisiorUnitAlborzCode int
+AdmissionUnitAlborzCode int
+AdvisiorSuperVisiorUnitAlborzCode int
+IssuingSuperVisiorUnitAlborzCode int
+IssuingUnitAlborzCode int
+EffectiveDate datetime
+IsMortgage bool
+
+TABLE Proposals.ProposalInstallmentSchedule
+Id int [PK]
+InsuranceYear int
+InstallmentNumber int
+DueDate datetime
+Amount float
+BillingIdentifier str
+Description str
+ProposalId int
+ProposalObligationsInsurerId int [FK->Proposals.ProposalObligationsInsurer.Id]
+InstallmentPaymentStatus int
+PaymentIdentifier str
+DepositPayOffMappingLogId int
+SendToPlcyLifeTb bool
+CreateDate datetime
+AddendumId int
+AddendumNumber int
+IsDeleted bool
+SubProposalId int [FK->Proposals.SubProposal.Id]
+Revoked bool
+TaxAmount float
+TotalAmount float
+TaxPercent int
+
+TABLE Proposals.ProposalInstallmentSelfPlan
+Id int [PK]
+ProposalId int [FK->Proposals.Proposal.Id]
+InsuranceYear int
+Amount float
+DueDate datetime
+ProposalInstallmentScheduleId int [FK->Proposals.ProposalInstallmentSchedule.Id]
+AddendumId int
+CreateDate datetime
+CreateUserId int [FK->dbo.User.Id]
+IsDeleted bool
+
+TABLE Proposals.ProposalInsured
+Id int [PK]
+ProposalId int [FK->Proposals.Proposal.Id]
+PersonId int
+CreateDateTime datetime
+LastUpdateDate datetime
+MainInsured bool
+InsurerAndInsuredRelationship int
+IsMain bool
+AddendumId int
+AddendumNumber int
+EffectiveDate datetime
+
+TABLE Proposals.ProposalInsuredBeneficiary
+Id int [PK]
+PersonId int
+PriorityShareOfTheDeath int
+ShareOfDeath float
+PriorityShareOfTheLife int
+ShareOfLife float
+ProposalInsuredId int [FK->Proposals.ProposalInsured.Id]
+BeneficiaryType int
+InsurerAndInsuredRelationship int
+LegalLegacy bool
+AddendumId int
+AddendumNumber int
+EffectiveDate datetime
+
+TABLE Proposals.ProposalInsuredInsuranceRisk
+Id int [PK]
+InsuranceRiskId int [FK->InsuranceRisks.InsuranceRisk.Id]
+CoverageAmount float
+IsMain bool
+ProposalInsuredId int [FK->Proposals.ProposalInsured.Id]
+CoverageRate float
+CoverageChangeRate float
+InsuranceParentRiskId int
+InsuranceParentRiskAmount float
+BaseRate float
+AddendumId int
+AddendumNumber int
+EffectiveDate datetime
+PensionAmount int
+PensionPeriod int
+PensionObligationRate float
+SubProposalId int [FK->Proposals.SubProposal.Id]
+PensionFinalInstallmentAmount float
+PensionFinalInstallmentBasisAmount float
+PensionFinalInstallmentBasisCapitalRatio int
+PensionFinalInstallmentRate float
+CoverageAmountQuantity float
+InvestmentProductPriceId int [FK->Investment.InvestmentProductPrice.Id]
+InvestmentUnitQuantity float
+AdjustedCoverageAmount float
+PurchaseTransactionId int [FK->Investment.PurchaseTransaction.Id]
+AdjustedCoverageRate float
+
+TABLE Proposals.ProposalInsuredInsuranceRiskDetail
+Id int [PK]
+ProposalId int [FK->Proposals.Proposal.Id]
+ProposalInsuredInsuranceRiskId int
+InsuranceRiskId int
+InsuranceYear int
+InsuranceAge int
+InsuranceAgeInIssuing int
+BasePremiumRateRaw float
+BasePremiumRate float
+SumOfSumationRate float
+SumOfMultipliedRate float
+FundRisk float
+PurePremium float
+CommercialPremium float
+TechnicalProfitRate float
+AddendumId int
+AddendumNumber int
+EffectiveDate datetime
+SubProposalId int [FK->Proposals.SubProposal.Id]
+TechnicalProfitRateRisk float
+TotalDepositUnitLinkPlanning float
+UnitTransferPlanningAmount float
+UnitTransferPlanningAmountProfit float
+
+TABLE Proposals.ProposalInsuredInsuranceRiskDetailAdministrativeCost
+Id int [PK]
+AdministrativeCostId int
+OperationOrder int
+ProposalInsuredInsuranceRiskDetailId int
+Amount float
+BeforPremium float
+InsuranceRiskId int
+FloorCost float
+RoofCost float
+BaseAmount float
+InsuranceRiskTitle str
+EffictiveInPolicy bool
+AdministrativeCostCategoryId int
+AdministrativeCostCategoryTitle str
+InsuranceYear int
+InsuredAge int
+AdministrativeCostType int
+ProposalId int
+Related bool
+AdministrativeCostCalculationConditionType int
+PercentCalculationMethodWithCostAdjustment float
+SalePlanCostAdjustmentId int
+CostAdjustmentPercentage float
+CostAdjustmentAmount float
+CostAdjustmentAmountWithAmount float
+AddendumId int
+AddendumNumber int
+EffectiveDate datetime
+SubProposalId int [FK->Proposals.SubProposal.Id]
+
+TABLE Proposals.ProposalInsuredInsuranceRiskMathReserve
+Id int [PK]
+PurePremium float
+CommercialPremium float
+MathsSavedNonConditionOfLife float
+MathsSavedOnConditionOfLife float
+TechnicalProfitRate float
+InsuranceYear int
+InsuredAgeInIssuing int
+InsuredAgeInYear int
+CreateDate datetime
+InsurancePlanHasRiskId int [FK->InsurancePlan.InsurancePlanHasRisk.Id]
+InsuranceRiskId int [FK->InsuranceRisks.InsuranceRisk.Id]
+ProposalId int [FK->Proposals.Proposal.Id]
+SavingMarginInYear float
+ObligationsPensionAmount float
+MathSavedWithoutPensionAmount float
+AddendumId int
+EffectiveDate datetime
+AdjustedQuantity float
+ConditionQuantity float
+InvestmentProductPriceId int [FK->Investment.InvestmentProductPrice.Id]
+InvestmentUnitQuantity float
+NonConditionQuantity float
+PurchaseTransactionId int [FK->Investment.PurchaseTransaction.Id]
+ProposalInsuredInsuranceRiskDetailId int
+
+TABLE Proposals.ProposalInsuredInsuranceRiskRiskFactor
+Id int [PK]
+RiskFactorId int
+HasRisk bool
+ProposalInsuredInsuranceRiskId int [FK->Proposals.ProposalInsuredInsuranceRisk.Id]
+BaseRateAdjustmentSum float
+BaseRateAdjustmentMultiplication float
+AddendumId int
+AddendumNumber int
+EffectiveDate datetime
+SubProposalId int [FK->Proposals.SubProposal.Id]
+
+TABLE Proposals.ProposalInsuredObligationsInsurer
+Id int [PK]
+InsuranceYear int
+InsuredAge int
+InsuranceRiskId int
+FundInsuranceRisk float
+AdjustmentRate float
+FundRate float
+ProposalId int [FK->Proposals.Proposal.Id]
+AddendumId int
+AddendumNumber int
+EffectiveDate datetime
+
+TABLE Proposals.ProposalInsuredQuestionnaireAnswerMapping
+Id int [PK]
+AnswerId int
+Answer str
+CreateDateTime datetime
+UserId int
+ProposalInsuredQuestionnaireAnswerId int [FK->Proposals.ProposalQuestionnaireAnswer.Id]
+
+TABLE Proposals.ProposalObligationsInsurer
+Id int [PK]
+InsuranceYear int
+SumPremiumInYear float
+AccumulatedPremium float
+Rate float
+Description str
+CreateDateTime datetime
+ProposalId int [FK->Proposals.Proposal.Id]
+ObligationInsurerUniqueId int
+AddendumId int
+AddendumNumber int
+EffectiveDate datetime
+SubProposalId int [FK->Proposals.SubProposal.Id]
+IsDeleted bool
+DocumentId int
+MainAmount float
+TaxAmount float
+TaxPercent int
+HasNumericBillSerial bool
+TaxAffairsOrganizationTaxId str
+TaxInvoiceNumber str
+
+TABLE Proposals.ProposalObligationUnderwriter
+Id int [PK]
+ProposalId int [FK->Proposals.Proposal.Id]
+InsuranceYear int
+InsuredAgeInYear int
+FeetForAnyReasonCapital float
+DeathByAccidentCapital float
+MaimCapital float
+MedicalExpensesCapital float
+UnemploymentResultingFromtheAccidentCapital float
+IncomeDisabilityCapital float
+DisabilityForAnyReasonCapital float
+SpecialDiseasesCapital float
+CancerCapital float
+SaveLivesCapital float
+IncurableDiseaseCapital float
+ExemptFromPremiumPaymentsCapital float
+CapitalStandsLastYearAmount float
+SavingMathCondition float
+SavingMathNonCondition float
+PolicyCashValue float
+AddendumId int
+AddendumNumber int
+EffectiveDate datetime
+SubProposalId int [FK->Proposals.SubProposal.Id]
+CancerPensionCapital float
+DeathByAccidentPensionCapital float
+DeathOfTheDebtorRiskCapital float
+DeathOfTheDebtorRiskPensionCapital float
+DisabilityForAnyReasonPensionCapital float
+ExemptFromLoanPaymentCapital float
+ExemptFromPremiumPaymentsPensionCapital float
+FeetForAnyReasonPensionCapital float
+IncomeDisabilityPensionCapital float
+IncurableDiseasePensionCapital float
+LifeFuture1Capital float
+LifeFuture2Capital float
+LifeFuture3Capital float
+LifeFuture4Capital float
+LifeFuture5Capital float
+MaimPensionCapital float
+MedicalExpensesPensionCapital float
+SaveLivesPensionCapital float
+SpecialDiseasesPensionCapital float
+UnemploymentResultingFromtheAccidentPensionCapital float
+LifeFuture6Capital float
+LifeFuture7Capital float
+DeathByWarCapital float
+DeathByWarPensionCapital float
+DeathByNaturalEventsCapital float
+DeathByNaturalEventsPensionCapital float
+HealthMonitoringCapital float
+HealthMonitoringPensionCapital float
+
+TABLE Proposals.ProposalOnlineRequest
+Id int [PK]
+InsurerNationalCode str
+InsuredNationalCode str
+InsurancePlanId int
+SalePlanId int
+DurationOfPolicy int
+CreateDateTime datetime
+InsurerBirthDate datetime
+InsuredBirthDate datetime
+MobileNumber str
+FirstName str
+LastName str
+PremiumAmount int
+Tax int
+FinalAmount int
+ProposalOnlineRequestStatus int
+ProposalId int
+InsurancePlanGetPremium int
+ObligationAmount int
+PolicyCoverInAllInsuranceCompany int
+AdviserId int
+UserId int
+ConfirmToken int
+ConfirmTokenCreateDate datetime
+PolicyHolderCode int
+NumberOfProposal int
+
+TABLE Proposals.ProposalOnlineRequestMapping
+Id int [PK]
+ProposalId int
+ProposalOnlineRequestId int [FK->Proposals.ProposalOnlineRequest.Id]
+
+TABLE Proposals.ProposalQuestionnaireAnswer
+Id int [PK]
+ProposalId int
+QuestionnaireId int
+QuestionId int
+AnswerId int
+Answer str
+UserId int
+CreateDateTime datetime
+ProposalInsuredId int [FK->Proposals.ProposalInsured.Id]
+QuestionAnswerType int
+AddendumId int
+AddendumNumber int
+EffectiveDate datetime
+
+TABLE Proposals.ProposalSharedPremium
+Id int [PK]
+InsurerAmount float
+SecondInsurerAmount float
+DepositDate datetime
+Status int
+ProposalId int [FK->Proposals.Proposal.Id]
+ConfirmUserId int [FK->dbo.User.Id]
+ConfirmDate datetime
+CreateUserId int [FK->dbo.User.Id]
+CreateDate datetime
+
+TABLE Proposals.SubProposal
+Id int [PK]
+StartDate datetime
+EndDate datetime
+ProposalId int [FK->Proposals.Proposal.Id]
+AddendumId int [FK->Addendums.SoloInstallmentAddendum.Id]
+CreateDate datetime
+CreateUserId int [FK->dbo.User.Id]
+
+TABLE ProposalStates.ProposalAdmissionConsideration
+Id int [PK]
+ReferencedToExternalExpert bool
+ExternalAdmitionId int
+ProposalId int [FK->Proposals.Proposal.Id]
+UserId int [FK->dbo.User.Id]
+ProposalProcessStatus int
+Message str
+LastUpdateDate datetime
+CreateDate datetime
+ProposalStateAttachmentId int
+ProposalAdmissionConsiderationStateStatus int
+HasSeen bool
+SeenDateTime datetime
+
+TABLE ProposalStates.ProposalConfirmation
+Id int [PK]
+ProposalId int [FK->Proposals.Proposal.Id]
+UserId int [FK->dbo.User.Id]
+ProposalProcessStatus int
+Message str
+LastUpdateDate datetime
+CreateDate datetime
+ProposalStateAttachmentId int
+ProposalConfirmationStateStatus int
+HasSeen bool
+SeenDateTime datetime
+
+TABLE ProposalStates.ProposalExternalAdmissionConsideration
+Id int [PK]
+ProposalId int [FK->Proposals.Proposal.Id]
+UserId int [FK->dbo.User.Id]
+ProposalProcessStatus int
+Message str
+LastUpdateDate datetime
+CreateDate datetime
+ProposalStateAttachmentId int
+StateStatus int
+HasSeen bool
+SeenDateTime datetime
+
+TABLE ProposalStates.ProposalInscription
+Id int [PK]
+ProposalId int [FK->Proposals.Proposal.Id]
+UserId int [FK->dbo.User.Id]
+ProposalProcessStatus int
+Message str
+LastUpdateDate datetime
+CreateDate datetime
+ProposalStateAttachmentId int
+ProposalInscriptionStateStatus int
+HasSeen bool
+SeenDateTime datetime
+
+TABLE ProposalStates.ProposalIssuing
+Id int [PK]
+ProposalId int [FK->Proposals.Proposal.Id]
+UserId int [FK->dbo.User.Id]
+ProposalProcessStatus int
+Message str
+LastUpdateDate datetime
+CreateDate datetime
+ProposalStateAttachmentId int
+ProposalIssuingStateStatus int
+HasSeen bool
+SeenDateTime datetime
+
+TABLE ProposalStates.ProposalIssuingConsideration
+Id int [PK]
+ProposalId int [FK->Proposals.Proposal.Id]
+UserId int [FK->dbo.User.Id]
+ProposalProcessStatus int
+Message str
+LastUpdateDate datetime
+CreateDate datetime
+ProposalStateAttachmentId int
+ProposalIssuingConsiderationStatusState int
+HasSeen bool
+SeenDateTime datetime
+
+TABLE ProposalStates.ProposalStateAttachment
+Id int [PK]
+UserId int
+CreateDate datetime
+StreamId str
+
+TABLE ProposalTemplates.ProposalTemplateQuestionnaireAnswer
+Id int [PK]
+ProposalTemplateId int [FK->InsuranceRisks.ProposalTemplate.Id]
+QuestionnaireId int
+QuestionId int
+AnswerId int
+Answer str
+QuestionAnswerType int
+
+TABLE ProposalTemplates.ProposalTemplateQuestionnaireAnswerMapping
+Id int [PK]
+AnswerId int
+Answer str
+ProposalTemplateQuestionnaireAnswerId int [FK->ProposalTemplates.ProposalTemplateQuestionnaireAnswer.Id]
+
+TABLE Receives.BankInvoiceReceive
+Id int [PK] [FK->Receives.BaseReceive.Id]
+RegisterDate datetime
+RecieveDate datetime
+Number str
+RefrenceNumber int
+RegisterUserId int [FK->dbo.User.Id]
+ConfirmUserId int [FK->dbo.User.Id]
+ConfirmOperationUnitId int [FK->SalesNetwork.OperationUnit.Id]
+Description str
+SystemBankAccountId int [FK->BasicInformation.SystemBankAccount.Id]
+DepositType int
+
+TABLE Receives.BaseOnlineReceiveRequest
+Id int [PK]
+Amount int
+Status int
+CreateDateTime datetime
+TrackingCode str
+OnlineReceiptGatewayId int [FK->Receives.OnlineReceiveGateway.Id]
+ReceiveId int [FK->Receives.OnlineReceive.Id]
+RowVersion datetime
+PaymentIdentityId int [FK->BasicInformation.PaymentIdentity.Id]
+
+TABLE Receives.BaseOnlineReceiveRequestLog
+Id int [PK]
+Error bool
+Message str
+CreateDateTime datetime
+PaymentIdentityId int [FK->BasicInformation.PaymentIdentity.Id]
+
+TABLE Receives.BaseReceive
+Id int [PK]
+Amount int
+CreateDateTime datetime
+TransactionType int
+DepositOperation int
+Type int
+Status int
+DepositAccountId int [FK->Receives.DepositAccount.Id]
+ReceiveReceiptId int
+PaymentIdentityId int [FK->BasicInformation.PaymentIdentity.Id]
+HasAccumulationCertificate bool
+PaymentReferenceId int
+PaymentType int
+BankStatementItemId int
+BankStatementType int
+
+TABLE Receives.BehPardakhtOnlineReceiveRequest
+Id int [PK] [FK->Receives.BaseOnlineReceiveRequest.Id]
+ResponseCode int
+ResponseMessage str
+
+TABLE Receives.BehPardakhtOnlineReceiveRequestLog
+Id int [PK] [FK->Receives.BaseOnlineReceiveRequestLog.Id]
+BehPardakhtOnlineReceiveRequestId int [FK->Receives.BehPardakhtOnlineReceiveRequest.Id]
+Step int
+ResponseCode int
+
+TABLE Receives.Bill
+Id int [PK]
+DepositAccountId int [FK->Receives.DepositAccount.Id]
+DepositOperation int
+CreateDate datetime
+Published bool
+
+TABLE Receives.BillAndPaymentIdentifierReceive
+Id int [PK] [FK->Receives.BaseReceive.Id]
+DepositDate datetime
+BillingIdentifier str
+PaymentIdentifier str
+BankReceiptNumber str
+Description str
+RegisterUserId int [FK->dbo.User.Id]
+AcceptedUserId int
+BillAndPaymentIdentifierReceiveType int
+SystemBankAccountId int [FK->BasicInformation.SystemBankAccount.Id]
+BillAndPaymentIdentifierStatus int
+
+TABLE Receives.BillReceive
+Id int [PK] [FK->Receives.BaseReceive.Id]
+Date datetime
+DateOfReceipt datetime
+Number str
+RegisterUserId int [FK->dbo.User.Id]
+ConfirmUserId int [FK->dbo.User.Id]
+Picture str
+Description str
+SystemBankAccountId int [FK->BasicInformation.SystemBankAccount.Id]
+ConfirmOperationUnitId int [FK->SalesNetwork.OperationUnit.Id]
+
+TABLE Receives.CertificateDepositTransfer
+Id int [PK]
+CreateDateTime datetime
+Type int
+HasDocument bool
+TransferDepositRequestId int [FK->Receives.TransferDepositRequest.Id]
+Number int
+IsBankToBank bool
+SourceSystemBankAccountId int [FK->BasicInformation.SystemBankAccount.Id]
+TargetSystemBankAccountId int [FK->BasicInformation.SystemBankAccount.Id]
+
+TABLE Receives.ChequeReceive
+Id int [PK] [FK->Receives.BaseReceive.Id]
+CheckDate datetime
+DateOfReceipt datetime
+Number str
+RegisterUserId int [FK->dbo.User.Id]
+ConfirmUserId int [FK->dbo.User.Id]
+Picture str
+Description str
+SystemBankAccountId int [FK->BasicInformation.SystemBankAccount.Id]
+ConfirmOperationUnitId int [FK->SalesNetwork.OperationUnit.Id]
+
+TABLE Receives.CreditReceive
+Id int [PK] [FK->Receives.BaseReceive.Id]
+RegisterDate datetime
+Number str
+RegisterUserId int [FK->dbo.User.Id]
+ConfirmUserId int [FK->dbo.User.Id]
+ConfirmOperationUnitId int [FK->SalesNetwork.OperationUnit.Id]
+Description str
+SystemBankAccountId int [FK->BasicInformation.SystemBankAccount.Id]
+
+TABLE Receives.DepositAccount
+Id int [PK]
+Title str
+SecretKey str
+CreateDateTime datetime
+Type int
+ReferenceId int
+
+TABLE Receives.DepositTransaction
+Id int [PK]
+Amount int
+Operation int
+Type int
+CreateDateTime datetime
+ReferenceId int
+TargetDepositAccountId int [FK->Receives.DepositAccount.Id]
+DepositAccountId int [FK->Receives.DepositAccount.Id]
+FromTransactionId int [FK->Receives.DepositTransaction.Id]
+PlaceOfSupplyId int
+SupplyType int
+
+TABLE Receives.FreeBlockedDepositTransfer
+Id int [PK]
+ProposalId int
+RefrenceNumber int
+RegisterDateTime datetime
+RegisterUserId int
+FreeDateTime datetime
+Amount int
+HasDocument bool
+SystemBankAccountId int [FK->BasicInformation.SystemBankAccount.Id]
+
+TABLE Receives.IranKishOnlineReceiveRequest
+Id int [PK] [FK->Receives.BaseOnlineReceiveRequest.Id]
+ResponseCode int
+ResponseMessage str
+
+TABLE Receives.IranKishOnlineReceiveRequestLog
+Id int [PK] [FK->Receives.BaseOnlineReceiveRequestLog.Id]
+IranKishOnlineReceiveRequestId int [FK->Receives.IranKishOnlineReceiveRequest.Id]
+Step int
+ResponseCode int
+
+TABLE Receives.OnlineReceive
+Id int [PK] [FK->Receives.BaseReceive.Id]
+OnlineReceiveGatewayId int [FK->Receives.OnlineReceiveGateway.Id]
+PayerUserId int [FK->dbo.User.Id]
+
+TABLE Receives.OnlineReceiveGateway
+Id int [PK]
+Title str
+Type int
+Published bool
+SystemBankAccountId int [FK->BasicInformation.SystemBankAccount.Id]
+DisplayOrder int
+Password str
+PayerId str
+TerminalId int
+Username str
+SubServiceId int
+
+TABLE Receives.OnlineReceiveRequestChangeStatusLog
+Id int [PK]
+CustomerCardNumber str
+ChangePaymentReason str
+TrackingCode str
+CreateDateTime datetime
+PaymentDateTime datetime
+UserId int [FK->dbo.User.Id]
+BaseOnlineReceiveRequestId int
+Status int
+ReceiveId int
+
+TABLE Receives.ReceiveReceipt
+Id int [PK]
+CreateDateTime datetime
+HasDocument bool
+Revoked bool
+ReceiveId int [FK->Receives.BaseReceive.Id]
+TransactionDate datetime
+PaymentIdentityId int [FK->BasicInformation.PaymentIdentity.Id]
+
+TABLE Receives.ReceiveReceiptRevoke
+Id int [PK]
+CreateDateTime datetime
+ReceiveReceiptId int [FK->Receives.ReceiveReceipt.Id]
+DocumentId int [FK->Accounting.Document.Id]
+HasDocument bool
+
+TABLE Receives.TransferDeposit
+Id int [PK]
+Number int
+SourceDepositAccountId int [FK->Receives.DepositAccount.Id]
+SourceDepositType int
+TargetDepositAccountId int [FK->Receives.DepositAccount.Id]
+TargetDepositType int
+Amount float
+TransferDate datetime
+RegisterUserId int [FK->dbo.User.Id]
+CreateDate datetime
+DocumentId int [FK->Accounting.Document.Id]
+
+TABLE Receives.TransferDepositLog
+Id int [PK]
+RegisterUserId int
+SourceDepositId int
+SourceDepositType int
+TargetDepositId int
+TargetDepositType int
+Amount float
+CreateDateTime datetime
+
+TABLE Receives.TransferDepositRequest
+Id int [PK]
+RegisterUserId int
+SourceDepositId int
+SourceDepositType int
+TargetDepositId int
+TargetDepositType int
+Amount float
+CreateDateTime datetime
+
+TABLE Receives.UnknownRequestLog
+Id int [PK] [FK->Receives.BaseOnlineReceiveRequestLog.Id]
+
+TABLE Reports.BaseReportRequest
+Id int [PK]
+Title str
+HashKey str
+Status int
+ExpiredAt datetime
+CreateUserId int [FK->dbo.User.Id]
+CreateDate datetime
+
+TABLE Reports.BordereauGettingPremium
+Id int [PK]
+ProposalInstallmentScheduleId int
+InsurableObjectId int
+InsurableObjectFullTitle str
+InsurancePlanId int
+InsurancePlanFullTitle str
+AdmissionUnitId int
+AdmissionOperationUnitId int
+AdvisiorId int
+SalesCoachId int
+PolicyIssuingDate datetime
+PolicyBeginDateTime datetime
+PolicyEndDate datetime
+PolicyNumber str
+PolicyHolderNameAndCode str
+PolicyHolderNationalCode str
+PolicyDurationInYear int
+PremiumPaymentTerm int
+InsurancePlanGetPremium int
+InsurancePlanGetPremiumTitle str
+InsuranceYear int
+InstallmentNumber int
+InstallmentDueDate datetime
+SettlementReceiptsNumber int
+AmountPremium float
+CreateDateTime datetime
+AdvisiorOperationUnitId int
+IssuingUnitId int
+IssuingOperationUnitId int
+SailesCoachOperationUnitId int
+InsurePersonId int
+SettlementDate datetime
+DepositDate datetime
+ProposalId int
+
+TABLE Reports.BordereauGettingPremiumInsuranceRiskDetail
+Id int [PK]
+InsuranceRiskId int
+RiskFund float
+NetPremium float
+CommercialTariffSalesFactors float
+InsurersCommercialTariff float
+TaxTariffs float
+SettlementTariffs float
+BordereauGettingPremiumId int [FK->Reports.BordereauGettingPremium.Id]
+BordereauGettingPremiumInsuranceRiskDetailType int
+ReinsurancePremium float
+ReinsurancePremiumWage float
+
+TABLE Reports.MathsSaveReport
+Id int [PK]
+TechnicalProfitRate float
+ProposalId int
+Policynumber str
+IssuingUnitTitle str
+AdvisoirUnitTitle str
+IssuingDate datetime
+PolicyBeginDate datetime
+PolicyEndDate datetime
+PolicyDuration int
+InsurancePlanGetPremium int
+PremiumPaymentTerm int
+CapitalFormation float
+PolicyHolderFullData str
+PolicyHolderNationalCode str
+InsuredFulllData str
+InsuredNationalCode str
+InstallmentYear int
+SumPremiumInYear float
+InstallmentAmount float
+SavingMarginInInstallmentYear float
+SettlementDate datetime
+InstallmentDueDate datetime
+InstallmentSettlementNumber int
+DateOfReceipt str
+NumberOfReceipt str
+InsuredAgeInInsuranceYear int
+InsurancePlanId int
+SalesCoachId int
+AdvisoirUnitId int
+IssuingUnitId int
+AdmissionUnitId int
+InsurerPersonId int
+
+TABLE Reports.MathsSaveReportRequest
+Id int [PK]
+UserId int
+CreateDate datetime
+FromInstallmentDuDate datetime
+ToInstallmentDuDate datetime
+Status int
+
+TABLE Reports.ProposalCommissionAggregateSeasonalReport
+Id int [PK]
+RequestReportId int [FK->Reports.BaseReportRequest.Id]
+OperationUnitId int [FK->SalesNetwork.OperationUnit.Id]
+CommissionTotalAmount float
+VatTotalAmount float
+CommissionVatTotalAmount float
+Month int
+Season int
+Year int
+CommissionTotalAmountForSession float
+VatTotalAmountForSession float
+CommissionVatTotalAmountForSession float
+
+TABLE SalePlans.AgeAdjustment
+Id int [PK]
+FromAge int
+ToAge int
+SalePlanId int [FK->SalePlans.SalePlan.Id]
+EffectiveAge int
+RegisterUserId int
+CreateDate datetime
+ProposalId int
+
+TABLE SalePlans.BaseVipCustomerTemp
+Id int [PK]
+SalePlanId int
+PersonalCode str
+FirstName str
+LastName str
+NationalCode str
+GenderType str
+TempBirthDate datetime
+BirthCertificateNumber str
+PlaceOfIssue str
+MaritalStatus str
+MobileNumber str
+Province str
+City str
+TempStatus int
+SheetName str
+RegisterUserId int
+NationalityId int
+
+TABLE SalePlans.CategoriesOfBuyerGoalMapping
+Id int [PK]
+CategoriesOfBuyerGoalId int [FK->CategoriesOfBuyerGoal.CategoriesOfBuyerGoal.Id]
+SalePlanId int [FK->SalePlans.SalePlan.Id]
+
+TABLE SalePlans.CostAdjustment
+Id int [PK]
+SalePlanId int [FK->SalePlans.SalePlan.Id]
+CostAdjustmentPercentage float
+AdministrativeCostId int
+AdministrativeCostCategoryId int
+EffectiveTimeInTheCommitmentsTable int
+FloorEffectInCalculation bool
+RootEffectInCalculation bool
+
+TABLE SalePlans.SalePlan
+Id int [PK]
+Title str
+LastUpdateDateTime datetime
+DisplayOrder int
+Published bool
+Deleted bool
+LimitedToVipInsurerCustomer bool
+LimitedToVipInsuredCustomer bool
+LimitedToVipBeneficialCustomer bool
+LimitedToIssuingUnit bool
+LimitedToAdvisor bool
+InsurancePlanId int [FK->InsurancePlan.InsurancePlan.Id]
+CreateDateTime datetime
+LimitedToSalesCoach bool
+IsDefault bool
+SecondInsurerPersonId int
+ProposalTemplateId int
+BeginDate datetime
+EndDate datetime
+IsInsrEmp bool
+isSendToCenterIns bool
+LifCntrctCod int
+TrcCod int
+HasPremiumDepositPayment bool
+Identifier str
+MapCntRctCod str
+MapFldDtlCod str
+SmsMessageTemplateTypes str
+SalePlanSettlementType int
+SettlementDeadLineDays int
+CooperationBenefitReceiverType int
+SecondInsurerPaymentType int
+CanAddLoanByCustomer bool
+HasSharedPremium bool
+HasCreditFacility bool
+
+TABLE SalePlans.SalePlanAdvanceSettlement
+Id int [PK]
+SalePlanId int [FK->SalePlans.SalePlan.Id]
+InsurancePlanGetPremium int
+MinPaidInstallmentCount int
+MaxInstallmentCount int
+MaxUnpaidInstallmentCount int
+MaxAmount float
+IsActive bool
+CreateUserId int [FK->dbo.User.Id]
+CreateDate datetime
+UpdateUserId int [FK->dbo.User.Id]
+UpdateDate datetime
+
+TABLE SalePlans.SalePlanBeneficiary
+Id int [PK]
+SalePlanInsuredId int [FK->SalePlans.SalePlanInsured.Id]
+InsurerAndInsuredRelationship int
+BeneficiaryType int
+PriorityShareOfTheDeath int
+ShareOfDeath float
+PriorityShareOfTheLife int
+ShareOfLife float
+SalePlanId int [FK->SalePlans.SalePlan.Id]
+PersonId int
+CreateDate datetime
+UpdateDate datetime
+RegisterUserId int [FK->dbo.User.Id]
+Published bool
+ActivationStartDate datetime
+ActivationEndDate datetime
+
+TABLE SalePlans.SalePlanBeneficiaryTemp
+Id int [PK] [FK->SalePlans.BaseVipCustomerTemp.Id]
+InsurerNationalCode str
+InsuredNationalCode str
+InsurerAndInsuredRelationship str
+BeneficiaryType str
+PriorityShareOfTheDeath int
+ShareOfDeath float
+ShareOfLife float
+
+TABLE SalePlans.SalePlanCondition
+Id int [PK]
+CreateDate datetime
+UpdateDate datetime
+Published bool
+DisplayOrder int
+SteamId str
+Title str
+ThumbnailSteamId str
+SalePlanId int [FK->SalePlans.SalePlan.Id]
+ConditionType int
+
+TABLE SalePlans.SalePlanConditionWordingMapping
+Id int [PK]
+WordingId int
+SalePlanConditionId int [FK->SalePlans.SalePlanCondition.Id]
+
+TABLE SalePlans.SalePlanDenyInsuranceRisk
+Id int [PK]
+InsuranceRiskId int
+CreateDateTime datetime
+RegisterUserId int
+Deleted bool
+SalePlanId int [FK->SalePlans.SalePlan.Id]
+
+TABLE SalePlans.SalePlanInsuranceRisk
+Id int [PK]
+SalePlanId int [FK->SalePlans.SalePlan.Id]
+InsuranceRiskId int
+MultiplierRate float
+
+TABLE SalePlans.SalePlanInsured
+Id int [PK]
+SalePlanPolicyHolderId int [FK->SalePlans.SalePlanPolicyHolder.Id]
+LegalLegacy bool
+SalePlanId int [FK->SalePlans.SalePlan.Id]
+PersonId int
+CreateDate datetime
+UpdateDate datetime
+RegisterUserId int [FK->dbo.User.Id]
+Published bool
+ActivationStartDate datetime
+ActivationEndDate datetime
+
+TABLE SalePlans.SalePlanInsuredTemp
+Id int [PK] [FK->SalePlans.BaseVipCustomerTemp.Id]
+InsurerNationalCode str
+LegalLegacy bool
+
+TABLE SalePlans.SalePlanLimitedDuration
+Id int [PK]
+StartDate datetime
+EndDate datetime
+SalePlanLimitedDurationType int
+SalePlanId int [FK->SalePlans.SalePlan.Id]
+
+TABLE SalePlans.SalePlanMandatoryConditionMapping
+Id int [PK]
+SalePlanId int [FK->SalePlans.SalePlan.Id]
+WordingId int
+
+TABLE SalePlans.SalePlanPersonVipCustomerMapping
+Id int [PK]
+SalePlanId int [FK->SalePlans.SalePlan.Id]
+PersonId int
+CreateDate datetime
+UpdateDate datetime
+Published bool
+PersonCustomerInsRoleType int
+ActivationStartDate datetime
+ActivationEndDate datetime
+
+TABLE SalePlans.SalePlanPolicyHolder
+Id int [PK]
+SalePlanId int [FK->SalePlans.SalePlan.Id]
+PersonId int
+CreateDate datetime
+UpdateDate datetime
+RegisterUserId int [FK->dbo.User.Id]
+Published bool
+ActivationStartDate datetime
+ActivationEndDate datetime
+
+TABLE SalePlans.SalePlanPolicyHolderTemp
+Id int [PK] [FK->SalePlans.BaseVipCustomerTemp.Id]
+
+TABLE SalePlans.SalesNetworkSalePlanMapping
+Id int [PK]
+SalePlanId int [FK->SalePlans.SalePlan.Id]
+SalesNetworkSalePlanType int
+CreateDate datetime
+UpdateDate datetime
+Published bool
+OperationUnitId int
+
+TABLE SalesNetwork.AdmissionUnit
+Id int [PK]
+OperationUnitId int [FK->SalesNetwork.OperationUnit.Id]
+StartDate datetime
+EndDate datetime
+ParentId int
+IsActive bool
+CreateDate datetime
+UpdateDate datetime
+Grade int
+Deleted bool
+AlborzCode int
+CreateUserId int [FK->dbo.User.Id]
+UpdateUserId int [FK->dbo.User.Id]
+
+TABLE SalesNetwork.Advisor
+Id int [PK]
+OperationUnitId int [FK->SalesNetwork.OperationUnit.Id]
+StartDate datetime
+EndDate datetime
+ParentId int
+IssuingUnitId int
+AdmissionUnitId int
+IsActive bool
+CreateDate datetime
+UpdateDate datetime
+Grade int
+Deleted bool
+OperationalLevelOfSalesNetworkId int [FK->SalesNetwork.OperationalLevelOfSalesNetwork.Id]
+SalesCoachId int
+PercentOfParent int
+PercentOfAdmission int
+PercentOfIssuing int
+PercentOfSalesCoach int
+AlborzCode int
+LeaderUnitId int
+CiisCmpIntrCod str
+CiisIntrMidId int
+CreateUserId int [FK->dbo.User.Id]
+UpdateUserId int [FK->dbo.User.Id]
+
+TABLE SalesNetwork.AdvisorSalesManMapping
+Id int [PK]
+SalesManId int [FK->SalesNetwork.SalesMan.Id]
+SalesManRate float
+AdvisorId int [FK->SalesNetwork.Advisor.Id]
+
+TABLE SalesNetwork.AssessorExpert
+Id int [PK]
+PersonId int [FK->Persons.Person.Id]
+StartDate datetime
+EndDate datetime
+AssessorExpertType int
+CreateUserId int [FK->dbo.User.Id]
+CreateDate datetime
+UpdateUserId int [FK->dbo.User.Id]
+UpdateDate datetime
+AccountingCode str
+
+TABLE SalesNetwork.AssessorExpertAllowedInsurancePlan
+Id int [PK]
+InsurancePlanId int [FK->InsurancePlan.InsurancePlan.Id]
+AssessorExpertId int [FK->SalesNetwork.AssessorExpert.Id]
+
+TABLE SalesNetwork.AssessorUnit
+Id int [PK]
+OperationUnitId int
+IsActive bool
+CreateDate datetime
+UpdateDate datetime
+RegisterUserId int
+AssessorunitType int
+
+TABLE SalesNetwork.CooperationRequest
+Id int [PK]
+NationalCode str
+BirthDate datetime
+MobileNumber str
+IsVerified bool
+ActivationToken str
+Description str
+CityId int
+ProvinceId int
+Major str
+Grade int
+CreateDateTime datetime
+CooperationRequestStatus int
+SalesCoachId int
+TokenDateTime datetime
+
+TABLE SalesNetwork.CooperationRequestAttachment
+Id int [PK]
+Url str
+CooperationRequestId int [FK->SalesNetwork.CooperationRequest.Id]
+
+TABLE SalesNetwork.IssuingUnit
+Id int [PK]
+OperationUnitId int [FK->SalesNetwork.OperationUnit.Id]
+StartDate datetime
+EndDate datetime
+IsActive bool
+CreateDate datetime
+UpdateDate datetime
+Grade int
+Deleted bool
+OperationalLevelOfSalesNetworkId int [FK->SalesNetwork.OperationalLevelOfSalesNetwork.Id]
+AlborzCode int
+CreateUserId int [FK->dbo.User.Id]
+UpdateUserId int [FK->dbo.User.Id]
+
+TABLE SalesNetwork.LeaderUnit
+Id int [PK]
+OperationUnitId int
+IsActive bool
+CreateDate datetime
+UpdateDate datetime
+RegisterUserId int
+
+TABLE SalesNetwork.OperationalLevelOfSalesNetwork
+Id int [PK]
+Title str
+Percent float
+TypeLevel int
+CreateDate datetime
+UpdateDate datetime
+Degree int
+
+TABLE SalesNetwork.OperationUnit
+Id int [PK]
+PersonId int [FK->Persons.Person.Id]
+CreateDate datetime
+UpdateDate datetime
+Published bool
+Deleted bool
+OperationUnitType int
+OperationUnitStatus int
+Title str
+CenterInsCode int
+AlborzInsCode int
+OperationUnitGuid str
+StartDate datetime
+EndDate datetime
+SupervisorOperationUnitId int
+ParentId int
+EconomicCode str
+SupervisorOperationAlborzCode int
+CreateUserId int [FK->dbo.User.Id]
+UpdateUserId int [FK->dbo.User.Id]
+Address str
+Mobile str
+Phone str
+CiisEmployerCode int
+HoldingResolutionDate datetime
+LicenseExpirationDate datetime
+LicenseGrantedDate datetime
+ProvinceId int [FK->dbo.StateProvince.Id]
+CiisRegisterUniqueCode str
+CissServiceCallTrackingCode str
+
+TABLE SalesNetwork.OperationUnitAdvancedSettlementRule
+Id int [PK]
+FromDate datetime
+ToDate datetime
+MinCount int
+MinPercent float
+Type int
+CreateUserId int [FK->dbo.User.Id]
+CreateDate datetime
+Month int
+
+TABLE SalesNetwork.OperationUnitAdvancedSettlementRuleInsurancePlan
+Id int [PK]
+InsurancePlanId int [FK->InsurancePlan.InsurancePlan.Id]
+OperationUnitAdvancedSettlementRuleId int [FK->SalesNetwork.OperationUnitAdvancedSettlementRule.Id]
+CreateUserId int [FK->dbo.User.Id]
+CreateDate datetime
+
+TABLE SalesNetwork.OperationUnitAllowedInsurancePlan
+Id int [PK]
+OperationUnitId int [FK->SalesNetwork.OperationUnit.Id]
+InsurancePlanId int [FK->InsurancePlan.InsurancePlan.Id]
+IsIssuingUnit bool
+IsAdvisor bool
+CreateDate datetime
+UpdateDate datetime
+CreateUserId int [FK->dbo.User.Id]
+UpdateUserId int [FK->dbo.User.Id]
+
+TABLE SalesNetwork.OperationUnitCenterInsCodeLog
+Id int [PK]
+OperationUnitId int [FK->SalesNetwork.OperationUnit.Id]
+EditorUserId int [FK->dbo.User.Id]
+OperationUnitCenterInsCode int
+FromDate datetime
+ToDate datetime
+
+TABLE SalesNetwork.OperationUnitChangeLog
+Id int [PK]
+EconomicCode str
+Title str
+PersonId int
+CenterInsCode int
+AlborzInsCode int
+OperationUnitType int
+OperationUnitStatus int
+OperationUnitGuid str
+CreateDate datetime
+UpdateDate datetime
+StartDate datetime
+EndDate datetime
+Published bool
+Deleted bool
+SupervisorOperationUnitId int
+ParentId int
+SupervisorOperationAlborzCode int
+OperationUnitId int
+OperationUnitDateTimeChange datetime
+ModifierUserId int
+OldRegisterUserId int
+
+TABLE SalesNetwork.OperationUnitLicenseMapping
+Id int [PK]
+OperationUnitId int [FK->SalesNetwork.OperationUnit.Id]
+LicenseProcessingSystem int
+CreateDate datetime
+UpdateDate datetime
+IsActive bool
+
+TABLE SalesNetwork.OperationUnitSertificateValueAdded
+Id int [PK]
+OwnerOperationUnitId int [FK->SalesNetwork.OperationUnit.Id]
+Attachment str
+RegisterUserId int [FK->dbo.User.Id]
+CreditFromDateTime datetime
+CreditToDateTime datetime
+Status int
+ConfirmUserId int [FK->dbo.User.Id]
+ConfirmOperationUnitId int [FK->SalesNetwork.OperationUnit.Id]
+RegisterDateTime datetime
+ConfirmDateTime datetime
+Decription str
+RevokerUserId int [FK->dbo.User.Id]
+RevokeDateTime datetime
+RevokerOperationUnitId int [FK->SalesNetwork.OperationUnit.Id]
+
+TABLE SalesNetwork.OperationUnitStatusLog
+Id int [PK]
+OperationUnitId int [FK->SalesNetwork.OperationUnit.Id]
+UpdateUserId int
+OperationUnitStatus int
+FromDate datetime
+ToDate datetime
+
+TABLE SalesNetwork.OperationUnitSupervisorLog
+Id int [PK]
+OperationUnitId int [FK->SalesNetwork.OperationUnit.Id]
+UpdateUserId int
+SupervisorOperationUnitId int
+FromDate datetime
+ToDate datetime
+
+TABLE SalesNetwork.SalesCoach
+Id int [PK]
+OperationUnitId int [FK->SalesNetwork.OperationUnit.Id]
+ParentId int
+StartDate datetime
+EndDate datetime
+IsActive bool
+CreateDate datetime
+UpdateDate datetime
+Deleted bool
+Grade int
+OperationalLevelOfSalesNetworkId int [FK->SalesNetwork.OperationalLevelOfSalesNetwork.Id]
+AlborzCode int
+CreateUserId int [FK->dbo.User.Id]
+UpdateUserId int [FK->dbo.User.Id]
+
+TABLE SalesNetwork.SalesMan
+Id int [PK]
+PersonId int [FK->Persons.Person.Id]
+CreateDate datetime
+UpdateDate datetime
+IsActive bool
+CreateUserId int [FK->dbo.User.Id]
+UpdateUserId int [FK->dbo.User.Id]
+
+TABLE Security.ApiKey
+Id int [PK]
+Title str
+Key str
+Published bool
+UserId int
+
+TABLE Statements.BankStatement
+Id int [PK]
+BankAccountId int
+FilePath str
+UserId int [FK->dbo.User.Id]
+DateTime datetime
+UserAlborzInsCode int
+Title str
+Type int
+
+TABLE Statements.MehrBankStatementItem
+Id int [PK]
+DocumentNumber str
+CustomerNo str
+ReleaseOrderNumber int
+FacilityNumber str
+InsurerName str
+OperationUnitId int [FK->SalesNetwork.OperationUnit.Id]
+DepositAccountId int [FK->Receives.DepositAccount.Id]
+BankStatementId int [FK->Statements.BankStatement.Id]
+SuccessfullyProcessedReceipt bool
+Error str
+ReferenceId int
+Date str
+Time str
+Withdrawal float
+Deposit float
+BankBalance float
+AgentBranch str
+Description str
+TransactionNo str
+TransactionType int
+ProposalId int
+UserComment str
+IdentifyInfo_Date datetime
+IdentifyInfo_UserId int [FK->dbo.User.Id]
+ChequeOrSlipNo str
+DestinationAccountType int
+UpdateDate datetime
+UpdateUserId int [FK->dbo.User.Id]
+AlborzBranchCode str
+IdentifyInfo_Type int
+AddendumIds str
+TransferenceIds str
+
+TABLE Statements.MellatBankStatementItem
+Id int [PK]
+Depositor str
+PhoneNumber str
+TransactionTypeCode int
+DepositAccountId int [FK->Receives.DepositAccount.Id]
+BankStatementId int [FK->Statements.BankStatement.Id]
+SuccessfullyProcessedReceipt bool
+Error str
+ReferenceId int
+Date str
+Time str
+Withdrawal float
+Deposit float
+BankBalance float
+AgentBranch str
+Description str
+TransactionType int
+ProposalId int
+UserComment str
+IdentifyInfo_Date datetime
+IdentifyInfo_UserId int [FK->dbo.User.Id]
+ChequeOrSlipNo str
+UpdateDate datetime
+UpdateUserId int [FK->dbo.User.Id]
+GatewayId int [FK->Receives.OnlineReceiveGateway.Id]
+GatewayTrackingCode str
+PayIdentity str
+PersonId int [FK->Persons.Person.Id]
+ReceiveId int [FK->Receives.BaseReceive.Id]
+IdentifyInfo_Type int
+
+TABLE Stories.Story
+Id int [PK]
+CreateDateTime datetime
+UpdateDateTime datetime
+StoryTemplateId int
+IncludeInHomePage bool
+ImageUrl str
+FontIcon str
+DisplayOrder int
+Title str
+BriefBody str
+Body str
+Published bool
+MetaKeywords str
+MetaDescription str
+MetaTitle str
+PositionInHomePage int
+
+TABLE Tickets.Ticket
+Id int [PK]
+ProposalId int
+Title str
+Description text
+Ip str
+CreateDate datetime
+TicketStatus int
+ReferralGroup int
+RegisterUserId int [FK->dbo.User.Id]
+Referrer int
+
+TABLE Tickets.TicketAttachmentMapping
+Id int [PK]
+ThumbnailStreamId str
+StreamId str
+Title str
+AttachmentGroupId int
+TicketId int [FK->Tickets.Ticket.Id]
+
+TABLE Tickets.TicketPost
+Id int [PK]
+TicketId int [FK->Tickets.Ticket.Id]
+PostTitle str
+PostDescription text
+Ip str
+CreateDate datetime
+TypeOfRespondent int
+RegisterUserId int [FK->dbo.User.Id]
+
+TABLE Treasury.ImportedBankAcountReps01
+Id int [PK]
+BankAccountId int [FK->BasicInformation.SystemBankAccount.Id]
+CreateDate datetime
+CreateUser int
+
+TABLE Treasury.ImportedBankAcountReps02
+Id int [PK]
+ImportedBankAcountReps01_ID int [FK->Treasury.ImportedBankAcountReps01.Id]
+BankAccountId int [FK->BasicInformation.SystemBankAccount.Id]
+ItemNo int
+Item_Description str
+TransType str
+TransDateTime datetime
+Amounts_In float
+Amounts_Out float
+Amounts_Balance float
+Bank_Branch str
+BankTransDocsId str
+BankTransDocsNo str
+BankPaymentIdentifier str
+More_Notes str
+InternalOprReferenceId int
+LoanRequestIdInBank int
+IsRecognized bool
+RecognizeDate datetime
+IsAllocated bool
+AllocateDate datetime
+CreateDate datetime
+CreateUser int
+
+TABLE Users.OperationalUser
+Id int [PK]
+PersonId int
+UserId int
+RegisterUserId int
+OperationUnitId int
+CreateDateTime datetime
+UpdateDateTime datetime
+Active bool
+Username str
