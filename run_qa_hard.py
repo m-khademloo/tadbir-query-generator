@@ -20,17 +20,21 @@ DEFAULT_TIMEOUT = 180
 MAX_DEFAULT = 100
 
 
-def run_one(query: str, timeout: int) -> dict:
-    """Run main.py --dry-run '<query>', return {exit_code, stdout, stderr, timeout_hit}."""
+def run_one(query: str, timeout: int | None) -> dict:
+    """Run main.py --dry-run '<query>', return {exit_code, stdout, stderr, timeout_hit}. timeout=None = no limit."""
+    kwargs = dict(
+        cwd=PROJECT_ROOT,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+    )
+    if timeout is not None:
+        kwargs["timeout"] = timeout
     try:
         r = subprocess.run(
             [str(PYTHON), str(MAIN_PY), "--dry-run", query],
-            cwd=PROJECT_ROOT,
-            timeout=timeout,
-            capture_output=True,
-            text=True,
-            encoding="utf-8",
-            errors="replace",
+            **kwargs,
         )
         return {
             "exit_code": r.returncode,
@@ -54,22 +58,12 @@ def run_one(query: str, timeout: int) -> dict:
         }
 
 
-def main():
-    import argparse
-    p = argparse.ArgumentParser()
-    p.add_argument("--timeout", type=int, default=DEFAULT_TIMEOUT, help="Per-query timeout seconds")
-    p.add_argument("--max", type=int, default=MAX_DEFAULT, help="Max number of queries to run")
-    p.add_argument("--resume", action="store_true", help="Resume from existing results file")
-    args = p.parse_args()
-
-    timeout = args.timeout
-    max_run = min(args.max, len(HARD_CASES))
+def main(results_file: Path, report_path: Path, timeout: int | None, max_run: int, resume: bool) -> int:
     queries = HARD_CASES[:max_run]
-
     results = []
-    if args.resume and RESULTS_JSON.exists():
+    if resume and results_file.exists():
         try:
-            with open(RESULTS_JSON, encoding="utf-8") as f:
+            with open(results_file, encoding="utf-8") as f:
                 results = json.load(f)
         except Exception:
             results = []
@@ -86,18 +80,23 @@ def main():
             print("  -> TIMEOUT", flush=True)
         else:
             print(f"  -> exit {out['exit_code']}", flush=True)
-        # Persist after each run
-        with open(RESULTS_JSON, "w", encoding="utf-8") as f:
+        with open(results_file, "w", encoding="utf-8") as f:
             json.dump(results, f, ensure_ascii=False, indent=0)
 
-    write_report(results)
-    print(f"Done. Results in {RESULTS_JSON}, report in QA_REPORT_OLLAMA_HARD_CASES.md")
+    report_title = None
+    if "WITHOUT_TIMEOUT" in str(report_path):
+        report_title = "QA Report - Ollama Hard Cases (100) - No Timeout"
+    elif "TIMEOUT_600" in str(report_path):
+        report_title = "QA Report - Ollama Hard Cases (100) - Timeout 600s"
+    write_report(results, out_path=report_path, title=report_title)
+    print(f"Done. Results in {results_file}, report in {report_path}")
     return 0
 
 
-def write_report(results: list[dict], out_path: Path | None = None) -> None:
-    """Generate QA_REPORT_OLLAMA_HARD_CASES.md from results list. Fills up to 100 with PENDING if needed."""
+def write_report(results: list[dict], out_path: Path | None = None, title: str | None = None) -> None:
+    """Generate report markdown from results list. Fills up to 100 with PENDING if needed."""
     out_path = out_path or PROJECT_ROOT / "QA_REPORT_OLLAMA_HARD_CASES.md"
+    title = title or "QA Report - Ollama Hard Cases (100 Edge / Join / Complex)"
     # Build full list: results + PENDING for any of HARD_CASES not yet run
     by_idx = {r.get("index"): r for r in results if r.get("index")}
     full_list = []
@@ -108,11 +107,15 @@ def write_report(results: list[dict], out_path: Path | None = None) -> None:
             full_list.append({"index": i, "query": HARD_CASES[i - 1], "exit_code": None, "timeout_hit": False, "stdout": "", "stderr": "", "pending": True})
     results = full_list
     lines = [
-        "# QA Report - Ollama Hard Cases (100 Edge / Join / Complex)",
+        f"# {title}",
         "",
         "**Date:** 2026-02-15  ",
         "**Environment:** Ollama http://127.0.0.1:11434, model qwen2.5-coder:7b, dry-run  ",
-        "**Retry:** 1, **Timeout per query:** 180s (configurable)  ",
+        "**Retry:** 1  ",
+    ]
+    if title and "600" in title:
+        lines.append("**Timeout per query:** 600s  ")
+    lines.extend([
         "",
         "---",
         "",
@@ -194,19 +197,31 @@ def write_report(results: list[dict], out_path: Path | None = None) -> None:
 if __name__ == "__main__":
     import argparse
     p = argparse.ArgumentParser()
-    p.add_argument("--timeout", type=int, default=DEFAULT_TIMEOUT, help="Per-query timeout seconds")
+    p.add_argument("--timeout", type=int, default=DEFAULT_TIMEOUT, help="Per-query timeout seconds (ignored if --no-timeout)")
+    p.add_argument("--no-timeout", action="store_true", help="No per-query timeout (infinite wait)")
     p.add_argument("--max", type=int, default=MAX_DEFAULT, help="Max number of queries to run")
     p.add_argument("--resume", action="store_true", help="Resume from existing results file")
+    p.add_argument("--report", type=str, default="", help="Output report path (default: QA_REPORT_OLLAMA_HARD_CASES.md)")
+    p.add_argument("--results-file", type=str, default="", help="Results JSON path (default: qa_hard_results.json)")
     p.add_argument("--report-only", action="store_true", help="Only generate report from existing results")
     args = p.parse_args()
 
+    results_file = Path(args.results_file) if args.results_file else RESULTS_JSON
+    report_path = Path(args.report) if args.report else PROJECT_ROOT / "QA_REPORT_OLLAMA_HARD_CASES.md"
+    timeout = None if args.no_timeout else args.timeout
+
     if args.report_only:
-        if not RESULTS_JSON.exists():
-            print("No results file. Run without --report-only first.")
+        if not results_file.exists():
+            print(f"No results file at {results_file}. Run without --report-only first.")
             sys.exit(1)
-        with open(RESULTS_JSON, encoding="utf-8") as f:
+        with open(results_file, encoding="utf-8") as f:
             results = json.load(f)
-        write_report(results)
+        title = None
+        if "WITHOUT_TIMEOUT" in str(report_path):
+            title = "QA Report - Ollama Hard Cases (100) - No Timeout"
+        elif "TIMEOUT_600" in str(report_path):
+            title = "QA Report - Ollama Hard Cases (100) - Timeout 600s"
+        write_report(results, out_path=report_path, title=title)
         sys.exit(0)
 
-    sys.exit(main())
+    sys.exit(main(results_file=results_file, report_path=report_path, timeout=timeout, max_run=min(args.max, len(HARD_CASES)), resume=args.resume))
