@@ -9,10 +9,11 @@ db_connection:
   # Or use connection_string for full control
 
 llm_settings:
-  provider: "deepseek"   # openai | deepseek | claude | ollama (override with LLM_PROVIDER in .env)
-  model: "deepseek-chat"
-  timeout_seconds: 30
-  retry_count: 3
+  provider: "ollama"   # openai | deepseek | claude | ollama
+  model: "qwen2.5-coder:7b"
+  timeout_seconds: 300
+  retry_count: 1
+  base_url: "http://127.0.0.1:11434"
 
 # Query safety
 max_rows: 500

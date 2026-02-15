@@ -1,0 +1,762 @@
+[
+{
+"exit_code": 0,
+"stdout": "╭────────────────────────── Generated SQL (dry run) ───────────────────────────╮\n│ SELECT TOP (500)                                                             │\n│     d.Id AS DocumentId,                                                      │\n│     d.ReferenceNumber,                                                       │\n│     d.Date,                                                                  │\n│     d.Type,                                                                  │\n│     d.ParentId,                                                              │\n│     d.RelatedDocumentId,                                                     │\n│     d.RelatedDocumentType,                                                   │\n│     c.Title AS CategoryTitle,                                                │\n│     c.DisplayOrder,                                                          │\n│     c.Published,                                                             │\n│     c.CreateDate AS CategoryCreateDate,                                      │\n│     c.UpdateDate AS CategoryUpdateDate,                                      │\n│     c.Description                                                            │\n│ FROM                                                                         │\n│     Accounting.Document d                                                    │\n│ JOIN                                                                         │\n│     CategoriesOfBuyerGoal.CategoriesOfBuyerGoal c ON d.ParentId = c.Id;      │\n╰──────────────────────────────────────────────────────────────────────────────╯\n",
+"stderr": "{\"timestamp\": \"2026-02-15T20:30:05.031407+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"e3d4c93e\", \"user_input\": \"Show accounting documents with their entries and coding, joined\"}\n\u001b[92m00:00:05 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T20:30:05.038845+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:00:05\"}\n\u001b[92m00:01:03 - LiteLLM:INFO\u001b[0m: utils.py:1629 - Wrapper: Completed Call, calling success_handler\n{\"timestamp\": \"2026-02-15T20:31:03.146165+00:00\", \"level\": \"INFO\", \"message\": \"Wrapper: Completed Call, calling success_handler\", \"asctime\": \"00:01:03\"}\n{\"timestamp\": \"2026-02-15T20:31:03.225216+00:00\", \"level\": \"WARNING\", \"message\": \"Too many tables selected, capping to 15\", \"request_id\": \"e3d4c93e\", \"count\": 75}\n{\"timestamp\": \"2026-02-15T20:31:03.225285+00:00\", \"level\": \"INFO\", \"message\": \"Tables selected\", \"request_id\": \"e3d4c93e\", \"tables_selected\": [\"Accounting.Document\", \"AdmissionUnit\", \"AssessorExpert\", \"AssessorExpertAllowedInsurancePlan\", \"AssessorUnit\", \"BaseReportRequest\", \"BordereauGettingPremium\", \"CategoriesOfBuyerGoalMapping\", \"CooperationRequest\", \"CooperationRequestAttachment\", \"CostAdjustment\", \"AgeAdjustment\", \"SalePlans.AgeAdjustment\", \"BaseVipCustomerTemp\", \"CategoriesOfBuyerGoal.CategoriesOfBuyerGoal\"]}\n\u001b[92m00:01:03 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T20:31:03.226845+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:01:03\"}\n\u001b[92m00:01:08 - LiteLLM:INFO\u001b[0m: utils.py:1629 - Wrapper: Completed Call, calling success_handler\n{\"timestamp\": \"2026-02-15T20:31:08.033720+00:00\", \"level\": \"INFO\", \"message\": \"Wrapper: Completed Call, calling success_handler\", \"asctime\": \"00:01:08\"}\n{\"timestamp\": \"2026-02-15T20:31:08.034053+00:00\", \"level\": \"INFO\", \"message\": \"Generated SQL\", \"request_id\": \"e3d4c93e\", \"generated_sql\": \"SELECT \\n    d.Id AS DocumentId,\\n    d.ReferenceNumber,\\n    d.Date,\\n    d.Type,\\n    d.ParentId,\\n    d.RelatedDocumentId,\\n    d.RelatedDocumentType,\\n    c.Title AS CategoryTitle,\\n    c.DisplayOrder,\\n   \"}\n\u001b[92m00:01:08 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T20:31:08.039105+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:01:08\"}\n\u001b[92m00:01:12 - LiteLLM:INFO\u001b[0m: utils.py:1629 - Wrapper: Completed Call, calling success_handler\n{\"timestamp\": \"2026-02-15T20:31:12.943254+00:00\", \"level\": \"INFO\", \"message\": \"Wrapper: Completed Call, calling success_handler\", \"asctime\": \"00:01:12\"}\n",
+"timeout_hit": false,
+"query": "Show accounting documents with their entries and coding, joined",
+"index": 1
+},
+{
+"exit_code": -1,
+"stdout": "",
+"stderr": "Command '['/home/mehdi/projects/personal/tadbir-query-generator/.venv/bin/python', '/home/mehdi/projects/personal/tadbir-query-generator/main.py', '--dry-run', 'List proposals with their insured risks and insurance plan names']' timed out after 120 seconds",
+"timeout_hit": true,
+"query": "List proposals with their insured risks and insurance plan names",
+"index": 2
+},
+{
+"exit_code": 0,
+"stdout": "╭────────────────────────── Generated SQL (dry run) ───────────────────────────╮\n│ SELECT TOP (500)                                                             │\n│     u.Id AS UserId,                                                          │\n│     u.Username AS UserName,                                                  │\n│     r.RoleName                                                               │\n│ FROM                                                                         │\n│     dbo.User u                                                               │\n│ JOIN                                                                         │\n│     UserRoles ur ON u.Id = ur.UserId                                         │\n│ JOIN                                                                         │\n│     Roles r ON ur.RoleId = r.Id;                                             │\n╰──────────────────────────────────────────────────────────────────────────────╯\n",
+"stderr": "{\"timestamp\": \"2026-02-15T20:33:16.061624+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"5cba1095\", \"user_input\": \"Users and their roles with role name\"}\n\u001b[92m00:03:16 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T20:33:16.070220+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:03:16\"}\n\u001b[92m00:03:22 - LiteLLM:INFO\u001b[0m: utils.py:1629 - Wrapper: Completed Call, calling success_handler\n{\"timestamp\": \"2026-02-15T20:33:22.114091+00:00\", \"level\": \"INFO\", \"message\": \"Wrapper: Completed Call, calling success_handler\", \"asctime\": \"00:03:22\"}\n{\"timestamp\": \"2026-02-15T20:33:22.199318+00:00\", \"level\": \"INFO\", \"message\": \"Tables selected\", \"request_id\": \"5cba1095\", \"tables_selected\": [\"Accounting.Document\", \"dbo.User\"]}\n\u001b[92m00:03:22 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T20:33:22.200761+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:03:22\"}\n\u001b[92m00:03:24 - LiteLLM:INFO\u001b[0m: utils.py:1629 - Wrapper: Completed Call, calling success_handler\n{\"timestamp\": \"2026-02-15T20:33:24.980764+00:00\", \"level\": \"INFO\", \"message\": \"Wrapper: Completed Call, calling success_handler\", \"asctime\": \"00:03:24\"}\n{\"timestamp\": \"2026-02-15T20:33:24.981089+00:00\", \"level\": \"INFO\", \"message\": \"Generated SQL\", \"request_id\": \"5cba1095\", \"generated_sql\": \"SELECT \\n    u.Id AS UserId,\\n    u.Username AS UserName,\\n    r.RoleName\\nFROM \\n    dbo.User u\\nJOIN \\n    UserRoles ur ON u.Id = ur.UserId\\nJOIN \\n    Roles r ON ur.RoleId = r.Id;\"}\n\u001b[92m00:03:24 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T20:33:24.985169+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:03:24\"}\n\u001b[92m00:03:27 - LiteLLM:INFO\u001b[0m: utils.py:1629 - Wrapper: Completed Call, calling success_handler\n{\"timestamp\": \"2026-02-15T20:33:27.529258+00:00\", \"level\": \"INFO\", \"message\": \"Wrapper: Completed Call, calling success_handler\", \"asctime\": \"00:03:27\"}\n",
+"timeout_hit": false,
+"query": "Users and their roles with role name",
+"index": 3
+},
+{
+"exit_code": -1,
+"stdout": "",
+"stderr": "Command '['/home/mehdi/projects/personal/tadbir-query-generator/.venv/bin/python', '/home/mehdi/projects/personal/tadbir-query-generator/main.py', '--dry-run', 'Accounting document with parent and related document']' timed out after 55 seconds",
+"timeout_hit": true,
+"query": "Accounting document with parent and related document",
+"index": 4
+},
+{
+"exit_code": -1,
+"stdout": "",
+"stderr": "Command '['/home/mehdi/projects/personal/tadbir-query-generator/.venv/bin/python', '/home/mehdi/projects/personal/tadbir-query-generator/main.py', '--dry-run', 'Proposals joined to persons and proposal states']' timed out after 55 seconds",
+"timeout_hit": true,
+"query": "Proposals joined to persons and proposal states",
+"index": 5
+},
+{
+"exit_code": -1,
+"stdout": "",
+"stderr": "Command '['/home/mehdi/projects/personal/tadbir-query-generator/.venv/bin/python', '/home/mehdi/projects/personal/tadbir-query-generator/main.py', '--dry-run', 'Payments with payment file and user who created']' timed out after 55 seconds",
+"timeout_hit": true,
+"query": "Payments with payment file and user who created",
+"index": 6
+},
+{
+"exit_code": -1,
+"stdout": "",
+"stderr": "Command '['/home/mehdi/projects/personal/tadbir-query-generator/.venv/bin/python', '/home/mehdi/projects/personal/tadbir-query-generator/main.py', '--dry-run', 'Documents with amendment requests and confirm user']' timed out after 55 seconds",
+"timeout_hit": true,
+"query": "Documents with amendment requests and confirm user",
+"index": 7
+},
+{
+"exit_code": -1,
+"stdout": "",
+"stderr": "Command '['/home/mehdi/projects/personal/tadbir-query-generator/.venv/bin/python', '/home/mehdi/projects/personal/tadbir-query-generator/main.py', '--dry-run', 'Addendums with base addendum and linked proposal insured risk']' timed out after 55 seconds",
+"timeout_hit": true,
+"query": "Addendums with base addendum and linked proposal insured risk",
+"index": 8
+},
+{
+"exit_code": -1,
+"stdout": "",
+"stderr": "Command '['/home/mehdi/projects/personal/tadbir-query-generator/.venv/bin/python', '/home/mehdi/projects/personal/tadbir-query-generator/main.py', '--dry-run', 'Entries with document, coding and subcoding']' timed out after 55 seconds",
+"timeout_hit": true,
+"query": "Entries with document, coding and subcoding",
+"index": 9
+},
+{
+"exit_code": 0,
+"stdout": "╭────────────────────────── Generated SQL (dry run) ───────────────────────────╮\n│ SELECT TOP (500)                                                             │\n│     d.ReferenceNumber,                                                       │\n│     d.Date,                                                                  │\n│     d.Type,                                                                  │\n│     p.BeneficiaryName,                                                       │\n│     i.InsurerName                                                            │\n│ FROM                                                                         │\n│     Accounting.Document d                                                    │\n│ LEFT JOIN                                                                    │\n│     Accounting.Parent p ON d.ParentId = p.Id                                 │\n│ LEFT JOIN                                                                    │\n│     Accounting.Document relatedDoc ON d.RelatedDocumentId = relatedDoc.Id    │\n│ LEFT JOIN                                                                    │\n│     Accounting.Document insurerDoc ON relatedDoc.RelatedDocumentId =         │\n│ insurerDoc.Id                                                                │\n│ LEFT JOIN                                                                    │\n│     Insurer i ON insurerDoc.ReferenceNumber = i.InsurancePolicyNumber;       │\n╰──────────────────────────────────────────────────────────────────────────────╯\n",
+"stderr": "{\"timestamp\": \"2026-02-15T20:41:10.531569+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"4d591c20\", \"user_input\": \"Policy with beneficiary and insurer\"}\n\u001b[92m00:11:10 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T20:41:10.538670+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:11:10\"}\n\u001b[92m00:11:29 - LiteLLM:INFO\u001b[0m: utils.py:1629 - Wrapper: Completed Call, calling success_handler\n{\"timestamp\": \"2026-02-15T20:41:29.868959+00:00\", \"level\": \"INFO\", \"message\": \"Wrapper: Completed Call, calling success_handler\", \"asctime\": \"00:11:29\"}\n{\"timestamp\": \"2026-02-15T20:41:29.958146+00:00\", \"level\": \"WARNING\", \"message\": \"Too many tables selected, capping to 15\", \"request_id\": \"4d591c20\", \"count\": 18}\n{\"timestamp\": \"2026-02-15T20:41:29.958202+00:00\", \"level\": \"INFO\", \"message\": \"Tables selected\", \"request_id\": \"4d591c20\", \"tables_selected\": [\"Accounting.Document\", \"AdventureWorks2019.Person.AddressType\", \"AdventureWorks2019.Person.BusinessEntityAddress\", \"AdventureWorks2019.Person.BusinessEntityContact\", \"AdventureWorks2019.Person.ContactType\", \"AdventureWorks2019.Person.EmailAddress\", \"AdventureWorks2019.Person.PhoneNumber\", \"AdventureWorks2019.Person.PhoneNumberType\", \"AdventureWorks2019.Person.StateProvinceCountryRegionCode\", \"AdventureWorks2019.Production.BillOfMaterials\", \"AdventureWorks2019.Production.BomComponent\", \"AdventureWorks2019.Production.Component\", \"AdventureWorks2019.Production.Document\", \"AdventureWorks2019.Production.Location\", \"AdventureWorks2019.Production.Product\"]}\n\u001b[92m00:11:29 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T20:41:29.959674+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:11:29\"}\n\u001b[92m00:11:34 - LiteLLM:INFO\u001b[0m: utils.py:1629 - Wrapper: Completed Call, calling success_handler\n{\"timestamp\": \"2026-02-15T20:41:34.717571+00:00\", \"level\": \"INFO\", \"message\": \"Wrapper: Completed Call, calling success_handler\", \"asctime\": \"00:11:34\"}\n{\"timestamp\": \"2026-02-15T20:41:34.717884+00:00\", \"level\": \"INFO\", \"message\": \"Generated SQL\", \"request_id\": \"4d591c20\", \"generated_sql\": \"SELECT \\n    d.ReferenceNumber,\\n    d.Date,\\n    d.Type,\\n    p.BeneficiaryName,\\n    i.InsurerName\\nFROM \\n    Accounting.Document d\\nLEFT JOIN \\n    Accounting.Parent p ON d.ParentId = p.Id\\nLEFT JOIN \\n    A\"}\n\u001b[92m00:11:34 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T20:41:34.722910+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:11:34\"}\n\u001b[92m00:11:39 - LiteLLM:INFO\u001b[0m: utils.py:1629 - Wrapper: Completed Call, calling success_handler\n{\"timestamp\": \"2026-02-15T20:41:39.721259+00:00\", \"level\": \"INFO\", \"message\": \"Wrapper: Completed Call, calling success_handler\", \"asctime\": \"00:11:39\"}\n",
+"timeout_hit": false,
+"query": "Policy with beneficiary and insurer",
+"index": 10
+},
+{
+"exit_code": -1,
+"stdout": "",
+"stderr": "Command '['/home/mehdi/projects/personal/tadbir-query-generator/.venv/bin/python', '/home/mehdi/projects/personal/tadbir-query-generator/main.py', '--dry-run', 'Documents created in last 7 days where type is 1 or 2']' timed out after 55 seconds",
+"timeout_hit": true,
+"query": "Documents created in last 7 days where type is 1 or 2",
+"index": 11
+},
+{
+"exit_code": -1,
+"stdout": "",
+"stderr": "Command '['/home/mehdi/projects/personal/tadbir-query-generator/.venv/bin/python', '/home/mehdi/projects/personal/tadbir-query-generator/main.py', '--dry-run', 'Proposals with status between 1 and 5 created after 2024']' timed out after 55 seconds",
+"timeout_hit": true,
+"query": "Proposals with status between 1 and 5 created after 2024",
+"index": 12
+},
+{
+"exit_code": -1,
+"stdout": "",
+"stderr": "Command '['/home/mehdi/projects/personal/tadbir-query-generator/.venv/bin/python', '/home/mehdi/projects/personal/tadbir-query-generator/main.py', '--dry-run', 'Users active and not deleted with email containing @company']' timed out after 55 seconds",
+"timeout_hit": true,
+"query": "Users active and not deleted with email containing @company",
+"index": 13
+},
+{
+"exit_code": -1,
+"stdout": "",
+"stderr": "Command '['/home/mehdi/projects/personal/tadbir-query-generator/.venv/bin/python', '/home/mehdi/projects/personal/tadbir-query-generator/main.py', '--dry-run', 'Accounting entries where amount greater than 1000 and date in last month']' timed out after 55 seconds",
+"timeout_hit": true,
+"query": "Accounting entries where amount greater than 1000 and date in last month",
+"index": 14
+},
+{
+"exit_code": 0,
+"stdout": "╭────────────────────────── Generated SQL (dry run) ───────────────────────────╮\n│ SELECT TOP (500)                                                             │\n│     d.*                                                                      │\n│ FROM                                                                         │\n│     Accounting.Document d                                                    │\n│ INNER JOIN                                                                   │\n│     Accounting.Document p ON d.ParentId = p.Id                               │\n│ WHERE                                                                        │\n│     d.Type = 'Premium' AND                                                   │\n│     d.Date >= GETDATE() AND                                                  │\n│     p.Type = 'Policy';                                                       │\n╰──────────────────────────────────────────────────────────────────────────────╯\n",
+"stderr": "{\"timestamp\": \"2026-02-15T20:45:23.860051+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"0903f4dd\", \"user_input\": \"Policies that are active and have premium payment term annual\"}\n\u001b[92m00:15:23 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T20:45:23.868066+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:15:23\"}\n\u001b[92m00:15:43 - LiteLLM:INFO\u001b[0m: utils.py:1629 - Wrapper: Completed Call, calling success_handler\n{\"timestamp\": \"2026-02-15T20:45:43.687255+00:00\", \"level\": \"INFO\", \"message\": \"Wrapper: Completed Call, calling success_handler\", \"asctime\": \"00:15:43\"}\n{\"timestamp\": \"2026-02-15T20:45:43.774010+00:00\", \"level\": \"WARNING\", \"message\": \"Too many tables selected, capping to 15\", \"request_id\": \"0903f4dd\", \"count\": 28}\n{\"timestamp\": \"2026-02-15T20:45:43.774062+00:00\", \"level\": \"INFO\", \"message\": \"Tables selected\", \"request_id\": \"0903f4dd\", \"tables_selected\": [\"Accounting.Document\", \"Advisors.Advisor\", \"Advisors.AdvisorSalesManMapping\", \"Assessors.AssessorExpert\", \"Assessors.AssessorExpertAllowedInsurancePlan\", \"Assessors.AssessorUnit\", \"Bordereau.BordereauGettingPremium\", \"Bordereau.BordereauGettingPremiumInsuranceRiskDetail\", \"Cooperation.CooperationRequest\", \"Cooperation.CooperationRequestAttachment\", \"Core.OperationUnit\", \"Core.Person\", \"Core.StateProvince\", \"Finance.BankStatement\", \"Finance.MehrBankStatementItem\"]}\n\u001b[92m00:15:43 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T20:45:43.775608+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:15:43\"}\n\u001b[92m00:15:46 - LiteLLM:INFO\u001b[0m: utils.py:1629 - Wrapper: Completed Call, calling success_handler\n{\"timestamp\": \"2026-02-15T20:45:46.407073+00:00\", \"level\": \"INFO\", \"message\": \"Wrapper: Completed Call, calling success_handler\", \"asctime\": \"00:15:46\"}\n{\"timestamp\": \"2026-02-15T20:45:46.407400+00:00\", \"level\": \"INFO\", \"message\": \"Generated SQL\", \"request_id\": \"0903f4dd\", \"generated_sql\": \"SELECT \\n    d.*\\nFROM \\n    Accounting.Document d\\nINNER JOIN \\n    Accounting.Document p ON d.ParentId = p.Id\\nWHERE \\n    d.Type = 'Premium' AND \\n    d.Date >= GETDATE() AND \\n    p.Type = 'Policy';\"}\n\u001b[92m00:15:46 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T20:45:46.411921+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:15:46\"}\n\u001b[92m00:15:49 - LiteLLM:INFO\u001b[0m: utils.py:1629 - Wrapper: Completed Call, calling success_handler\n{\"timestamp\": \"2026-02-15T20:45:49.188043+00:00\", \"level\": \"INFO\", \"message\": \"Wrapper: Completed Call, calling success_handler\", \"asctime\": \"00:15:49\"}\n",
+"timeout_hit": false,
+"query": "Policies that are active and have premium payment term annual",
+"index": 15
+},
+{
+"exit_code": 0,
+"stdout": "╭────────────────────────── Generated SQL (dry run) ───────────────────────────╮\n│ SELECT TOP (500) d.Status, COUNT(*) AS ProposalCount                         │\n│ FROM Accounting.Document d                                                   │\n│ GROUP BY d.Status                                                            │\n│ HAVING COUNT(*) > 10;                                                        │\n╰──────────────────────────────────────────────────────────────────────────────╯\n",
+"stderr": "{\"timestamp\": \"2026-02-15T20:45:52.252135+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"b1065218\", \"user_input\": \"Proposals by status with count greater than 10\"}\n\u001b[92m00:15:52 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T20:45:52.259763+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:15:52\"}\n\u001b[92m00:16:24 - LiteLLM:INFO\u001b[0m: utils.py:1629 - Wrapper: Completed Call, calling success_handler\n{\"timestamp\": \"2026-02-15T20:46:24.789799+00:00\", \"level\": \"INFO\", \"message\": \"Wrapper: Completed Call, calling success_handler\", \"asctime\": \"00:16:24\"}\n{\"timestamp\": \"2026-02-15T20:46:24.870615+00:00\", \"level\": \"WARNING\", \"message\": \"Too many tables selected, capping to 15\", \"request_id\": \"b1065218\", \"count\": 57}\n{\"timestamp\": \"2026-02-15T20:46:24.870672+00:00\", \"level\": \"INFO\", \"message\": \"Tables selected\", \"request_id\": \"b1065218\", \"tables_selected\": [\"Accounting.Document\", \"AdmissionUnit\", \"AssessorExpertAllowedInsurancePlan\", \"Assessment.AssessmentRecord\", \"BaseReportRequest\", \"BordereauGettingPremium\", \"CategoriesOfBuyerGoal.CategoriesOfBuyerGoal\", \"CostAdjustment\", \"Credit.CreditCardTransaction\", \"Crm.Customer\", \"Documents.Document\", \"Employees.Employee\", \"Files.File\", \"Finance.IncomeRecord\", \"Finance.OutgoingRecord\"]}\n\u001b[92m00:16:24 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T20:46:24.872135+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:16:24\"}\n\u001b[92m00:16:26 - LiteLLM:INFO\u001b[0m: utils.py:1629 - Wrapper: Completed Call, calling success_handler\n{\"timestamp\": \"2026-02-15T20:46:26.630456+00:00\", \"level\": \"INFO\", \"message\": \"Wrapper: Completed Call, calling success_handler\", \"asctime\": \"00:16:26\"}\n{\"timestamp\": \"2026-02-15T20:46:26.630821+00:00\", \"level\": \"INFO\", \"message\": \"Generated SQL\", \"request_id\": \"b1065218\", \"generated_sql\": \"SELECT d.Status, COUNT(*) AS ProposalCount\\nFROM Accounting.Document d\\nGROUP BY d.Status\\nHAVING COUNT(*) > 10;\"}\n\u001b[92m00:16:26 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T20:46:26.635368+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:16:26\"}\n\u001b[92m00:16:28 - LiteLLM:INFO\u001b[0m: utils.py:1629 - Wrapper: Completed Call, calling success_handler\n{\"timestamp\": \"2026-02-15T20:46:28.476279+00:00\", \"level\": \"INFO\", \"message\": \"Wrapper: Completed Call, calling success_handler\", \"asctime\": \"00:16:28\"}\n",
+"timeout_hit": false,
+"query": "Proposals by status with count greater than 10",
+"index": 16
+},
+{
+"exit_code": 0,
+"stdout": "╭────────────────────────── Generated SQL (dry run) ───────────────────────────╮\n│ SELECT TOP (500) *                                                           │\n│ FROM Accounting.Document                                                     │\n│ WHERE ReferenceNumber IS NOT NULL                                            │\n│ ORDER BY Date DESC;                                                          │\n╰──────────────────────────────────────────────────────────────────────────────╯\n",
+"stderr": "{\"timestamp\": \"2026-02-15T20:46:31.305859+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"9a6f4790\", \"user_input\": \"Documents where reference number is not null order by date desc\"}\n\u001b[92m00:16:31 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T20:46:31.313853+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:16:31\"}\n\u001b[92m00:17:20 - LiteLLM:INFO\u001b[0m: utils.py:1629 - Wrapper: Completed Call, calling success_handler\n{\"timestamp\": \"2026-02-15T20:47:20.142937+00:00\", \"level\": \"INFO\", \"message\": \"Wrapper: Completed Call, calling success_handler\", \"asctime\": \"00:17:20\"}\n{\"timestamp\": \"2026-02-15T20:47:20.228260+00:00\", \"level\": \"WARNING\", \"message\": \"Too many tables selected, capping to 15\", \"request_id\": \"9a6f4790\", \"count\": 115}\n{\"timestamp\": \"2026-02-15T20:47:20.228320+00:00\", \"level\": \"INFO\", \"message\": \"Tables selected\", \"request_id\": \"9a6f4790\", \"tables_selected\": [\"Accounting.Document\", \"Administration.Branch\", \"Administration.BranchUserMapping\", \"Administration.Employee\", \"Administration.EmployeeRoleMapping\", \"Administration.Function\", \"Administration.Permission\", \"Administration.Position\", \"Administration.Role\", \"Administration.User\", \"Administration.UserPermissionMapping\", \"Analysis.AnalysisReport\", \"Analysis.DataPoint\", \"Analysis.Query\", \"Analysis.Visualization\"]}\n\u001b[92m00:17:20 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T20:47:20.229587+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:17:20\"}\n\u001b[92m00:17:21 - LiteLLM:INFO\u001b[0m: utils.py:1629 - Wrapper: Completed Call, calling success_handler\n{\"timestamp\": \"2026-02-15T20:47:21.503147+00:00\", \"level\": \"INFO\", \"message\": \"Wrapper: Completed Call, calling success_handler\", \"asctime\": \"00:17:21\"}\n{\"timestamp\": \"2026-02-15T20:47:21.503600+00:00\", \"level\": \"INFO\", \"message\": \"Generated SQL\", \"request_id\": \"9a6f4790\", \"generated_sql\": \"SELECT *\\nFROM Accounting.Document\\nWHERE ReferenceNumber IS NOT NULL\\nORDER BY Date DESC;\"}\n\u001b[92m00:17:21 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T20:47:21.507811+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:17:21\"}\n\u001b[92m00:17:22 - LiteLLM:INFO\u001b[0m: utils.py:1629 - Wrapper: Completed Call, calling success_handler\n{\"timestamp\": \"2026-02-15T20:47:22.920813+00:00\", \"level\": \"INFO\", \"message\": \"Wrapper: Completed Call, calling success_handler\", \"asctime\": \"00:17:22\"}\n",
+"timeout_hit": false,
+"query": "Documents where reference number is not null order by date desc",
+"index": 17
+},
+{
+"exit_code": -1,
+"stdout": "",
+"stderr": "Command '['/home/mehdi/projects/personal/tadbir-query-generator/.venv/bin/python', '/home/mehdi/projects/personal/tadbir-query-generator/main.py', '--dry-run', 'Users who have logged in in the last 30 days']' timed out after 55 seconds",
+"timeout_hit": true,
+"query": "Users who have logged in in the last 30 days",
+"index": 18
+},
+{
+"exit_code": -1,
+"stdout": "",
+"stderr": "Command '['/home/mehdi/projects/personal/tadbir-query-generator/.venv/bin/python', '/home/mehdi/projects/personal/tadbir-query-generator/main.py', '--dry-run', 'Entries grouped by coding with sum of amount']' timed out after 55 seconds",
+"timeout_hit": true,
+"query": "Entries grouped by coding with sum of amount",
+"index": 19
+},
+{
+"exit_code": 0,
+"stdout": "╭────────────────────────── Generated SQL (dry run) ───────────────────────────╮\n│ SELECT TOP (500) d.Id, d.ReferenceNumber, d.Date, d.Type, d.ParentId,        │\n│ d.RelatedDocumentId, d.RelatedDocumentType                                   │\n│ FROM Accounting.Document d                                                   │\n│ JOIN Accounting.Document p ON d.ParentId = p.Id                              │\n│ WHERE p.Type = 1 -- Assuming type 1 represents the original document         │\n│ AND d.Type = 2 -- Assuming type 2 represents the beneficiary change document │\n│ AND d.Date >= DATEADD(QUARTER, DATEDIFF(QUARTER, 0, GETDATE()) - 1, 0)       │\n│ AND d.Date < DATEADD(QUARTER, DATEDIFF(QUARTER, 0, GETDATE()), 0);           │\n╰──────────────────────────────────────────────────────────────────────────────╯\n",
+"stderr": "{\"timestamp\": \"2026-02-15T20:49:22.063250+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"40ee0f8c\", \"user_input\": \"Addendums of type beneficiary change in last quarter\"}\n\u001b[92m00:19:22 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T20:49:22.072079+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:19:22\"}\n\u001b[92m00:19:58 - LiteLLM:INFO\u001b[0m: utils.py:1629 - Wrapper: Completed Call, calling success_handler\n{\"timestamp\": \"2026-02-15T20:49:58.282119+00:00\", \"level\": \"INFO\", \"message\": \"Wrapper: Completed Call, calling success_handler\", \"asctime\": \"00:19:58\"}\n{\"timestamp\": \"2026-02-15T20:49:58.362657+00:00\", \"level\": \"WARNING\", \"message\": \"Too many tables selected, capping to 15\", \"request_id\": \"40ee0f8c\", \"count\": 73}\n{\"timestamp\": \"2026-02-15T20:49:58.362707+00:00\", \"level\": \"INFO\", \"message\": \"Tables selected\", \"request_id\": \"40ee0f8c\", \"tables_selected\": [\"Accounting.Document\", \"AddOn.AddOnPackage\", \"AddOn.AddOnPackageDetail\", \"Admin.AdvisorAssessmentResult\", \"Advisors.Advisor\", \"AdvisorTraining.TrainingModule\", \"Agreements.ConsumptionContract\", \"Agreements.Contract\", \"Agreements.InsurancePolicy\", \"Agreements.PremiumInvoice\", \"Analytics.Analysis\", \"Approval.ApprovalRequest\", \"Assessment.AssessmentResult\", \"Assessors.AssessorExpert\", \"AuditLog.AuditEntry\"]}\n\u001b[92m00:19:58 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T20:49:58.364515+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:19:58\"}\n\u001b[92m00:20:04 - LiteLLM:INFO\u001b[0m: utils.py:1629 - Wrapper: Completed Call, calling success_handler\n{\"timestamp\": \"2026-02-15T20:50:04.255798+00:00\", \"level\": \"INFO\", \"message\": \"Wrapper: Completed Call, calling success_handler\", \"asctime\": \"00:20:04\"}\n{\"timestamp\": \"2026-02-15T20:50:04.256323+00:00\", \"level\": \"INFO\", \"message\": \"Generated SQL\", \"request_id\": \"40ee0f8c\", \"generated_sql\": \"SELECT d.Id, d.ReferenceNumber, d.Date, d.Type, d.ParentId, d.RelatedDocumentId, d.RelatedDocumentType\\nFROM Accounting.Document d\\nJOIN Accounting.Document p ON d.ParentId = p.Id\\nWHERE p.Type = 1 -- As\"}\n\u001b[92m00:20:04 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T20:50:04.262854+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:20:04\"}\n\u001b[92m00:20:10 - LiteLLM:INFO\u001b[0m: utils.py:1629 - Wrapper: Completed Call, calling success_handler\n{\"timestamp\": \"2026-02-15T20:50:10.431510+00:00\", \"level\": \"INFO\", \"message\": \"Wrapper: Completed Call, calling success_handler\", \"asctime\": \"00:20:10\"}\n",
+"timeout_hit": false,
+"query": "Addendums of type beneficiary change in last quarter",
+"index": 20
+},
+{
+"exit_code": -1,
+"stdout": "",
+"stderr": "Command '['/home/mehdi/projects/personal/tadbir-query-generator/.venv/bin/python', '/home/mehdi/projects/personal/tadbir-query-generator/main.py', '--dry-run', 'Count of proposals per status']' timed out after 55 seconds",
+"timeout_hit": true,
+"query": "Count of proposals per status",
+"index": 21
+},
+{
+"exit_code": -1,
+"stdout": "",
+"stderr": "Command '['/home/mehdi/projects/personal/tadbir-query-generator/.venv/bin/python', '/home/mehdi/projects/personal/tadbir-query-generator/main.py', '--dry-run', 'Sum of amounts by document type in accounting']' timed out after 55 seconds",
+"timeout_hit": true,
+"query": "Sum of amounts by document type in accounting",
+"index": 22
+},
+{
+"exit_code": -1,
+"stdout": "",
+"stderr": "Command '['/home/mehdi/projects/personal/tadbir-query-generator/.venv/bin/python', '/home/mehdi/projects/personal/tadbir-query-generator/main.py', '--dry-run', 'Average premium by insurance plan']' timed out after 55 seconds",
+"timeout_hit": true,
+"query": "Average premium by insurance plan",
+"index": 23
+},
+{
+"exit_code": -1,
+"stdout": "",
+"stderr": "Command '['/home/mehdi/projects/personal/tadbir-query-generator/.venv/bin/python', '/home/mehdi/projects/personal/tadbir-query-generator/main.py', '--dry-run', 'Max and min date of documents per year']' timed out after 55 seconds",
+"timeout_hit": true,
+"query": "Max and min date of documents per year",
+"index": 24
+},
+{
+"exit_code": 0,
+"stdout": "╭────────────────────────── Generated SQL (dry run) ───────────────────────────╮\n│ SELECT TOP (500)                                                             │\n│     dbo.User.Role,                                                           │\n│     COUNT(DISTINCT dbo.User.Id) AS DistinctUsers                             │\n│ FROM                                                                         │\n│     dbo.User                                                                 │\n│ JOIN                                                                         │\n│     Reports.MathsSaveReportRequest ON dbo.User.Id =                          │\n│ Reports.MathsSaveReportRequest.UserId                                        │\n│ GROUP BY                                                                     │\n│     dbo.User.Role;                                                           │\n╰──────────────────────────────────────────────────────────────────────────────╯\n",
+"stderr": "{\"timestamp\": \"2026-02-15T20:53:53.834986+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"2c061bda\", \"user_input\": \"Count distinct users per role\"}\n\u001b[92m00:23:53 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T20:53:53.843343+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:23:53\"}\n\u001b[92m00:24:13 - LiteLLM:INFO\u001b[0m: utils.py:1629 - Wrapper: Completed Call, calling success_handler\n{\"timestamp\": \"2026-02-15T20:54:13.762604+00:00\", \"level\": \"INFO\", \"message\": \"Wrapper: Completed Call, calling success_handler\", \"asctime\": \"00:24:13\"}\n{\"timestamp\": \"2026-02-15T20:54:13.844017+00:00\", \"level\": \"WARNING\", \"message\": \"Too many tables selected, capping to 15\", \"request_id\": \"2c061bda\", \"count\": 24}\n{\"timestamp\": \"2026-02-15T20:54:13.844068+00:00\", \"level\": \"INFO\", \"message\": \"Tables selected\", \"request_id\": \"2c061bda\", \"tables_selected\": [\"Accounting.Document\", \"BasicInformation.SystemBankAccount\", \"CategoriesOfBuyerGoal.CategoriesOfBuyerGoal\", \"Reports.BordereauGettingPremium\", \"Reports.MathsSaveReportRequest\", \"SalePlans.AgeAdjustment\", \"SalePlans.BaseVipCustomerTemp\", \"SalePlans.CategoriesOfBuyerGoalMapping\", \"SalePlans.CostAdjustment\", \"SalePlans.SalePlanAdvancedSettlement\", \"SalePlans.SalePlanBeneficiary\", \"SalePlans.SalePlanBeneficiaryTemp\", \"SalePlans.SalePlanConditionWordingMapping\", \"SalePlans.SalePlanDenyInsuranceRisk\", \"SalePlans.SalePlan InsuranceRisk\"]}\n\u001b[92m00:24:13 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T20:54:13.845507+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:24:13\"}\n\u001b[92m00:24:17 - LiteLLM:INFO\u001b[0m: utils.py:1629 - Wrapper: Completed Call, calling success_handler\n{\"timestamp\": \"2026-02-15T20:54:17.781525+00:00\", \"level\": \"INFO\", \"message\": \"Wrapper: Completed Call, calling success_handler\", \"asctime\": \"00:24:17\"}\n{\"timestamp\": \"2026-02-15T20:54:17.781832+00:00\", \"level\": \"INFO\", \"message\": \"Generated SQL\", \"request_id\": \"2c061bda\", \"generated_sql\": \"SELECT \\n    dbo.User.Role, \\n    COUNT(DISTINCT dbo.User.Id) AS DistinctUsers\\nFROM \\n    dbo.User\\nJOIN \\n    Reports.MathsSaveReportRequest ON dbo.User.Id = Reports.MathsSaveReportRequest.UserId\\nGROUP BY\"}\n\u001b[92m00:24:17 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T20:54:17.785876+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:24:17\"}\n\u001b[92m00:24:20 - LiteLLM:INFO\u001b[0m: utils.py:1629 - Wrapper: Completed Call, calling success_handler\n{\"timestamp\": \"2026-02-15T20:54:20.704755+00:00\", \"level\": \"INFO\", \"message\": \"Wrapper: Completed Call, calling success_handler\", \"asctime\": \"00:24:20\"}\n",
+"timeout_hit": false,
+"query": "Count distinct users per role",
+"index": 25
+},
+{
+"exit_code": -1,
+"stdout": "",
+"stderr": "Command '['/home/mehdi/projects/personal/tadbir-query-generator/.venv/bin/python', '/home/mehdi/projects/personal/tadbir-query-generator/main.py', '--dry-run', 'Total entries per coding code']' timed out after 55 seconds",
+"timeout_hit": true,
+"query": "Total entries per coding code",
+"index": 26
+},
+{
+"exit_code": -1,
+"stdout": "",
+"stderr": "Command '['/home/mehdi/projects/personal/tadbir-query-generator/.venv/bin/python', '/home/mehdi/projects/personal/tadbir-query-generator/main.py', '--dry-run', 'Number of addendums per base addendum type']' timed out after 55 seconds",
+"timeout_hit": true,
+"query": "Number of addendums per base addendum type",
+"index": 27
+},
+{
+"exit_code": -1,
+"stdout": "",
+"stderr": "Command '['/home/mehdi/projects/personal/tadbir-query-generator/.venv/bin/python', '/home/mehdi/projects/personal/tadbir-query-generator/main.py', '--dry-run', 'Count policies grouped by status and plan']' timed out after 55 seconds",
+"timeout_hit": true,
+"query": "Count policies grouped by status and plan",
+"index": 28
+},
+{
+"exit_code": -1,
+"stdout": "",
+"stderr": "Command '['/home/mehdi/projects/personal/tadbir-query-generator/.venv/bin/python', '/home/mehdi/projects/personal/tadbir-query-generator/main.py', '--dry-run', 'Sum of payment amounts by month']' timed out after 55 seconds",
+"timeout_hit": true,
+"query": "Sum of payment amounts by month",
+"index": 29
+},
+{
+"exit_code": -1,
+"stdout": "",
+"stderr": "Command '['/home/mehdi/projects/personal/tadbir-query-generator/.venv/bin/python', '/home/mehdi/projects/personal/tadbir-query-generator/main.py', '--dry-run', 'Count documents by parent and type']' timed out after 55 seconds",
+"timeout_hit": true,
+"query": "Count documents by parent and type",
+"index": 30
+},
+{
+"exit_code": 1,
+"stdout": "\n\u001b[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new\u001b[0m\nLiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.\n\nLLM error (table selection): litellm.APIConnectionError: OllamaException - \nServer disconnected without sending a response.\nError: pipeline failed.\n",
+"stderr": "{\"timestamp\": \"2026-02-15T20:58:59.305023+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"e525f108\", \"user_input\": \"\\u0644\\u06cc\\u0633\\u062a \\u067e\\u06cc\\u0634\\u0646\\u0647\\u0627\\u062f\\u0647\\u0627\\u06cc \\u062a\\u0627\\u06cc\\u06cc\\u062f \\u0634\\u062f\\u0647\"}\n\u001b[92m00:28:59 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T20:58:59.314447+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:28:59\"}\n{\"timestamp\": \"2026-02-15T20:59:30.108007+00:00\", \"level\": \"WARNING\", \"message\": \"LLM call failed (attempt 1/1), request_id=e525f108: litellm.APIConnectionError: OllamaException - Server disconnected without sending a response.\"}\n{\"timestamp\": \"2026-02-15T20:59:30.114775+00:00\", \"level\": \"ERROR\", \"message\": \"LLM table selection failed\\nTraceback (most recent call last):\\n  File \\\"/home/mehdi/projects/personal/tadbir-query-generator/.venv/lib/python3.12/site-packages/httpx/_transports/default.py\\\", line 101, in map_httpcore_exceptions\\n    yield\\n  File \\\"/home/mehdi/projects/personal/tadbir-query-generator/.venv/lib/python3.12/site-packages/httpx/_transports/default.py\\\", line 250, in handle_request\\n    resp = self._pool.handle_request(req)\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mehdi/projects/personal/tadbir-query-generator/.venv/lib/python3.12/site-packages/httpcore/_sync/connection_pool.py\\\", line 256, in handle_request\\n    raise exc from None\\n  File \\\"/home/mehdi/projects/personal/tadbir-query-generator/.venv/lib/python3.12/site-packages/httpcore/_sync/connection_pool.py\\\", line 236, in handle_request\\n    response = connection.handle_request(\\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mehdi/projects/personal/tadbir-query-generator/.venv/lib/python3.12/site-packages/httpcore/_sync/connection.py\\\", line 103, in handle_request\\n    return self._connection.handle_request(request)\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mehdi/projects/personal/tadbir-query-generator/.venv/lib/python3.12/site-packages/httpcore/_sync/http11.py\\\", line 136, in handle_request\\n    raise exc\\n  File \\\"/home/mehdi/projects/personal/tadbir-query-generator/.venv/lib/python3.12/site-packages/httpcore/_sync/http11.py\\\", line 106, in handle_request\\n    ) = self._receive_response_headers(**kwargs)\\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mehdi/projects/personal/tadbir-query-generator/.venv/lib/python3.12/site-packages/httpcore/_sync/http11.py\\\", line 177, in _receive_response_headers\\n    event = self._receive_event(timeout=timeout)\\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mehdi/projects/personal/tadbir-query-generator/.venv/lib/python3.12/site-packages/httpcore/_sync/http11.py\\\", line 231, in _receive_event\\n    raise RemoteProtocolError(msg)\\nhttpcore.RemoteProtocolError: Server disconnected without sending a response.\\n\\nThe above exception was the direct cause of the following exception:\\n\\nTraceback (most recent call last):\\n  File \\\"/home/mehdi/projects/personal/tadbir-query-generator/.venv/lib/python3.12/site-packages/litellm/llms/custom_httpx/llm_http_handler.py\\\", line 224, in _make_common_sync_call\\n    response = sync_httpx_client.post(\\n               ^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mehdi/projects/personal/tadbir-query-generator/.venv/lib/python3.12/site-packages/litellm/llms/custom_httpx/http_handler.py\\\", line 1044, in post\\n    raise e\\n  File \\\"/home/mehdi/projects/personal/tadbir-query-generator/.venv/lib/python3.12/site-packages/litellm/llms/custom_httpx/http_handler.py\\\", line 1023, in post\\n    response = self.client.send(req, stream=stream)\\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mehdi/projects/personal/tadbir-query-generator/.venv/lib/python3.12/site-packages/httpx/_client.py\\\", line 914, in send\\n    response = self._send_handling_auth(\\n               ^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mehdi/projects/personal/tadbir-query-generator/.venv/lib/python3.12/site-packages/httpx/_client.py\\\", line 942, in _send_handling_auth\\n    response = self._send_handling_redirects(\\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mehdi/projects/personal/tadbir-query-generator/.venv/lib/python3.12/site-packages/httpx/_client.py\\\", line 979, in _send_handling_redirects\\n    response = self._send_single_request(request)\\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mehdi/projects/personal/tadbir-query-generator/.venv/lib/python3.12/site-packages/httpx/_client.py\\\", line 1014, in _send_single_request\\n    response = transport.handle_request(request)\\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mehdi/projects/personal/tadbir-query-generator/.venv/lib/python3.12/site-packages/httpx/_transports/default.py\\\", line 249, in handle_request\\n    with map_httpcore_exceptions():\\n  File \\\"/usr/lib/python3.12/contextlib.py\\\", line 158, in __exit__\\n    self.gen.throw(value)\\n  File \\\"/home/mehdi/projects/personal/tadbir-query-generator/.venv/lib/python3.12/site-packages/httpx/_transports/default.py\\\", line 118, in map_httpcore_exceptions\\n    raise mapped_exc(message) from exc\\nhttpx.RemoteProtocolError: Server disconnected without sending a response.\\n\\nDuring handling of the above exception, another exception occurred:\\n\\nTraceback (most recent call last):\\n  File \\\"/home/mehdi/projects/personal/tadbir-query-generator/.venv/lib/python3.12/site-packages/litellm/main.py\\\", line 3873, in completion\\n    response = base_llm_http_handler.completion(\\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mehdi/projects/personal/tadbir-query-generator/.venv/lib/python3.12/site-packages/litellm/llms/custom_httpx/llm_http_handler.py\\\", line 546, in completion\\n    response = self._make_common_sync_call(\\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mehdi/projects/personal/tadbir-query-generator/.venv/lib/python3.12/site-packages/litellm/llms/custom_httpx/llm_http_handler.py\\\", line 251, in _make_common_sync_call\\n    raise self._handle_error(e=e, provider_config=provider_config)\\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mehdi/projects/personal/tadbir-query-generator/.venv/lib/python3.12/site-packages/litellm/llms/custom_httpx/llm_http_handler.py\\\", line 4630, in _handle_error\\n    raise provider_config.get_error_class(\\nlitellm.llms.ollama.common_utils.OllamaError: Server disconnected without sending a response.\\n\\nDuring handling of the above exception, another exception occurred:\\n\\nTraceback (most recent call last):\\n  File \\\"/home/mehdi/projects/personal/tadbir-query-generator/cli/main.py\\\", line 87, in run_pipeline\\n    table_response = llm.complete_json(table_messages, request_id=request_id)\\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mehdi/projects/personal/tadbir-query-generator/llm/client.py\\\", line 109, in complete_json\\n    raw = self.complete(messages, request_id=request_id, json_mode=True)\\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mehdi/projects/personal/tadbir-query-generator/llm/client.py\\\", line 100, in complete\\n    raise last_error or RuntimeError(\\\"LLM completion failed\\\")\\n  File \\\"/home/mehdi/projects/personal/tadbir-query-generator/llm/client.py\\\", line 84, in complete\\n    response = litellm.completion(**kwargs)\\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mehdi/projects/personal/tadbir-query-generator/.venv/lib/python3.12/site-packages/litellm/utils.py\\\", line 1748, in wrapper\\n    raise e\\n  File \\\"/home/mehdi/projects/personal/tadbir-query-generator/.venv/lib/python3.12/site-packages/litellm/utils.py\\\", line 1569, in wrapper\\n    result = original_function(*args, **kwargs)\\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mehdi/projects/personal/tadbir-query-generator/.venv/lib/python3.12/site-packages/litellm/main.py\\\", line 4305, in completion\\n    raise exception_type(\\n          ^^^^^^^^^^^^^^^\\n  File \\\"/home/mehdi/projects/personal/tadbir-query-generator/.venv/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py\\\", line 2398, in exception_type\\n    raise e\\n  File \\\"/home/mehdi/projects/personal/tadbir-query-generator/.venv/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py\\\", line 2367, in exception_type\\n    raise APIConnectionError(\\nlitellm.exceptions.APIConnectionError: litellm.APIConnectionError: OllamaException - Server disconnected without sending a response.\", \"request_id\": \"e525f108\"}\n",
+"timeout_hit": false,
+"query": "لیست پیشنهادهای تایید شده",
+"index": 31
+},
+{
+"exit_code": -1,
+"stdout": "",
+"stderr": "Command '['/home/mehdi/projects/personal/tadbir-query-generator/.venv/bin/python', '/home/mehdi/projects/personal/tadbir-query-generator/main.py', '--dry-run', 'تعداد کاربران فعال']' timed out after 55 seconds",
+"timeout_hit": true,
+"query": "تعداد کاربران فعال",
+"index": 32
+},
+{
+"exit_code": -1,
+"stdout": "",
+"stderr": "Command '['/home/mehdi/projects/personal/tadbir-query-generator/.venv/bin/python', '/home/mehdi/projects/personal/tadbir-query-generator/main.py', '--dry-run', 'سندهای حسابداری هفته گذشته']' timed out after 55 seconds",
+"timeout_hit": true,
+"query": "سندهای حسابداری هفته گذشته",
+"index": 33
+},
+{
+"exit_code": -9,
+"stdout": "",
+"stderr": "{\"timestamp\": \"2026-02-15T21:01:23.473695+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"8716056a\", \"user_input\": \"\\u0628\\u06cc\\u0645\\u0647\\u200c\\u0646\\u0627\\u0645\\u0647\\u200c\\u0647\\u0627\\u06cc \\u0645\\u0646\\u0642\\u0636\\u06cc \\u0634\\u062f\\u0647\"}\n\u001b[92m00:31:23 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T21:01:23.483537+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:31:23\"}\n",
+"timeout_hit": false,
+"query": "بیمه‌نامه‌های منقضی شده",
+"index": 34
+},
+{
+"exit_code": -9,
+"stdout": "",
+"stderr": "{\"timestamp\": \"2026-02-15T21:01:53.226223+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"87d3fbfa\", \"user_input\": \"\\u067e\\u0631\\u062f\\u0627\\u062e\\u062a\\u200c\\u0647\\u0627\\u06cc \\u0645\\u0648\\u0641\\u0642 \\u0622\\u062e\\u0631\\u06cc\\u0646 \\u0645\\u0627\\u0647\"}\n\u001b[92m00:31:53 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T21:01:53.233973+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:31:53\"}\n",
+"timeout_hit": false,
+"query": "پرداخت‌های موفق آخرین ماه",
+"index": 35
+},
+{
+"exit_code": -9,
+"stdout": "",
+"stderr": "{\"timestamp\": \"2026-02-15T21:02:19.586788+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"ac0bd396\", \"user_input\": \"\\u06af\\u0632\\u0627\\u0631\\u0634 \\u067e\\u06cc\\u0634\\u0646\\u0647\\u0627\\u062f \\u0628\\u0647 \\u062a\\u0641\\u06a9\\u06cc\\u06a9 \\u0648\\u0636\\u0639\\u06cc\\u062a\"}\n\u001b[92m00:32:19 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T21:02:19.595822+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:32:19\"}\n",
+"timeout_hit": false,
+"query": "گزارش پیشنهاد به تفکیک وضعیت",
+"index": 36
+},
+{
+"exit_code": -9,
+"stdout": "",
+"stderr": "{\"timestamp\": \"2026-02-15T21:02:42.950761+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"0ee4b308\", \"user_input\": \"\\u0627\\u0641\\u0631\\u0627\\u062f \\u0628\\u0627 \\u06a9\\u062f \\u0645\\u0644\\u06cc \\u062e\\u0627\\u0644\\u06cc\"}\n\u001b[92m00:32:42 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T21:02:42.958636+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:32:42\"}\n",
+"timeout_hit": false,
+"query": "افراد با کد ملی خالی",
+"index": 37
+},
+{
+"exit_code": 1,
+"stdout": "Validation failed: Multiple statements not allowed\nError: pipeline failed.\n",
+"stderr": "{\"timestamp\": \"2026-02-15T21:02:51.135408+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"08e9ff47\", \"user_input\": \"\\u0686\\u0646\\u062f \\u062a\\u0627 \\u0633\\u0646\\u062f \\u0627\\u0635\\u0644\\u0627\\u062d\\u06cc\\u0647 \\u062f\\u0627\\u0631\\u06cc\\u0645\"}\n\u001b[92m00:32:51 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T21:02:51.143383+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:32:51\"}\n\u001b[92m00:32:58 - LiteLLM:INFO\u001b[0m: utils.py:1629 - Wrapper: Completed Call, calling success_handler\n{\"timestamp\": \"2026-02-15T21:02:58.479871+00:00\", \"level\": \"INFO\", \"message\": \"Wrapper: Completed Call, calling success_handler\", \"asctime\": \"00:32:58\"}\n{\"timestamp\": \"2026-02-15T21:02:58.568341+00:00\", \"level\": \"INFO\", \"message\": \"Tables selected\", \"request_id\": \"08e9ff47\", \"tables_selected\": [\"Accounting.Document\", \"AddOn.AddOn\", \"AddOn.AddOnInsured\", \"AddOn.AddOnPlan\"]}\n\u001b[92m00:32:58 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T21:02:58.569840+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:32:58\"}\n\u001b[92m00:33:00 - LiteLLM:INFO\u001b[0m: utils.py:1629 - Wrapper: Completed Call, calling success_handler\n{\"timestamp\": \"2026-02-15T21:03:00.398683+00:00\", \"level\": \"INFO\", \"message\": \"Wrapper: Completed Call, calling success_handler\", \"asctime\": \"00:33:00\"}\n{\"timestamp\": \"2026-02-15T21:03:00.399079+00:00\", \"level\": \"INFO\", \"message\": \"Generated SQL\", \"request_id\": \"08e9ff47\", \"generated_sql\": \"SELECT COUNT(*) AS NumberOfDocumentsToModify \\nFROM Accounting.Document\\nWHERE Type = 2; -- Assuming type 2 represents a document that needs to be modified\"}\n{\"timestamp\": \"2026-02-15T21:03:00.399567+00:00\", \"level\": \"WARNING\", \"message\": \"Validation failed\", \"request_id\": \"08e9ff47\", \"error\": \"Multiple statements not allowed\"}\n",
+"timeout_hit": false,
+"query": "چند تا سند اصلاحیه داریم",
+"index": 38
+},
+{
+"exit_code": 0,
+"stdout": "╭────────────────────────── Generated SQL (dry run) ───────────────────────────╮\n│ SELECT TOP (500)                                                             │\n│     d.Id,                                                                    │\n│     d.ReferenceNumber,                                                       │\n│     d.Date,                                                                  │\n│     d.Type,                                                                  │\n│     d.ParentId,                                                              │\n│     d.RelatedDocumentId,                                                     │\n│     d.RelatedDocumentType                                                    │\n│ FROM                                                                         │\n│     Accounting.Document d;                                                   │\n╰──────────────────────────────────────────────────────────────────────────────╯\n",
+"stderr": "{\"timestamp\": \"2026-02-15T21:03:03.861903+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"e7ef6fc8\", \"user_input\": \"\\u0644\\u06cc\\u0633\\u062a \\u0646\\u0642\\u0634\\u200c\\u0647\\u0627\\u06cc \\u06a9\\u0627\\u0631\\u0628\\u0631\\u06cc\"}\n\u001b[92m00:33:03 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T21:03:03.870707+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:33:03\"}\n\u001b[92m00:33:36 - LiteLLM:INFO\u001b[0m: utils.py:1629 - Wrapper: Completed Call, calling success_handler\n{\"timestamp\": \"2026-02-15T21:03:36.022878+00:00\", \"level\": \"INFO\", \"message\": \"Wrapper: Completed Call, calling success_handler\", \"asctime\": \"00:33:36\"}\n{\"timestamp\": \"2026-02-15T21:03:36.103739+00:00\", \"level\": \"WARNING\", \"message\": \"Too many tables selected, capping to 15\", \"request_id\": \"e7ef6fc8\", \"count\": 59}\n{\"timestamp\": \"2026-02-15T21:03:36.103806+00:00\", \"level\": \"INFO\", \"message\": \"Tables selected\", \"request_id\": \"e7ef6fc8\", \"tables_selected\": [\"Accounting.Document\", \"Addenda.AddendumItem\", \"AdmissionUnits.AdmissionUnitPersonnel\", \"Advisors.Assistant\", \"Assessors.Expertise\", \"AssessmentUnits.UnitPersonnel\", \"AuditTrail.ActionLog\", \"BankAccounts.AccountDetails\", \"Benefits.BenefitPackage\", \"Benefits.EmployeeBenefit\", \"Billing.Invoice\", \"Branches.BranchOffice\", \"Branches.BranchPersonnel\", \"CaseStudies.StudyItem\", \"Claims.ClaimDetail\"]}\n\u001b[92m00:33:36 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T21:03:36.105984+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:33:36\"}\n\u001b[92m00:33:38 - LiteLLM:INFO\u001b[0m: utils.py:1629 - Wrapper: Completed Call, calling success_handler\n{\"timestamp\": \"2026-02-15T21:03:38.395920+00:00\", \"level\": \"INFO\", \"message\": \"Wrapper: Completed Call, calling success_handler\", \"asctime\": \"00:33:38\"}\n{\"timestamp\": \"2026-02-15T21:03:38.396248+00:00\", \"level\": \"INFO\", \"message\": \"Generated SQL\", \"request_id\": \"e7ef6fc8\", \"generated_sql\": \"SELECT \\n    d.Id,\\n    d.ReferenceNumber,\\n    d.Date,\\n    d.Type,\\n    d.ParentId,\\n    d.RelatedDocumentId,\\n    d.RelatedDocumentType\\nFROM \\n    Accounting.Document d;\"}\n\u001b[92m00:33:38 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T21:03:38.400521+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:33:38\"}\n\u001b[92m00:33:40 - LiteLLM:INFO\u001b[0m: utils.py:1629 - Wrapper: Completed Call, calling success_handler\n{\"timestamp\": \"2026-02-15T21:03:40.833681+00:00\", \"level\": \"INFO\", \"message\": \"Wrapper: Completed Call, calling success_handler\", \"asctime\": \"00:33:40\"}\n",
+"timeout_hit": false,
+"query": "لیست نقش‌های کاربری",
+"index": 39
+},
+{
+"exit_code": -9,
+"stdout": "",
+"stderr": "{\"timestamp\": \"2026-02-15T21:03:43.730824+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"45057652\", \"user_input\": \"\\u0645\\u062c\\u0645\\u0648\\u0639 \\u0645\\u0628\\u0627\\u0644\\u063a \\u0628\\u0647 \\u062a\\u0641\\u06a9\\u06cc\\u06a9 \\u0646\\u0648\\u0639 \\u0633\\u0646\\u062f\"}\n\u001b[92m00:33:43 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T21:03:43.738342+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:33:43\"}\n",
+"timeout_hit": false,
+"query": "مجموع مبالغ به تفکیک نوع سند",
+"index": 40
+},
+{
+"exit_code": -9,
+"stdout": "",
+"stderr": "{\"timestamp\": \"2026-02-15T21:03:57.939447+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"8d4b0d16\", \"user_input\": \"Show me everything from last week\"}\n\u001b[92m00:33:57 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T21:03:57.947016+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:33:57\"}\n",
+"timeout_hit": false,
+"query": "Show me everything from last week",
+"index": 41
+},
+{
+"exit_code": -9,
+"stdout": "",
+"stderr": "{\"timestamp\": \"2026-02-15T21:04:21.355415+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"4e0dae39\", \"user_input\": \"Give me reports\"}\n\u001b[92m00:34:21 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T21:04:21.363463+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:34:21\"}\n",
+"timeout_hit": false,
+"query": "Give me reports",
+"index": 42
+},
+{
+"exit_code": -9,
+"stdout": "",
+"stderr": "{\"timestamp\": \"2026-02-15T21:04:59.015322+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"239a704b\", \"user_input\": \"What do we have\"}\n\u001b[92m00:34:59 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T21:04:59.022685+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:34:59\"}\n",
+"timeout_hit": false,
+"query": "What do we have",
+"index": 43
+},
+{
+"exit_code": -9,
+"stdout": "",
+"stderr": "{\"timestamp\": \"2026-02-15T21:05:30.237784+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"6b396e2c\", \"user_input\": \"List data\"}\n\u001b[92m00:35:30 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T21:05:30.246367+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:35:30\"}\n",
+"timeout_hit": false,
+"query": "List data",
+"index": 44
+},
+{
+"exit_code": -9,
+"stdout": "",
+"stderr": "{\"timestamp\": \"2026-02-15T21:05:33.208709+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"fe3f0ec1\", \"user_input\": \"Summary\"}\n\u001b[92m00:35:33 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T21:05:33.216030+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:35:33\"}\n",
+"timeout_hit": false,
+"query": "Summary",
+"index": 45
+},
+{
+"exit_code": -9,
+"stdout": "",
+"stderr": "{\"timestamp\": \"2026-02-15T21:05:36.176150+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"44b6d843\", \"user_input\": \"All of them\"}\n\u001b[92m00:35:36 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T21:05:36.183564+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:35:36\"}\n",
+"timeout_hit": false,
+"query": "All of them",
+"index": 46
+},
+{
+"exit_code": -9,
+"stdout": "",
+"stderr": "{\"timestamp\": \"2026-02-15T21:05:39.377603+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"b650066a\", \"user_input\": \"Recent stuff\"}\n\u001b[92m00:35:39 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T21:05:39.385539+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:35:39\"}\n",
+"timeout_hit": false,
+"query": "Recent stuff",
+"index": 47
+},
+{
+"exit_code": -9,
+"stdout": "",
+"stderr": "{\"timestamp\": \"2026-02-15T21:05:42.128806+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"8c55aa27\", \"user_input\": \"Important records\"}\n\u001b[92m00:35:42 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T21:05:42.135708+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:35:42\"}\n",
+"timeout_hit": false,
+"query": "Important records",
+"index": 48
+},
+{
+"exit_code": -9,
+"stdout": "",
+"stderr": "{\"timestamp\": \"2026-02-15T21:05:45.185244+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"ce342dba\", \"user_input\": \"Things that need attention\"}\n\u001b[92m00:35:45 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T21:05:45.193054+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:35:45\"}\n",
+"timeout_hit": false,
+"query": "Things that need attention",
+"index": 49
+},
+{
+"exit_code": -9,
+"stdout": "",
+"stderr": "{\"timestamp\": \"2026-02-15T21:05:48.298707+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"d72aa4d3\", \"user_input\": \"Whatever is active\"}\n\u001b[92m00:35:48 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T21:05:48.306401+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:35:48\"}\n",
+"timeout_hit": false,
+"query": "Whatever is active",
+"index": 50
+},
+{
+"exit_code": -9,
+"stdout": "",
+"stderr": "{\"timestamp\": \"2026-02-15T21:05:51.215308+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"91d40c52\", \"user_input\": \"I need a list of all accounting documents that were created in the last week and have a document type of either 1 or 2, and I want to see the reference number and date and type, please\"}\n\u001b[92m00:35:51 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T21:05:51.222330+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:35:51\"}\n",
+"timeout_hit": false,
+"query": "I need a list of all accounting documents that were created in the last week and have a document type of either 1 or 2, and I want to see the reference number and date and type, please",
+"index": 51
+},
+{
+"exit_code": -9,
+"stdout": "",
+"stderr": "{\"timestamp\": \"2026-02-15T21:05:54.528675+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"94f46091\", \"user_input\": \"Show proposals that are in status approved or pending and were created by a user who is still active and the proposal has at least one insured risk linked to it\"}\n\u001b[92m00:35:54 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T21:05:54.536669+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:35:54\"}\n",
+"timeout_hit": false,
+"query": "Show proposals that are in status approved or pending and were created by a user who is still active and the proposal has at least one insured risk linked to it",
+"index": 52
+},
+{
+"exit_code": -9,
+"stdout": "",
+"stderr": "{\"timestamp\": \"2026-02-15T21:05:57.594188+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"e872a163\", \"user_input\": \"List every user with their username and email and the name of their role and whether they are active, but only if they have logged in at least once\"}\n\u001b[92m00:35:57 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T21:05:57.602294+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:35:57\"}\n",
+"timeout_hit": false,
+"query": "List every user with their username and email and the name of their role and whether they are active, but only if they have logged in at least once",
+"index": 53
+},
+{
+"exit_code": -9,
+"stdout": "",
+"stderr": "{\"timestamp\": \"2026-02-15T21:06:00.451395+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"7668ad41\", \"user_input\": \"Accounting entries joined to their document and to the coding table, where the entry amount is positive and the document date is in the current year, grouped by document type\"}\n\u001b[92m00:36:00 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T21:06:00.458570+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:36:00\"}\n",
+"timeout_hit": false,
+"query": "Accounting entries joined to their document and to the coding table, where the entry amount is positive and the document date is in the current year, grouped by document type",
+"index": 54
+},
+{
+"exit_code": -9,
+"stdout": "",
+"stderr": "{\"timestamp\": \"2026-02-15T21:06:03.462190+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"fbdd023d\", \"user_input\": \"I want to see addendums of type beneficiary change or premium change that are linked to a base addendum which was created last month\"}\n\u001b[92m00:36:03 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T21:06:03.470262+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:36:03\"}\n",
+"timeout_hit": false,
+"query": "I want to see addendums of type beneficiary change or premium change that are linked to a base addendum which was created last month",
+"index": 55
+},
+{
+"exit_code": -9,
+"stdout": "",
+"stderr": "{\"timestamp\": \"2026-02-15T21:06:06.473623+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"8dce2a4d\", \"user_input\": \"Documents where type = 1\"}\n\u001b[92m00:36:06 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T21:06:06.480435+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:36:06\"}\n",
+"timeout_hit": false,
+"query": "Documents where type = 1",
+"index": 56
+},
+{
+"exit_code": -9,
+"stdout": "",
+"stderr": "{\"timestamp\": \"2026-02-15T21:06:09.377920+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"50c88c0c\", \"user_input\": \"Select * from Accounting.Document where Date > '2024-01-01'\"}\n\u001b[92m00:36:09 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T21:06:09.385547+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:36:09\"}\n",
+"timeout_hit": false,
+"query": "Select * from Accounting.Document where Date > '2024-01-01'",
+"index": 57
+},
+{
+"exit_code": -9,
+"stdout": "",
+"stderr": "{\"timestamp\": \"2026-02-15T21:06:12.461094+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"bd4069ae\", \"user_input\": \"User's list\"}\n\u001b[92m00:36:12 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T21:06:12.468597+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:36:12\"}\n",
+"timeout_hit": false,
+"query": "User's list",
+"index": 58
+},
+{
+"exit_code": -9,
+"stdout": "",
+"stderr": "",
+"timeout_hit": false,
+"query": "Proposals (active only)",
+"index": 59
+},
+{
+"exit_code": -9,
+"stdout": "",
+"stderr": "{\"timestamp\": \"2026-02-15T21:06:18.622418+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"fbb723b4\", \"user_input\": \"Count(*) from Document\"}\n\u001b[92m00:36:18 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T21:06:18.629754+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:36:18\"}\n",
+"timeout_hit": false,
+"query": "Count(*) from Document",
+"index": 60
+},
+{
+"exit_code": -9,
+"stdout": "",
+"stderr": "{\"timestamp\": \"2026-02-15T21:06:21.511972+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"fe8d7734\", \"user_input\": \"List users where id is 1\"}\n\u001b[92m00:36:21 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T21:06:21.520418+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:36:21\"}\n",
+"timeout_hit": false,
+"query": "List users where id is 1",
+"index": 61
+},
+{
+"exit_code": -9,
+"stdout": "",
+"stderr": "{\"timestamp\": \"2026-02-15T21:06:24.658053+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"ebaf3c02\", \"user_input\": \"Show documents; comment\"}\n\u001b[92m00:36:24 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T21:06:24.665034+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:36:24\"}\n",
+"timeout_hit": false,
+"query": "Show documents; comment",
+"index": 62
+},
+{
+"exit_code": -9,
+"stdout": "",
+"stderr": "{\"timestamp\": \"2026-02-15T21:06:27.583214+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"420d2e7c\", \"user_input\": \"Proposals where status in (1,2,3)\"}\n\u001b[92m00:36:27 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T21:06:27.590651+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:36:27\"}\n",
+"timeout_hit": false,
+"query": "Proposals where status in (1,2,3)",
+"index": 63
+},
+{
+"exit_code": -9,
+"stdout": "",
+"stderr": "{\"timestamp\": \"2026-02-15T21:06:30.503643+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"79e049d7\", \"user_input\": \"Users order by Id\"}\n\u001b[92m00:36:30 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T21:06:30.510250+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:36:30\"}\n",
+"timeout_hit": false,
+"query": "Users order by Id",
+"index": 64
+},
+{
+"exit_code": -9,
+"stdout": "",
+"stderr": "{\"timestamp\": \"2026-02-15T21:06:33.746842+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"cc36b6b6\", \"user_input\": \"Select Id from Accounting.Document\"}\n\u001b[92m00:36:33 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T21:06:33.754575+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:36:33\"}\n",
+"timeout_hit": false,
+"query": "Select Id from Accounting.Document",
+"index": 65
+},
+{
+"exit_code": -9,
+"stdout": "",
+"stderr": "{\"timestamp\": \"2026-02-15T21:06:36.624569+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"c956954d\", \"user_input\": \"acounting documnts\"}\n\u001b[92m00:36:36 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T21:06:36.633103+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:36:36\"}\n",
+"timeout_hit": false,
+"query": "acounting documnts",
+"index": 66
+},
+{
+"exit_code": -9,
+"stdout": "",
+"stderr": "{\"timestamp\": \"2026-02-15T21:06:39.726869+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"89b768bb\", \"user_input\": \"proposlas by statu\"}\n\u001b[92m00:36:39 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T21:06:39.733883+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:36:39\"}\n",
+"timeout_hit": false,
+"query": "proposlas by statu",
+"index": 67
+},
+{
+"exit_code": -9,
+"stdout": "",
+"stderr": "",
+"timeout_hit": false,
+"query": "usrs and roels",
+"index": 68
+},
+{
+"exit_code": -9,
+"stdout": "",
+"stderr": "{\"timestamp\": \"2026-02-15T21:06:45.618595+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"93110335\", \"user_input\": \"lisr of polocies\"}\n\u001b[92m00:36:45 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T21:06:45.626834+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:36:45\"}\n",
+"timeout_hit": false,
+"query": "lisr of polocies",
+"index": 69
+},
+{
+"exit_code": -9,
+"stdout": "",
+"stderr": "{\"timestamp\": \"2026-02-15T21:06:48.692919+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"070d7c11\", \"user_input\": \"docuemnts form last weak\"}\n\u001b[92m00:36:48 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T21:06:48.700753+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:36:48\"}\n",
+"timeout_hit": false,
+"query": "docuemnts form last weak",
+"index": 70
+},
+{
+"exit_code": -9,
+"stdout": "",
+"stderr": "{\"timestamp\": \"2026-02-15T21:06:51.831570+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"01b3dfd8\", \"user_input\": \"Documents from 2024-06-01 to 2024-06-30\"}\n\u001b[92m00:36:51 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T21:06:51.838869+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:36:51\"}\n",
+"timeout_hit": false,
+"query": "Documents from 2024-06-01 to 2024-06-30",
+"index": 71
+},
+{
+"exit_code": -9,
+"stdout": "",
+"stderr": "{\"timestamp\": \"2026-02-15T21:06:54.748519+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"c112ede4\", \"user_input\": \"Proposals created on 2025-01-15\"}\n\u001b[92m00:36:54 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T21:06:54.756608+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:36:54\"}\n",
+"timeout_hit": false,
+"query": "Proposals created on 2025-01-15",
+"index": 72
+},
+{
+"exit_code": -9,
+"stdout": "",
+"stderr": "{\"timestamp\": \"2026-02-15T21:06:57.921290+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"d567fcc4\", \"user_input\": \"Users with more than 5 logins\"}\n\u001b[92m00:36:57 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T21:06:57.928391+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:36:57\"}\n",
+"timeout_hit": false,
+"query": "Users with more than 5 logins",
+"index": 73
+},
+{
+"exit_code": -9,
+"stdout": "",
+"stderr": "{\"timestamp\": \"2026-02-15T21:07:00.902315+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"cc41df86\", \"user_input\": \"Entries with amount between 100 and 500\"}\n\u001b[92m00:37:00 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T21:07:00.910554+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:37:00\"}\n",
+"timeout_hit": false,
+"query": "Entries with amount between 100 and 500",
+"index": 74
+},
+{
+"exit_code": -9,
+"stdout": "",
+"stderr": "{\"timestamp\": \"2026-02-15T21:07:04.094437+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"a6b749bf\", \"user_input\": \"Policies expiring in next 30 days\"}\n\u001b[92m00:37:04 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T21:07:04.101174+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:37:04\"}\n",
+"timeout_hit": false,
+"query": "Policies expiring in next 30 days",
+"index": 75
+},
+{
+"exit_code": -9,
+"stdout": "",
+"stderr": "{\"timestamp\": \"2026-02-15T21:07:06.951909+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"37071bd8\", \"user_input\": \"Documents that are not type 0\"}\n\u001b[92m00:37:06 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T21:07:06.958615+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:37:06\"}\n",
+"timeout_hit": false,
+"query": "Documents that are not type 0",
+"index": 76
+},
+{
+"exit_code": -9,
+"stdout": "",
+"stderr": "{\"timestamp\": \"2026-02-15T21:07:10.335115+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"22ad96e3\", \"user_input\": \"Users who are not deleted\"}\n\u001b[92m00:37:10 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T21:07:10.347106+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:37:10\"}\n",
+"timeout_hit": false,
+"query": "Users who are not deleted",
+"index": 77
+},
+{
+"exit_code": -9,
+"stdout": "",
+"stderr": "{\"timestamp\": \"2026-02-15T21:07:12.896469+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"65ac061f\", \"user_input\": \"Proposals not in draft status\"}\n\u001b[92m00:37:12 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T21:07:12.904655+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:37:12\"}\n",
+"timeout_hit": false,
+"query": "Proposals not in draft status",
+"index": 78
+},
+{
+"exit_code": -9,
+"stdout": "",
+"stderr": "{\"timestamp\": \"2026-02-15T21:07:15.913257+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"14510ff1\", \"user_input\": \"Entries without a linked subcoding\"}\n\u001b[92m00:37:15 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T21:07:15.919968+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:37:15\"}\n",
+"timeout_hit": false,
+"query": "Entries without a linked subcoding",
+"index": 79
+},
+{
+"exit_code": -9,
+"stdout": "",
+"stderr": "",
+"timeout_hit": false,
+"query": "Policies that do not have addendums",
+"index": 80
+},
+{
+"exit_code": -9,
+"stdout": "",
+"stderr": "{\"timestamp\": \"2026-02-15T21:07:22.010303+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"f34bbd42\", \"user_input\": \"Documents that have at least one entry with amount > 100\"}\n\u001b[92m00:37:22 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T21:07:22.018212+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:37:22\"}\n",
+"timeout_hit": false,
+"query": "Documents that have at least one entry with amount > 100",
+"index": 81
+},
+{
+"exit_code": -9,
+"stdout": "",
+"stderr": "{\"timestamp\": \"2026-02-15T21:07:25.058930+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"ac9f6c1e\", \"user_input\": \"Proposals that have insured risks and are in approved status\"}\n\u001b[92m00:37:25 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T21:07:25.067000+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:37:25\"}\n",
+"timeout_hit": false,
+"query": "Proposals that have insured risks and are in approved status",
+"index": 82
+},
+{
+"exit_code": -9,
+"stdout": "",
+"stderr": "{\"timestamp\": \"2026-02-15T21:07:28.162117+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"cbdcb751\", \"user_input\": \"Users who have a role and are active\"}\n\u001b[92m00:37:28 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T21:07:28.168758+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:37:28\"}\n",
+"timeout_hit": false,
+"query": "Users who have a role and are active",
+"index": 83
+},
+{
+"exit_code": -9,
+"stdout": "",
+"stderr": "{\"timestamp\": \"2026-02-15T21:07:31.163579+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"0aaa7073\", \"user_input\": \"Accounting documents with parent type 1 or no parent\"}\n\u001b[92m00:37:31 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T21:07:31.171770+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:37:31\"}\n",
+"timeout_hit": false,
+"query": "Accounting documents with parent type 1 or no parent",
+"index": 84
+},
+{
+"exit_code": -9,
+"stdout": "",
+"stderr": "{\"timestamp\": \"2026-02-15T21:07:34.124139+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"a45263ed\", \"user_input\": \"Addendums linked to proposal insured risk where the risk is active\"}\n\u001b[92m00:37:34 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T21:07:34.131095+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:37:34\"}\n",
+"timeout_hit": false,
+"query": "Addendums linked to proposal insured risk where the risk is active",
+"index": 85
+},
+{
+"exit_code": -9,
+"stdout": "",
+"stderr": "{\"timestamp\": \"2026-02-15T21:07:37.112141+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"b7538790\", \"user_input\": \"Top 10 documents by date with their entry count\"}\n\u001b[92m00:37:37 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T21:07:37.119126+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:37:37\"}\n",
+"timeout_hit": false,
+"query": "Top 10 documents by date with their entry count",
+"index": 86
+},
+{
+"exit_code": -9,
+"stdout": "",
+"stderr": "{\"timestamp\": \"2026-02-15T21:07:40.362411+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"b997eaef\", \"user_input\": \"Proposals with their person name and state name and count of insured risks\"}\n\u001b[92m00:37:40 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T21:07:40.370911+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:37:40\"}\n",
+"timeout_hit": false,
+"query": "Proposals with their person name and state name and count of insured risks",
+"index": 87
+},
+{
+"exit_code": -9,
+"stdout": "",
+"stderr": "{\"timestamp\": \"2026-02-15T21:07:43.203758+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"a191a1f1\", \"user_input\": \"Users with role, last login date, and count of operations\"}\n\u001b[92m00:37:43 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T21:07:43.212086+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:37:43\"}\n",
+"timeout_hit": false,
+"query": "Users with role, last login date, and count of operations",
+"index": 88
+},
+{
+"exit_code": -9,
+"stdout": "",
+"stderr": "{\"timestamp\": \"2026-02-15T21:07:46.187461+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"b0d11a78\", \"user_input\": \"Documents with parent reference and related document reference\"}\n\u001b[92m00:37:46 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T21:07:46.194669+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:37:46\"}\n",
+"timeout_hit": false,
+"query": "Documents with parent reference and related document reference",
+"index": 89
+},
+{
+"exit_code": -9,
+"stdout": "",
+"stderr": "{\"timestamp\": \"2026-02-15T21:07:49.265430+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"85762e4e\", \"user_input\": \"Payments grouped by user and by month with total amount\"}\n\u001b[92m00:37:49 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T21:07:49.272466+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:37:49\"}\n",
+"timeout_hit": false,
+"query": "Payments grouped by user and by month with total amount",
+"index": 90
+},
+{
+"exit_code": -9,
+"stdout": "",
+"stderr": "",
+"timeout_hit": false,
+"query": "Policies with plan name and beneficiary count",
+"index": 91
+},
+{
+"exit_code": -9,
+"stdout": "",
+"stderr": "{\"timestamp\": \"2026-02-15T21:07:55.344631+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"84c49e7e\", \"user_input\": \"Entries with document reference and coding title and subcoding\"}\n\u001b[92m00:37:55 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T21:07:55.353002+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:37:55\"}\n",
+"timeout_hit": false,
+"query": "Entries with document reference and coding title and subcoding",
+"index": 92
+},
+{
+"exit_code": -9,
+"stdout": "",
+"stderr": "",
+"timeout_hit": false,
+"query": "Addendums with base addendum date and type description",
+"index": 93
+},
+{
+"exit_code": -9,
+"stdout": "",
+"stderr": "{\"timestamp\": \"2026-02-15T21:08:01.319850+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"3b266522\", \"user_input\": \"Full join of document and entry and coding\"}\n\u001b[92m00:38:01 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T21:08:01.327447+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:38:01\"}\n",
+"timeout_hit": false,
+"query": "Full join of document and entry and coding",
+"index": 94
+},
+{
+"exit_code": -9,
+"stdout": "",
+"stderr": "{\"timestamp\": \"2026-02-15T21:08:04.673519+00:00\", \"level\": \"INFO\", \"message\": \"Query received\", \"request_id\": \"956c1ee3\", \"user_input\": \"Proposals with person and state and plan and insured risk count\"}\n\u001b[92m00:38:04 - LiteLLM:INFO\u001b[0m: utils.py:3889 - \nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\n{\"timestamp\": \"2026-02-15T21:08:04.680291+00:00\", \"level\": \"INFO\", \"message\": \"\\nLiteLLM completion() model= qwen2.5-coder:7b; provider = ollama\", \"asctime\": \"00:38:04\"}\n",
+"timeout_hit": false,
+"query": "Proposals with person and state and plan and insured risk count",
+"index": 95
+}
+]

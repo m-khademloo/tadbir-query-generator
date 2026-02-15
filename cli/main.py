@@ -93,6 +93,11 @@ def run_pipeline(
     table_names = table_response.get("tables") or []
     if not isinstance(table_names, list):
         table_names = [table_names] if table_names else []
+    # Cap tables to avoid huge schema prompts (some local LLMs return too many)
+    max_tables = 15
+    if len(table_names) > max_tables:
+        log.warning("Too many tables selected, capping to %s", max_tables, extra={"request_id": request_id, "count": len(table_names)})
+        table_names = table_names[:max_tables]
     log.info("Tables selected", extra={"request_id": request_id, "tables_selected": table_names})
 
     if not table_names:
@@ -148,6 +153,7 @@ def run_pipeline(
         final_sql = limited_sql.strip()
     except Exception as e:
         log.warning("Limit enforcement LLM failed, using original SQL", extra={"request_id": request_id})
+        console.print(f"[yellow]Warning: Limit enforcement failed ({e}), using original SQL.[/yellow]")
         final_sql = generated_sql
 
     # Re-validate after limit rewrite
@@ -203,6 +209,9 @@ def run_cli() -> None:
         sys.exit(0)
 
     success = run_pipeline(query, config, dry_run=args.dry_run)
+    if not success:
+        console = Console()
+        console.print("[red]Error: pipeline failed.[/red]")
     sys.exit(0 if success else 1)
 
 
