@@ -69,19 +69,40 @@ def _extract_columns_regex(sql: str) -> list[str]:
     return list(seen)
 
 
+def _has_select_star(sql: str) -> bool:
+    """True if query has SELECT * or SELECT table.* (star in select list)."""
+    return bool(re.search(r"\bSELECT\s+(\w+\.)?\*\s+FROM", sql, re.IGNORECASE | re.DOTALL))
+
+
+def _extract_from_tables(sql: str) -> set[str]:
+    """Extract normalized table names from FROM and JOIN clauses."""
+    tables = set()
+    # FROM [schema].[table] or schema.table or table
+    for m in re.finditer(r"\b(?:FROM|JOIN)\s+\[?([\w.]+)\]?(?:\s+AS\s+\w+)?(?=\s+(?:ON|WHERE|JOIN|GROUP|ORDER|$|\s*;))", sql, re.IGNORECASE):
+        tables.add(m.group(1).lower().replace("]", "").replace("[", ""))
+    if not tables:
+        # Simpler: FROM x or JOIN x
+        for m in re.finditer(r"(?:FROM|JOIN)\s+([\w.]+)", sql, re.IGNORECASE):
+            tables.add(m.group(1).lower())
+    return tables
+
+
 class QueryValidator:
     """Validates SQL before execution: type, injection, structure, forbidden columns."""
 
     def __init__(self, forbidden_columns: list[str]) -> None:
         """forbidden_columns: list of 'table.column' or 'schema.table.column' (normalized lower)."""
         self.forbidden_set = {c.strip().lower() for c in forbidden_columns if c.strip()}
-        # Also allow schema.table.column
-        for c in self.forbidden_set.copy():
+        # Table names that contain a forbidden column (for SELECT * check)
+        self._forbidden_tables: set[str] = set()
+        for c in list(self.forbidden_set):
             parts = c.split(".")
             if len(parts) == 2:
-                self.forbidden_set.add(parts[-1])  # forbid bare column name too if ambiguous
+                self.forbidden_set.add(parts[-1])
+                self._forbidden_tables.add(parts[0])  # table
             elif len(parts) == 3:
                 self.forbidden_set.add(f"{parts[1]}.{parts[2]}")
+                self._forbidden_tables.add(f"{parts[0]}.{parts[1]}")  # schema.table
 
     def validate(self, sql: str) -> ValidationResult:
         """Run all checks. Returns ValidationResult with valid=True only if all pass."""
@@ -128,6 +149,13 @@ class QueryValidator:
             selected = _extract_columns_regex(sql_stripped)
         if not selected:
             selected = _extract_columns_regex(sql_stripped)
+
+        # 5a) SELECT *: if any FROM table has a forbidden column, reject
+        if _has_select_star(sql_stripped) or not selected:
+            from_tables = _extract_from_tables(sql_stripped)
+            for tbl in from_tables:
+                if tbl in self._forbidden_tables:
+                    return ValidationResult(valid=False, error_message=f"Forbidden column in selected table (SELECT *): table {tbl}")
 
         for col_ref in selected:
             # Normalize: could be "col", "table.col", "schema.table.col"

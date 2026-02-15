@@ -7,3 +7,5 @@
 # Security.User.PasswordHash
 # Payments.CardNumber
 # person.Person.NationalId
+dbo.User.Password
+dbo.User.NationalCode

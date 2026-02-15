@@ -39,8 +39,8 @@ def run_pipeline(
     config: AppConfig,
     *,
     dry_run: bool = False,
-) -> None:
-    """Run the full pipeline and print results or errors."""
+) -> bool:
+    """Run the full pipeline and print results or errors. Returns True on success, False on error."""
     request_id = str(uuid.uuid4())[:8]
     log = get_logger("pipeline")
     console = Console()
@@ -65,7 +65,7 @@ def run_pipeline(
     if not all_descriptions:
         console.print("[red]No table descriptions found. Check paths in config.[/red]")
         log.error("No table descriptions", extra={"request_id": request_id})
-        return
+        return False
 
     tables_text = schema_loader.format_tables_text_for_prompt(all_descriptions)
 
@@ -88,7 +88,7 @@ def run_pipeline(
     except Exception as e:
         log.exception("LLM table selection failed", extra={"request_id": request_id})
         console.print(f"[red]LLM error (table selection): {e}[/red]")
-        return
+        return False
 
     table_names = table_response.get("tables") or []
     if not isinstance(table_names, list):
@@ -97,13 +97,13 @@ def run_pipeline(
 
     if not table_names:
         console.print("[yellow]No tables selected for this request.[/yellow]")
-        return
+        return False
 
     # 3) Load schema for selected tables
     table_infos = schema_loader.get_schema_for_tables(table_names)
     if not table_infos:
         console.print("[red]Could not load schema for selected tables.[/red]")
-        return
+        return False
     schema_text = schema_loader.format_schema_text_for_prompt(table_infos)
 
     # 4) LLM: SQL generation
@@ -115,7 +115,7 @@ def run_pipeline(
     except Exception as e:
         log.exception("LLM SQL generation failed", extra={"request_id": request_id})
         console.print(f"[red]LLM error (SQL generation): {e}[/red]")
-        return
+        return False
 
     # Normalize: extract only SQL (strip markdown code blocks if present)
     raw_sql = raw_sql.strip()
@@ -132,7 +132,7 @@ def run_pipeline(
     if not validation.valid:
         log.warning("Validation failed", extra={"request_id": request_id, "error": validation.error_message})
         console.print(f"[red]Validation failed: {validation.error_message}[/red]")
-        return
+        return False
 
     # Optional: LLM security validation (if you want double-check)
     # ...
@@ -154,11 +154,11 @@ def run_pipeline(
     validation2 = validator.validate(final_sql)
     if not validation2.valid:
         console.print(f"[red]Validation failed after limit rewrite: {validation2.error_message}[/red]")
-        return
+        return False
 
     if dry_run:
         console.print(Panel(final_sql, title="Generated SQL (dry run)", border_style="blue"))
-        return
+        return True
 
     # 7) Execute
     executor = get_executor_from_config(config)
@@ -173,10 +173,11 @@ def run_pipeline(
     )
     if not result.success:
         console.print(f"[red]Execution error: {result.error_message}[/red]")
-        return
+        return False
 
     # 8) Render
     render_result(result, show_time=True)
+    return True
 
 
 def run_cli() -> None:
@@ -195,13 +196,14 @@ def run_cli() -> None:
         level="DEBUG" if args.verbose else config.log_level,
         structured=config.log_structured,
     )
-    query = args.query
+    query = (args.query or "").strip()
     if not query:
         parser.print_help()
         print("\nExample: query-cli 'Show active users created last week'")
-        return
+        sys.exit(0)
 
-    run_pipeline(query, config, dry_run=args.dry_run)
+    success = run_pipeline(query, config, dry_run=args.dry_run)
+    sys.exit(0 if success else 1)
 
 
 if __name__ == "__main__":
