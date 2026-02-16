@@ -49,6 +49,8 @@ def setup_logging(
     """Configure root logger with level and optional structured output."""
     root = logging.getLogger()
     root.setLevel(getattr(logging, level.upper(), logging.INFO))
+    # Suppress noisy LiteLLM INFO logs (LLM prompts/results go to logs/ instead)
+    logging.getLogger("LiteLLM").setLevel(logging.WARNING)
     if root.handlers:
         for h in root.handlers[:]:
             root.removeHandler(h)

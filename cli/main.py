@@ -18,7 +18,13 @@ from llm import LLMClient
 from prompts import PromptManager
 from validation import QueryValidator, ValidationResult
 from execution import QueryExecutor, get_executor_from_config, render_result, ExecutionResult
-from app_logging import setup_logging, get_logger
+from app_logging import (
+    setup_logging,
+    get_logger,
+    get_run_log_path,
+    write_run_header,
+    append_llm_step,
+)
 
 
 def load_forbidden_columns(path: Path) -> list[str]:
@@ -53,6 +59,11 @@ def run_pipeline(
         },
     )
 
+    # Per-run LLM log file (prompts + results) under project_root/logs
+    logs_dir = config.project_root / "logs"
+    run_log_path = get_run_log_path(request_id, logs_dir=logs_dir)
+    write_run_header(run_log_path, request_id, user_input)
+
     # Paths
     root = config.project_root
     tables_desc_path = root / config.tables_description_path
@@ -85,6 +96,7 @@ def run_pipeline(
         if config.log_prompts:
             log.debug("Table selection prompt", extra={"messages": str(table_messages)[:500]})
         table_response = llm.complete_json(table_messages, request_id=request_id)
+        append_llm_step(run_log_path, "table_selection", table_messages, table_response)
     except Exception as e:
         log.exception("LLM table selection failed", extra={"request_id": request_id})
         console.print(f"[red]LLM error (table selection): {e}[/red]")
@@ -117,6 +129,7 @@ def run_pipeline(
         if config.log_prompts:
             log.debug("SQL generation prompt", extra={"messages": str(sql_messages)[:500]})
         raw_sql = llm.complete(sql_messages, request_id=request_id)
+        append_llm_step(run_log_path, "sql_generation", sql_messages, raw_sql)
     except Exception as e:
         log.exception("LLM SQL generation failed", extra={"request_id": request_id})
         console.print(f"[red]LLM error (SQL generation): {e}[/red]")
@@ -146,6 +159,7 @@ def run_pipeline(
     try:
         limit_messages = pm.limit_enforcement(generated_sql, config.max_rows)
         limited_sql = llm.complete(limit_messages, request_id=request_id)
+        append_llm_step(run_log_path, "limit_enforcement", limit_messages, limited_sql)
         limited_sql = limited_sql.strip()
         if limited_sql.startswith("```"):
             limited_sql = re.sub(r"^```\w*\n?", "", limited_sql)

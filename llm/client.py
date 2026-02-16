@@ -9,6 +9,9 @@ from typing import Any
 
 import litellm
 
+# Reduce noisy console output from LiteLLM (prompts/results go to logs/ instead)
+litellm.set_verbose = False
+
 logger = logging.getLogger(__name__)
 
 
